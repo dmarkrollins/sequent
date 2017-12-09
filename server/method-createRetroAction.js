@@ -35,8 +35,6 @@ Meteor.methods({
             retroId = retro._id
         }
         
-        console.log('this retro id', retroId)
-        
         const action = {}
         action.title = title
         action.status = Constants.RetroItemStatuses.PENDING

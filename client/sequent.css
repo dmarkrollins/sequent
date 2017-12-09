@@ -1,5 +1,9 @@
 body{
-    overflow-y:hidden;
+    overflow:hidden;
+}
+
+body::-webkit-scrollbar { 
+    display: none;
 }
 
 .fullscreen {

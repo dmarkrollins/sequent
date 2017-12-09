@@ -2,7 +2,10 @@ import { Meteor } from 'meteor/meteor'
 import { Sequent, RetroActions } from '../lib/sequent'
 import { Constants } from '../lib/constants'
 
+RetroActions._ensureIndex('createdBy', 1)
 RetroActions._ensureIndex('status', 1)
+RetroActions._ensureIndex('createdAt', 1)
+
 
 Meteor.publish('open-actions', function() {
     

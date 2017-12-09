@@ -1,16 +1,11 @@
-body{
-    overflow:hidden;
-}
-
-body::-webkit-scrollbar { 
-    display: none;
-}
-
 .fullscreen {
     height:100vh;
     width: 100%;
-    background-color: #094394;
     display: table;
+}
+
+.backgroundBlue {
+    background-color: #094394;
 }
 
 .vertical-center{

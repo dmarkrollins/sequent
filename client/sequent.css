@@ -1,11 +1,6 @@
 body{
     overflow-y:hidden;
 }
-@media only screen and (max-width:960px){
-    body{
-        overflow-y:scroll;
-    }
-}
 
 .fullscreen {
     height:100vh;

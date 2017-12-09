@@ -38,6 +38,12 @@ Template.retroBoard.helpers({
             const list = _.filter(retro.items, function(item){
                 return (item.itemType === Constants.RetroItemTypes.HAPPY && item.status === Constants.RetroItemStatuses.PENDING)
             })
+            if (retro.showCompleted){
+                const list2 = _.filter(retro.items, function(item){
+                    return (item.itemType === Constants.RetroItemTypes.HAPPY && item.status === Constants.RetroItemStatuses.COMPLETE)
+                })
+                return list.concat(list2)
+            }
             return list
         }
     },
@@ -47,6 +53,12 @@ Template.retroBoard.helpers({
             const list = _.filter(retro.items, function(item){
                 return (item.itemType === Constants.RetroItemTypes.MEH && item.status === Constants.RetroItemStatuses.PENDING)
             })
+            if (retro.showCompleted){
+                const list2 = _.filter(retro.items, function(item){
+                    return (item.itemType === Constants.RetroItemTypes.MEH && item.status === Constants.RetroItemStatuses.COMPLETE)
+                })
+                return list.concat(list2)
+            }
             return list
         }
     },
@@ -56,6 +68,12 @@ Template.retroBoard.helpers({
             const list = _.filter(retro.items, function(item){
                 return (item.itemType === Constants.RetroItemTypes.SAD && item.status === Constants.RetroItemStatuses.PENDING)
             })
+            if (retro.showCompleted){
+                const list2 = _.filter(retro.items, function(item){
+                    return (item.itemType === Constants.RetroItemTypes.SAD && item.status === Constants.RetroItemStatuses.COMPLETE)
+                })
+                return list.concat(list2)
+            }
             return list
         }
     },
@@ -80,6 +98,17 @@ Template.retroBoard.helpers({
         }
         
         return true
+    },
+    itemClass() {
+        const retro = Retros.findOne()
+
+        if(!retro) return 'listItem '
+
+        if(retro.showCompleted && this.status === Constants.RetroItemStatuses.COMPLETE) {
+            return 'listItemCompleted'
+        }
+
+        return 'listItem '
     }
 })
 
@@ -113,8 +142,9 @@ Template.retroBoard.events({
     },
     'click div.listItem': function(event, template) {
 
+        const retro = Retros.findOne()
+
         $( "div.retroItem" ).removeClass('itemHighlight')
-        // $( "a.okButton" ).addClass('hidden')
         $( "a.deleteButton" ).addClass('hidden')
         
         if(template.currentlyHighlighted === event.currentTarget){
@@ -122,7 +152,14 @@ Template.retroBoard.events({
             return
         }
 
-        // $(event.currentTarget).find('a.okButton').removeClass('hidden')
+        if(retro){
+            if(retro.showCompleted) {
+                if (this.status === Constants.RetroItemStatuses.COMPLETE){
+                    return 
+                }
+            }
+        }
+
         $(event.currentTarget).find('a.deleteButton').removeClass('hidden')
         event.currentTarget.classList.add('itemHighlight')
         template.currentlyHighlighted = event.currentTarget

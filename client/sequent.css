@@ -133,6 +133,13 @@ body{
     font-size: 1.5em;
 }
 
+.listItemCompleted {
+    background-color: #d6d6d6;
+    opacity: 0.90;
+    color: rgb(126, 124, 124);
+    font-size: 1.5em;
+}
+
 .itemBase {
     display: table-row; 
     min-height: 50px; 
@@ -233,6 +240,13 @@ li.happyTab.active{
 
 li.mehTab.active{
     border-bottom: #cec327 1px solid;
+}
+
+.menuRed {
+    color: #990000;
+}
+.menuBlue {
+    color: #2b71cc;
 }
 
 li.sadTab.active{

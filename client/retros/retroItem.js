@@ -28,6 +28,9 @@ Template.retroItem.helpers({
             return 'disabled'
         }
         return ''
+    },
+    notCompleted() {
+        return (this.status === Constants.RetroItemStatuses.PENDING)
     }
 })
 

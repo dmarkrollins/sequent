@@ -1,15 +1,18 @@
 <template name="retroItem">
-
+    
     <div style="width: 100%; display: table;">
         <div style="display: table-row; min-height: 50px;" >
             <div style="width: 24px; display: table-cell; text-align: center; padding: 12px;">
-                <a href="#" data-id={{itemId}} id="voteButton" style="margin-bottom: 0" class="btn {{voteDisabled}}"><img src="/thumb.png" width=20 ></a>
-                <span style="font-size: .75em !important; margin-top: -12px; color: #666">{{votes}}</span>
+                {{#if notCompleted}}
+                    <a href="#" data-id={{itemId}} id="voteButton" style="margin-bottom: 0" class="btn {{voteDisabled}}"><img src="/thumb.png" width=20 ></a>
+                    <span style="font-size: .75em !important; margin-top: -12px; color: #666">{{votes}}</span>
+                {{/if}}
             </div>
             <div class="tappable-text" style="width: 70%; display: table-cell; text-align: left;padding: 12px;"> {{title}} </div>
             <div class="tappable-icon" style="display: table-cell; text-align: center;"> 
-                <!-- <a href="#" class="hidden okButton"><img src="/check.png" width=24 ></a> -->
-                <a href="#" id={{itemId}} class="hidden deleteButton"><img src="/deleteItem.png" width=16 ></a>
+                {{#if notCompleted}}
+                    <a href="#" id={{itemId}} class="hidden deleteButton"><img src="/deleteItem.png" width=16 ></a>
+                {{/if}}
             </div>
         </div>
     </div>

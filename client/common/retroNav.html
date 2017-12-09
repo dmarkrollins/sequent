@@ -16,8 +16,13 @@
                             <img src="/gear.png" width="32" alt="">
                         </a>
                         <ul class="dropdown-menu pull-right">
-                            <li><a href="#" id="freezeRetro"><i class="fa fa-bolt" aria-hidden="true" style="color: #8627d3; margin-right: 12px;"></i>{{freezeText}}</a></li>
-                            <li><a href="#" id="archiveRetro"><i class="fa fa-archive" aria-hidden="true" style="color: #2780d3;"></i> Archive Retro</a></li>
+                            <li><a href="#" id="freezeRetro"><i class="fa fa-bolt" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{freezeText}}</a></li>
+                            {{#if displayShowCompletedMenuItem}}
+                                <li><a href="#" id="showCompleted"><i class="fa {{completeViewClass}}" aria-hidden="true"></i> {{showCompletedText}}</a></li>
+                            {{/if}}
+                            <li><a href="#" id="archiveRetro"><i class="fa fa-archive" aria-hidden="true" style="color: #2b71cc;"></i> Archive Retro</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="mailto:?subject=Check%20Out%20Sequent&body=Simple%20team%20retrospectives%20-%20https://sequent.herokuapp.com" id="showCompleted"><i class="fa fa-share-alt" aria-hidden="true" style="color: #2b71cc"></i> Share Sequent</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" id="signOut"><i class="fa fa-sign-out" style="color: #990000;" aria-hidden="true"></i> Logout</a></li>
                         </ul>

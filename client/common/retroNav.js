@@ -5,7 +5,7 @@ Template.retroNav.helpers({
     projectName() {
         if (!Meteor.user()) return ''
         
-        return Meteor.user().username
+        return Meteor.user().username.toProperCase()
     },
     actionCount() {
         return RetroActions.find().count()

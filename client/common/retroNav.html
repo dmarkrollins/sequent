@@ -1,20 +1,19 @@
 <template name="retroNav">
-        navbar navbar-inverse navbar-fixed-top
     <nav class="navbar navbar-inverse navbar-static-top" style="margin: 0">
         <div class="row">
-            <div class="col-xs-8">
-                <div class="navbar-header" style="min-width: 150px; overflow:hidden;">
+            <div class="col-xs-7">
+                <div class="navbar-header" style="min-width: 150px; overflow: hidden; text-overflow: ellipsis;">
                     <a class="navbar-brand" href="#" >
-                        <span style="white-space: nowrap;"><img alt="Brand" src="/Sequent.png" width="64" style="margin-right: 20px;">{{projectName}} - Retro {{freezeTitle}}</span>
+                        <span style="white-space: nowrap;"><img alt="Brand" src="/Sequent.png" width="64" style="margin-right: 20px;">{{projectName}}{{freezeTitle}}</span>
                     </a>
                 </div>
             </div>
-            <div class="col-xs-4 text-right" style="white-space: nowrap;">
-                    <a href="/retro/board" style="position: relative; top: 7px;  margin-right: 12px;"><img src="/retros.png" width="24" alt=""></a>
-                    <a href="/retro/actions" style="position: relative; top: 7px;  margin-right: 0px;"><span class="badge {{badgeClass}}" style="font-size: 1.1em;">{{actionCount}}</span></a>
-                    <div class="btn-group">
-                        <a class="btn dropdown-toggle" style="position: relative; top: 9px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <img src="/gear.png" width="24" alt="">
+            <div class="col-xs-5 text-right" style="white-space: nowrap;">
+                    <a href="/retro/board" style="position: relative; top: 4px;  margin-right: 12px;"><img src="/retros.png" width="32" alt=""></a>
+                    <a href="/retro/actions" style="position: relative; top: 5px;  margin-right: 0px;"><span class="badge {{badgeClass}}" style="font-size: 1.2em;">{{actionCount}}</span></a>
+                    <div class="btn-group" >
+                        <a class="btn dropdown-toggle" style="position: relative; top: 6px; margin-right: 7px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <img src="/gear.png" width="32" alt="">
                         </a>
                         <ul class="dropdown-menu pull-right">
                             <li><a href="#" id="freezeRetro"><i class="fa fa-bolt" aria-hidden="true" style="color: #8627d3; margin-right: 12px;"></i>{{freezeText}}</a></li>

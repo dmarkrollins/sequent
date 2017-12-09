@@ -238,3 +238,15 @@ body{
     padding:0;
     border-top: 1px rgb(212, 212, 212) solid;
 }
+
+li.happyTab.active{
+    border-bottom: #337a4e 1px solid;
+}
+
+li.mehTab.active{
+    border-bottom: #cec327 1px solid;
+}
+
+li.sadTab.active{
+    border-bottom: #a05252 1px solid;
+}

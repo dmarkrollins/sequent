@@ -1,0 +1,104 @@
+<template name="retroBoard">
+    <div class="fullscreen">
+        {{> actionInput}}
+        <div class="row">
+            {{#if Template.subscriptionsReady}}
+                <div class="col-sm-12 col-xs-12 hidden-md hidden-lg hidden-xl">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active happy" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" >:)</a></li>
+                        <li role="presentation" class="meh" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab" >:-</a></li>
+                        <li role="presentation" class="sad"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab">:(</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="happy">
+                            <div class="fullheight-green text-center" style="padding-top: 5px;">
+                                {{#if notFrozen}}
+                                    <div class="retroItem greenItem">
+                                        <textarea rows="2" placeholder=":)"></textarea>
+                                    </div>
+                                {{/if}}
+                                {{#each greenItem}}
+                                    <div class="retroItem listItem">
+                                        {{> retroItem this }}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="meh">
+                            <div class="fullheight-yellow text-center" style="padding-top: 5px;">
+                                {{#if notFrozen}}
+                                    <div class="retroItem yellowItem" >
+                                        <textarea rows="2" placeholder="-)"></textarea>
+                                    </div>
+                                {{/if}}
+                                {{#each yellowItem}}
+                                    <div class="retroItem listItem">
+                                        {{> retroItem this }}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sad">
+                            <div class="fullheight-red text-center" style="padding-top: 5px;">
+                                {{#if notFrozen}}
+                                    <div class="retroItem redItem" >
+                                        <textarea rows="2" placeholder=":("></textarea>
+                                    </div>
+                                {{/if}}
+                                {{#each redItem}}
+                                    <div class="retroItem listItem">
+                                        {{> retroItem this }}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm hidden-xs col-md-12">
+                    <div class="row row-eq-height">
+                        <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
+                            {{#if notFrozen}}
+                                <div class="retroItem greenItem">
+                                    <textarea rows="2" placeholder=":)"></textarea>
+                                </div>
+                            {{/if}}
+                            {{#each greenItem}}
+                                <div class="retroItem listItem">
+                                    {{> retroItem this }}
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-4 fullheight-yellow text-center" style="display: table-cell;">
+                            {{#if notFrozen}}
+                                <div class="retroItem yellowItem">
+                                    <textarea rows="2" placeholder=":-"></textarea>
+                                </div>
+                            {{/if}}
+                            {{#each yellowItem}}
+                                <div class="retroItem listItem">
+                                    {{> retroItem this}}
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-4 fullheight-red text-center" style="display: table-cell;">
+                            {{#if notFrozen}}
+                                <div class="retroItem redItem">
+                                    <textarea rows="2" placeholder=":("></textarea>
+                                </div>
+                            {{/if}}
+                            {{#each redItem}}
+                                <div class="retroItem listItem">
+                                    {{> retroItem this}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                {{> spinner}}
+            {{/if}}
+        </div>
+    </div>    
+    
+</template>

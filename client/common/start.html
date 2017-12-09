@@ -1,0 +1,35 @@
+<template name="start">
+    
+    <div class="fullscreen">
+        <div class="vertical-center">
+            <div class="panel panel-default" style="max-width: 500px; margin: 0 auto; padding: 20px;">
+                <img src="/Sequent.png" width="64"/>
+                <h3 style="margin-top: 7px; margin-bottom: 21px;">Sequent</h3>
+                <p>
+                    Because your team is only as good as it's last retro...
+                </p>
+                <div style="width: 80%; margin: 0 auto;">
+                    <form id="start-form">
+                        <fieldset id="start-fs">
+                            <div class="form-group">
+                                <input type="text" class="form-control" id="teamName" placeholder="Team-Name">
+                            </div>
+                            <div class="form-group">
+                                <input type="password" class="form-control" id="password" placeholder="Password">
+                            </div>
+                            <p>
+                                <span class="error-message">{{errMessage}}</span>
+                            </p>
+                            <p>
+                                <button class="btn btn-primary" id="btnNewTeam"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Team</button>
+                                <button type="submit" class="btn btn-success" id="btnNext">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                            </p>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+    
+</template>

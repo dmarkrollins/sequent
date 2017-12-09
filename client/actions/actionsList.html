@@ -1,0 +1,23 @@
+<template name="actionsList">
+    
+    <div class="fullscreen">
+        
+        {{> actionInput}}
+        
+        <div class="row">
+            {{#each item}}
+                <div class="col-xs-12 col-sm-6 col-sm-offset-3 listActionItem text-center">
+                    <div class="actionItem " style="display: table; width: 95%;">
+                        <div class="tappable-text" style="width: 80%; display: table-cell; text-align: left; padding: 12px;"> {{title}} </div>
+                        <div class="tappable-icon" style="width: 15%; display: table-cell; text-align: right; padding-right: 5px; white-space: nowrap; min-width: 50px;"> 
+                            <a href="#" id={{_id}} class="hidden deleteButton" title="Delete item" style="width: 32px;"><img src="/deleteItem.png" width=16></a>&nbsp;
+                            <a href="#" id={{_id}} class="okButton" title="Complete item"><img src="/{{okImage}}" width=32 ></a>&nbsp;
+                        </div>
+                    </div>
+                </div>
+            {{/each}}
+        </div>        
+
+    </div>            
+    
+</template>

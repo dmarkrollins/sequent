@@ -1,4 +1,5 @@
 
+import { Retros } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 Template.retroItem.onCreated(function(){
@@ -19,6 +20,14 @@ Template.retroItem.helpers({
             default:
                 return 'redItem'
         }
+    },
+    voteDisabled() {
+        const retro = Retros.findOne()
+        if(!retro) return
+        if(retro.status === Constants.RetroStatuses.FROZEN){
+            return 'disabled'
+        }
+        return ''
     }
 })
 

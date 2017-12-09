@@ -59,7 +59,7 @@ Template.newTeam.events({
                 template.setMessage(err)
                 return
             }
-            FlowRouter.go('/retros')
+            FlowRouter.go('/retro/board')
         })
         
     }

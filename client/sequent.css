@@ -157,18 +157,6 @@ body{
     display:         flex;
 }
 
-.actionItem {
-    background-color: #f3f3f3;
-    opacity: 0.90;
-    color: #333;
-    font-size: 1.5em;
-    border-radius: 4px 4px 4px 4px;
-    -moz-border-radius: 4px 4px 4px 4px;
-    -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #000000;
-    margin: 12px;
-}
-
 .actionItemHighlight {
     font-size: 2em;
     color: #000;

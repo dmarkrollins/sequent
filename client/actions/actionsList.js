@@ -8,12 +8,6 @@ Template.actionsList.onCreated(function() {
 Template.actionsList.helpers({
     item() {
         return RetroActions.find()
-    },
-    okImage() {
-        if (this.status === Constants.RetroItemStatuses.PENDING){
-            return 'ok-gray.png'
-        }
-        return 'ok-green.png'
     }
 })
 
@@ -32,8 +26,7 @@ Template.actionsList.events({
             }
         }
     },
-    'click div.listActionItem': function(event, template) {
-
+    'click div.retroItem': function(event, template) {
         $( "div.actionItem" ).removeClass('actionItemHighlight')
         // $( "a.okButton" ).addClass('hidden')
         $( "a.deleteButton" ).addClass('hidden')
@@ -48,24 +41,4 @@ Template.actionsList.events({
         $(event.currentTarget).find('div.actionItem').addClass('actionItemHighlight')
         template.currentlyHighlighted = event.currentTarget
     },
-    'click a.deleteButton': function(event, template){
-        var r = confirm("Are you sure?");
-        if(!r) return
-        Meteor.call('removeAction', event.currentTarget.id, function(err){
-          if(err){
-              console.log(err)
-              toastr.error('Could not remove action - try again later')
-          }  
-        })
-    },
-    'click a.okButton': function(event, template){
-        event.preventDefault()
-        event.stopPropagation() 
-        Meteor.call('toggleAction', event.currentTarget.id, function(err){
-          if(err){
-              console.log(err)
-              toastr.error('Could not remove action - try again later')
-          }  
-        })
-    }
 })

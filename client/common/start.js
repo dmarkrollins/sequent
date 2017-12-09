@@ -20,16 +20,22 @@ Template.start.helpers({
 })
 
 Template.start.events({
+    'keypress form#start-form'(event, template){
+        if(event.which === 13) {
+            event.preventDefault();
+            $("#start-form").submit()
+        }
+    },
     'click #btnNewTeam'(event) {
         event.preventDefault();
         FlowRouter.go('/new')
     },
-    'click #btnNext': function(event, template) {
+    'submit #start-form': function(event, template) {
         event.preventDefault();
         
         template.message.set('')
-        const name = event.target.form.teamName.value || '';
-        const password = event.target.form.password.value|| '';
+        const name = event.target.teamName.value || '';
+        const password = event.target.password.value || '';
         
         if(name === '' || password === ''){
             template.message.set('Invalid team name and password combination!')

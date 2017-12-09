@@ -1,3 +1,7 @@
+html, body {
+    overflow-x: hidden;
+}
+
 .fullscreen {
     background-color: #094394;
     height:100vh;

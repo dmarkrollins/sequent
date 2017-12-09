@@ -1,27 +1,28 @@
 <template name="retroNav">
+        navbar navbar-inverse navbar-fixed-top
     <nav class="navbar navbar-inverse navbar-static-top" style="margin: 0">
-        <div class="container-fluid">
-            <div class="navbar-header">
-                <a class="navbar-brand" href="#" >
-                    <span style="white-space: nowrap;"><img alt="Brand" src="/Sequent.png" width="64" style="margin-right: 20px;">{{projectName}} - Retro {{freezeTitle}}</span>
-                </a>
+        <div class="row">
+            <div class="col-xs-8">
+                <div class="navbar-header" style="min-width: 150px; overflow:hidden;">
+                    <a class="navbar-brand" href="#" >
+                        <span style="white-space: nowrap;"><img alt="Brand" src="/Sequent.png" width="64" style="margin-right: 20px;">{{projectName}} - Retro {{freezeTitle}}</span>
+                    </a>
+                </div>
             </div>
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav navbar-right">
-                        <li style="white-space: nowrap;"><a href="/retro/board">Retro</a></li>
-                        <li style="white-space: nowrap;"><a href="/retro/actions">Action Items {{#if showBadge}}&nbsp;<span class="badge badge-error">{{actionCount}}</span>{{/if}}</a></li>
-                    <li>
-                        <a class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <div class="col-xs-4 text-right" style="white-space: nowrap;">
+                    <a href="/retro/board" style="position: relative; top: 7px;  margin-right: 12px;"><img src="/retros.png" width="24" alt=""></a>
+                    <a href="/retro/actions" style="position: relative; top: 7px;  margin-right: 0px;"><span class="badge {{badgeClass}}" style="font-size: 1.1em;">{{actionCount}}</span></a>
+                    <div class="btn-group">
+                        <a class="btn dropdown-toggle" style="position: relative; top: 9px;" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <img src="/gear.png" width="24" alt="">
                         </a>
-                        <ul class="dropdown-menu">
+                        <ul class="dropdown-menu pull-right">
                             <li><a href="#" id="freezeRetro"><i class="fa fa-bolt" aria-hidden="true" style="color: #8627d3; margin-right: 12px;"></i>{{freezeText}}</a></li>
                             <li><a href="#" id="archiveRetro"><i class="fa fa-archive" aria-hidden="true" style="color: #2780d3;"></i> Archive Retro</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" id="signOut"><i class="fa fa-sign-out" style="color: #990000;" aria-hidden="true"></i> Logout</a></li>
                         </ul>
-                    </li>
-                </ul>
+                    </div>
              </div>
         </div>  
     </nav>

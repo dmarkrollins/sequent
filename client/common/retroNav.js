@@ -10,8 +10,11 @@ Template.retroNav.helpers({
     actionCount() {
         return RetroActions.find().count()
     },
-    showBadge() {
-        return RetroActions.find().count() > 0
+    badgeClass() {
+        if ( RetroActions.find().count() > 0) {
+            return 'badge-error'
+        }
+        return ''
     },
     freezeText() {
         const retro = Retros.findOne()

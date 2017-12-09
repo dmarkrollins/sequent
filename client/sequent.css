@@ -204,9 +204,9 @@ body{
 .nav-tabs>li>a {
     background-color: transparent;
     border-color: #cecece;
-    color:#dfdfdf;
+    color: #000;;
     margin-bottom: 0;
-    
+    font-size: 1.1em;
 }
 
 .nav-tabs {
@@ -217,26 +217,20 @@ body{
 
 /* active tab color */
 .nav-tabs>li.active>a, .nav-tabs>li.active>a:hover, .nav-tabs>li.active>a:focus {
-    color: #dfdfdf;
+    color: #000;
+    font-weight: bold;
     background-color: transparent;
     border: 1px solid #dfdfdf;
-    border-bottom: 0;
+    /* border-bottom: 1px #094394 solid; */
+    font-size: 1.1em;
 }
 
 /* hover tab color */
 .nav-tabs>li>a:hover {
     border-color: #b6b6b6;
+    color: #000;
     background-color: transparent;
-}
-
-.nav-tabs li .happy {
-    background-color: #337a4e;
-}
-.nav-tabs li .meh {
-    background-color: #cec327;
-}
-.nav-tabs li .sad {
-    background-color: #a05252;
+    font-size: 1.1em;
 }
 
 .tab-content {

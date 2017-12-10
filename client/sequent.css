@@ -135,6 +135,7 @@ html, body {
     opacity: 0.90;
     color: #333;
     font-size: 1.5em;
+    overflow: hidden;
 }
 
 .listItemCompleted {

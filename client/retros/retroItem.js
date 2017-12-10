@@ -21,16 +21,25 @@ Template.retroItem.helpers({
                 return 'redItem'
         }
     },
-    voteDisabled() {
-        const retro = Retros.findOne()
-        if(!retro) return
-        if(retro.status === Constants.RetroStatuses.FROZEN){
-            return 'disabled'
-        }
-        return ''
-    },
     notCompleted() {
         return (this.status === Constants.RetroItemStatuses.PENDING)
+    },
+    showVoteButton() {
+
+        const retro = Retros.findOne()
+
+        if(!retro) return true
+        
+        if (retro.status === Constants.RetroStatuses.FROZEN || retro.status === Constants.RetroStatuses.ARCHIVED) {
+            return false
+        }
+
+        if (this.status !== Constants.RetroItemStatuses.PENDING) {
+            return false
+        }
+
+        return true
+        
     }
 })
 

@@ -4,14 +4,14 @@
         <div style="display: table-row; min-height: 50px;" >
             <div style="width: 30px; display: table-cell; text-align: center; padding-left: 7px;">
                 {{#if showVoteButton}}
-                    <a href="#" data-id={{itemId}} id="voteButton" style="margin-bottom: 0" class="btn"><img src="/thumb.png" width=20 ></a>
+                    <a href="#" data-id={{data.itemId}} id="voteButton" style="margin-bottom: 0" class="btn"><img src="/thumb.png" width=20 ></a>
                 {{/if}}
-                <p style="font-size: .75em !important; color: #666">{{votes}}</p>
+                <p style="font-size: .75em !important; color: #666">{{data.votes}}</p>
             </div>
-            <div class="tappable-text" style="display: table-cell; text-align: left; paddinf: 7px; word-break: break-all"> {{title}} </div>
-            <div class="tappable-icon" style="width: 20px; display: table-cell; text-align: right; padding: 7px 12px 7px 7px;"> 
+            <div class="tappable-text" style="width: 275px; text-align: left; padding: 7px; overflow: scroll;"> {{data.title}} </div>
+            <div class="tappable-icon" style="min-width: 20px; display: table-cell; text-align: right; padding: 7px 12px 7px 7px;"> 
                 {{#if notCompleted}}
-                    <a href="#" id={{itemId}} class="hidden deleteButton"><img src="/deleteItem.png" width=16 ></a>
+                    <a href="#" id={{data.itemId}} class="hidden completeButton" style="margin-right: 12px;"><img src="/{{okButton}}" width=24 ></a>
                 {{/if}}
             </div>
         </div>

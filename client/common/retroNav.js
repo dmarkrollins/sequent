@@ -1,3 +1,4 @@
+/* global PackageInfo */
 import { Retros, RetroActions } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
@@ -61,7 +62,9 @@ Template.retroNav.helpers({
         if(retro.showCompleted) return 'Hide Completed'
 
         return 'Show Completed'
-        
+    },
+    currentVersion() {
+        return `Version ${PackageInfo.version}`        
     }
     
 })
@@ -114,6 +117,10 @@ Template.retroNav.events({
                 toastr.error('Failed to toggle completed view!')
             }
         })        
+    },
+
+    'click #showVersions'() {
+        FlowRouter.go('/retro/versions')
     }
     
 })

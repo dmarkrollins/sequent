@@ -109,6 +109,15 @@ Template.retroBoard.helpers({
         }
 
         return 'listItem '
+    },
+    currentItem() {
+        return {
+            data: this,
+            unHighlight: function(){
+                $( "div.retroItem" ).removeClass('itemHighlight')
+                $( "a.completeButton" ).addClass('hidden')        
+            }
+        }
     }
 })
 
@@ -145,7 +154,7 @@ Template.retroBoard.events({
         const retro = Retros.findOne()
 
         $( "div.retroItem" ).removeClass('itemHighlight')
-        $( "a.deleteButton" ).addClass('hidden')
+        $( "a.completeButton" ).addClass('hidden')
         
         if(template.currentlyHighlighted === event.currentTarget){
             template.currentlyHighlighted = null
@@ -160,7 +169,7 @@ Template.retroBoard.events({
             }
         }
 
-        $(event.currentTarget).find('a.deleteButton').removeClass('hidden')
+        $(event.currentTarget).find('a.completeButton').removeClass('hidden')
         event.currentTarget.classList.add('itemHighlight')
         template.currentlyHighlighted = event.currentTarget
     },

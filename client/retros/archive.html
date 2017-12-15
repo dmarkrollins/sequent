@@ -1,0 +1,36 @@
+<template name="archive">
+
+    <div class="fullscreen">
+        <div class="vertical-center"  style="padding: 7px;">
+            <div class="panel panel-default" style="max-width: 500px; margin: 0 auto; padding: 20px;">
+                <img src="/Sequent.png" width="64"/>
+                <h3 style="margin-top: 7px; margin-bottom: 21px;">{{myName}} Team Archive</h3>
+
+                {{#if Template.subscriptionsReady}}
+                    <div class="row">
+                        <div class="col-sm-6 col-sm-offset-3 col-xs-12">      
+                            <table class="table table-striped">
+                                <thead>
+                                    <tr>
+                                        <th style="font-size: 0.9em" align="center">View</th>
+                                        <th>Created</th>
+                                        <th># Items</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {{#each items}}
+                                        {{> archiveItem this}}
+                                    {{/each}}
+                                </tbody>
+                            </table>        
+                        </div>
+                    </div>  
+
+                {{else}}
+                    {{> spinner}}
+                {{/if}}
+
+            </div>
+        </div>
+    </div>
+</template>

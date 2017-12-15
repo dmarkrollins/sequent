@@ -4,13 +4,13 @@
   "description": "Sequent Retrospectives",
   "version": "0.1.03",
   "author": "6thcents (http://6thcents.com/)",
-
   "scripts": {
     "start": "meteor run"
   },
   "dependencies": {
     "babel-runtime": "^6.26.0",
     "bcrypt": "^1.0.3",
-    "meteor-node-stubs": "^0.3.2"
+    "meteor-node-stubs": "^0.3.2",
+    "moment": "^2.19.4"
   }
 }

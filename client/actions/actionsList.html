@@ -1,15 +1,19 @@
 <template name="actionsList">
     
-    <div class="fullscreen backgroundBlue">
+    <div class="fullscreen">
         
         {{> actionInput}}
-        
-        {{#each item}}
-            <div class="retroItem listItem">
-                {{> actionItem this}}
-            </div>
-        {{/each}}
 
+        {{#if Template.subscriptionsReady}}
+            {{#each item}}
+                <div class="retroItem listItem">
+                    {{> actionItem this}}
+                </div>
+            {{/each}}
+        {{else}}
+            {{> spinner}}
+        {{/if}}
+        
     </div>            
     
 </template>

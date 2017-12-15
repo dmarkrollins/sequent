@@ -20,6 +20,17 @@ FlowRouter.route('/new', {
     }
 });
 
+FlowRouter.route('/versions', {
+    subscriptions: function(params) {
+        this.register('retros', Meteor.subscribe('active-retros'))  
+        this.register('actions', Meteor.subscribe('open-actions'))
+      },
+      action: function() {
+        BlazeLayout.render('retroLayout', {content: 'sequentVersions'});
+    }
+    
+})
+
 RetroRouter = FlowRouter.group({
     prefix: '/retro',
     name: 'admin',
@@ -52,13 +63,13 @@ RetroRouter.route('/actions', {
     
 })
 
-RetroRouter.route('/versions', {
+RetroRouter.route('/archives', {
     subscriptions: function(params) {
-        this.register('retros', Meteor.subscribe('active-retros'))  
+        this.register('retros', Meteor.subscribe('archived-retros'))  
         this.register('actions', Meteor.subscribe('open-actions'))
       },
       action: function() {
-        BlazeLayout.render('retroLayout', {content: 'sequentVersions'});
+        BlazeLayout.render('retroLayout', {content: 'archive'});
     }
     
 })

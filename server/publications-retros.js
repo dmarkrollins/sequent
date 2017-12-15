@@ -20,12 +20,12 @@ Meteor.publish('active-retros', function() {
     
 });
 
-Meteor.publish('archived-retros', function(teamId) {
+Meteor.publish('archived-retros', function() {
     
     if(!this.userId) {
         return null
     }
-    
-    return Retros.find({ createdBy: this.userId, status: Constants.RetroStatuses.ARCHIVE})
+
+    return Retros.find({ createdBy: this.userId, status: Constants.RetroStatuses.ARCHIVED})
  
 });

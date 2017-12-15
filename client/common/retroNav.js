@@ -117,10 +117,6 @@ Template.retroNav.events({
                 toastr.error('Failed to toggle completed view!')
             }
         })        
-    },
-
-    'click #showVersions'() {
-        FlowRouter.go('/retro/versions')
     }
     
 })

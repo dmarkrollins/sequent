@@ -37,7 +37,7 @@ html, body {
 
 .fullheight-green {
     min-height:100vh;
-    background-color: #aec4c1;
+    background-color: #496d89;/*#aec4c1;*/
     overflow: visible;
     padding-bottom: 20px;
     border-top: 1px solid #666;
@@ -46,7 +46,8 @@ html, body {
 
 .fullheight-yellow {
     min-height:100vh;
-    background-color: #d8da95;
+    background-color: #d4ba6a; /*cfa9a9;*/
+   
     overflow: visible;
     padding-bottom: 20px;
     border-left: 1px solid #666;
@@ -56,7 +57,7 @@ html, body {
 
 .fullheight-red {
     min-height:100vh;
-    background-color: #cfa9a9;
+    background-color: #d4886a; /*d8da95;*/
     overflow: visible;
     padding-bottom: 20px;
     border-left: 1px solid #666;
@@ -97,12 +98,13 @@ html, body {
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #5e9671;
-    background-color: #ace0bf;
+    border: 1px solid #123652; /*5e9671; */
+    background-color: #718EA4;/*ace0bf;*/
     box-shadow: none;
     overflow: hidden;
     outline: none;
     resize: none;
+    color: #000;
 }
 
 .yellowItem textarea {
@@ -112,8 +114,8 @@ html, body {
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #b3a703;
-    background-color: #ebebad;
+    border: 1px solid #806515;/*944a4a;*/
+    background-color: #ffeaaa;/*f3b5b5;*/
     box-shadow: none;
     overflow: hidden;
     outline: none;
@@ -127,8 +129,8 @@ html, body {
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #944a4a;
-    background-color: #f3b5b5;
+    border: 1px solid #803315;/*b3a703;*/
+    background-color: #ffc2aa;/*ebebad;*/
     box-shadow: none;
     overflow: hidden;
     outline: none;
@@ -208,7 +210,7 @@ html, body {
 /* tab color */
 .nav-tabs>li>a {
     background-color: transparent;
-    border-color: #999;
+    border-color: #777;
     color: #000;;
     margin-bottom: 0;
     font-size: 1.1em;
@@ -227,14 +229,14 @@ html, body {
     color: #000;
     font-weight: bold;
     background-color: transparent;
-    border: 1px solid #666;
+    border: 1px solid #444;
     /* border-bottom: 1px #b5b2b6 solid; */
     font-size: 1.1em;
 }
 
 /* hover tab color */
 .nav-tabs>li>a:hover {
-    border-color: #b6b6b6;
+    border-color: #000;
     color: #000;
     background-color: transparent;
     font-size: 1.1em;
@@ -247,12 +249,12 @@ html, body {
 }
 
 li.happyTab.active{
-    border-bottom: #aec4c1 1px solid;
+    border-bottom: #7690a5 1px solid;
 
 }
 
 li.mehTab.active{
-    border-bottom: #d8da95 1px solid;
+    border-bottom: #e0c87e 1px solid;
 
 }
 
@@ -264,6 +266,28 @@ li.mehTab.active{
 }
 
 li.sadTab.active{
-    border-bottom: #cfa9a9 1px solid;
+    border-bottom: #e2a3a3 1px solid;
 
+}
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #666;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #666;
+   opacity:  1;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #666;
+   opacity:  1;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #666;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #666;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #666;
 }

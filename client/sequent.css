@@ -37,7 +37,7 @@ html, body {
 
 .fullheight-green {
     min-height:100vh;
-    background-color: #8bc4bc;
+    background-color: #aec4c1;
     overflow: visible;
     padding-bottom: 20px;
     border-top: 1px solid #666;
@@ -46,7 +46,7 @@ html, body {
 
 .fullheight-yellow {
     min-height:100vh;
-    background-color: #dee06d;
+    background-color: #d8da95;
     overflow: visible;
     padding-bottom: 20px;
     border-left: 1px solid #666;
@@ -56,7 +56,7 @@ html, body {
 
 .fullheight-red {
     min-height:100vh;
-    background-color: #e2a1a1;
+    background-color: #cfa9a9;
     overflow: visible;
     padding-bottom: 20px;
     border-left: 1px solid #666;
@@ -247,13 +247,13 @@ html, body {
 }
 
 li.happyTab.active{
-    border-bottom: #8bc4bc 1px solid;
-    opacity: 0.75;
+    border-bottom: #aec4c1 1px solid;
+
 }
 
 li.mehTab.active{
-    border-bottom: #dee06d 1px solid;
-    opacity: 0.75;
+    border-bottom: #d8da95 1px solid;
+
 }
 
 .menuRed {
@@ -264,6 +264,6 @@ li.mehTab.active{
 }
 
 li.sadTab.active{
-    border-bottom: #e2a1a1 1px solid;
-    opacity: 0.75;
+    border-bottom: #cfa9a9 1px solid;
+
 }

@@ -5,9 +5,9 @@
             {{#if Template.subscriptionsReady}}
                 <div class="col-sm-12 col-xs-12 hidden-md hidden-lg hidden-xl">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active happyTab" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#8bc4bc; border-bottom: 0; ">:)</a></li>
-                        <li role="presentation" class="mehTab" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #dee06d; border-bottom: 0; ">:-</a></li>
-                        <li role="presentation" class="sadTab"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #e2a1a1; border-bottom: 0; ">:(</a></li>
+                        <li role="presentation" class="active happyTab" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#aec4c1; border-bottom: 0; opacity: 0.75;">:)</a></li>
+                        <li role="presentation" class="mehTab" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #d8da95; border-bottom: 0; opacity: 0.75;">:|</a></li>
+                        <li role="presentation" class="sadTab"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #cfa9a9; border-bottom: 0; opacity: 0.75;">:(</a></li>
                     </ul>
 
                     <div class="tab-content">
@@ -29,7 +29,7 @@
                             <div class="fullheight-yellow text-center" style="padding-top: 5px;">
                                 {{#if notFrozen}}
                                     <div class="yellowItem" >
-                                        <textarea rows="1" placeholder=":-"></textarea>
+                                        <textarea rows="1" placeholder=":|"></textarea>
                                     </div>
                                 {{/if}}
                                 {{#each yellowItem}}
@@ -60,7 +60,7 @@
                         <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
                             {{#if notFrozen}}
                                 <div class="greenItem">
-                                    <textarea rows="2" placeholder=":)"></textarea>
+                                    <textarea rows="1" placeholder=":)"></textarea>
                                 </div>
                             {{/if}}
                             {{#each greenItem}}
@@ -72,7 +72,7 @@
                         <div class="col-md-4 fullheight-yellow text-center" style="display: table-cell;">
                             {{#if notFrozen}}
                                 <div class="yellowItem">
-                                    <textarea rows="2" placeholder=":-"></textarea>
+                                    <textarea rows="1" placeholder=":|"></textarea>
                                 </div>
                             {{/if}}
                             {{#each yellowItem}}
@@ -84,7 +84,7 @@
                         <div class="col-md-4 fullheight-red text-center" style="display: table-cell;">
                             {{#if notFrozen}}
                                 <div class="redItem">
-                                    <textarea rows="2" placeholder=":("></textarea>
+                                    <textarea rows="1" placeholder=":("></textarea>
                                 </div>
                             {{/if}}
                             {{#each redItem}}

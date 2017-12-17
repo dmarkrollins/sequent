@@ -1,4 +1,4 @@
-import { Retros, RetroActions } from '../../lib/sequent'
+import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 Template.actionsList.onCreated(function() {
@@ -8,6 +8,16 @@ Template.actionsList.onCreated(function() {
 Template.actionsList.helpers({
     item() {
         return RetroActions.find()
+    },
+    backGround(){
+        const settings = Settings.findOne()
+
+        if(!settings){
+            return Sequent.defaultBackground
+        }
+        else {
+            return settings.backgroundImage
+        }
     }
 })
 

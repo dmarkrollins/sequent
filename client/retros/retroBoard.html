@@ -1,21 +1,21 @@
 <template name="retroBoard">
-    <div class="backgroundBlue">
+    <div style="background-image: url({{backGround}})">
         {{> actionInput}}
         <div class="row">
             {{#if Template.subscriptionsReady}}
                 <div class="col-sm-12 col-xs-12 hidden-md hidden-lg hidden-xl">
                     <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active happyTab" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#337a4e; border-bottom: 0;">:)</a></li>
-                        <li role="presentation" class="mehTab" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #cec327; border-bottom: 0;">:-</a></li>
-                        <li role="presentation" class="sadTab"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #a05252; border-bottom: 0;">:(</a></li>
+                        <li role="presentation" class="active happyTab" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#496d89; border-bottom: 0; opacity: 0.75;">:)</a></li>
+                        <li role="presentation" class="mehTab" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #d4ba6a; border-bottom: 0; opacity: 0.75;">:|</a></li>
+                        <li role="presentation" class="sadTab"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #d4886a; border-bottom: 0; opacity: 0.75;">:/</a></li>
                     </ul>
 
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="happy">
                             <div class="fullheight-green text-center" style="padding-top: 5px;">
                                 {{#if notFrozen}}
-                                    <div class="retroItem greenItem">
-                                        <textarea rows="1" placeholder=":)"></textarea>
+                                    <div class="greenItem">
+                                        <textarea rows="1" placeholder="{{happyPlaceholder}}"></textarea>
                                     </div>
                                 {{/if}}
                                 {{#each greenItem}}
@@ -28,8 +28,8 @@
                         <div role="tabpanel" class="tab-pane" id="meh">
                             <div class="fullheight-yellow text-center" style="padding-top: 5px;">
                                 {{#if notFrozen}}
-                                    <div class="retroItem yellowItem" >
-                                        <textarea rows="1" placeholder=":-"></textarea>
+                                    <div class="yellowItem" >
+                                        <textarea rows="1" placeholder="{{mehPlaceholder}}"></textarea>
                                     </div>
                                 {{/if}}
                                 {{#each yellowItem}}
@@ -42,8 +42,8 @@
                         <div role="tabpanel" class="tab-pane" id="sad">
                             <div class="fullheight-red text-center" style="padding-top: 5px;">
                                 {{#if notFrozen}}
-                                    <div class="retroItem redItem" >
-                                        <textarea rows="1" placeholder=":("></textarea>
+                                    <div class="redItem" >
+                                        <textarea rows="1" placeholder="{{sadPlaceholder}}"></textarea>
                                     </div>
                                 {{/if}}
                                 {{#each redItem}}
@@ -59,8 +59,8 @@
                     <div class="row row-eq-height">
                         <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
                             {{#if notFrozen}}
-                                <div class="retroItem greenItem">
-                                    <textarea rows="2" placeholder=":)"></textarea>
+                                <div class="greenItem">
+                                    <textarea rows="1" placeholder="{{happyPlaceholder}}"></textarea>
                                 </div>
                             {{/if}}
                             {{#each greenItem}}
@@ -71,8 +71,8 @@
                         </div>
                         <div class="col-md-4 fullheight-yellow text-center" style="display: table-cell;">
                             {{#if notFrozen}}
-                                <div class="retroItem yellowItem">
-                                    <textarea rows="2" placeholder=":-"></textarea>
+                                <div class="yellowItem">
+                                    <textarea rows="1" placeholder="{{mehPlaceholder}}"></textarea>
                                 </div>
                             {{/if}}
                             {{#each yellowItem}}
@@ -83,8 +83,8 @@
                         </div>
                         <div class="col-md-4 fullheight-red text-center" style="display: table-cell;">
                             {{#if notFrozen}}
-                                <div class="retroItem redItem">
-                                    <textarea rows="2" placeholder=":("></textarea>
+                                <div class="redItem">
+                                    <textarea rows="1" placeholder="{{sadPlaceholder}}"></textarea>
                                 </div>
                             {{/if}}
                             {{#each redItem}}

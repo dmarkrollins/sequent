@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
-import { Sequent } from '../../lib/sequent'
+import { Sequent, Settings } from '../../lib/sequent'
 
 import './start.html'
 
@@ -16,6 +16,16 @@ Template.start.onCreated(function() {
 Template.start.helpers({
     errMessage() {
         return Template.instance().message.get()
+    },
+    backGround(){
+        const settings = Settings.findOne()
+
+        if(!settings){
+            return Sequent.defaultBackground
+        }
+        else {
+            return settings.backgoundImage
+        }
     }
 })
 

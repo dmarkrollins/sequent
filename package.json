@@ -2,7 +2,7 @@
   "name": "sequent",
   "private": true,
   "description": "Sequent Retrospectives",
-  "version": "0.1.03",
+  "version": "0.1.04",
   "author": "6thcents (http://6thcents.com/)",
   "scripts": {
     "start": "meteor run"

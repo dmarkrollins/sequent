@@ -4,14 +4,21 @@ html, body {
 }
 
 .fullscreen {
-    background-color: #094394;
     height:100vh;
     width: 100%;
     display: table;
 }
 
+
+
 .backgroundBlue {
-    background-color: #094394;
+    background-image: url(graypattern.png);
+    /* background: rgb(206,206,206); 
+    background: -moz-linear-gradient(-45deg, rgba(206,206,206,1) 0%, rgba(89,106,114,1) 100%);
+    background: -webkit-linear-gradient(-45deg, rgba(206,206,206,1) 0%,rgba(89,106,114,1) 100%);
+    background: linear-gradient(135deg, rgba(206,206,206,1) 0%,rgba(89,106,114,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#cecece', endColorstr='#596a72',GradientType=1 ); 
+    */
 }
 
 .vertical-center{
@@ -29,23 +36,32 @@ html, body {
 
 .fullheight-green {
     min-height:100vh;
-    background-color: #337a4e;
+    background-color: #496d89;/*#aec4c1;*/
     overflow: visible;
     padding-bottom: 20px;
+    border-top: 1px solid #666;
+    opacity: 0.75;
 }
 
 .fullheight-yellow {
     min-height:100vh;
-    background-color: #cec327;
+    background-color: #d4ba6a; /*cfa9a9;*/
+   
     overflow: visible;
     padding-bottom: 20px;
+    border-left: 1px solid #666;
+    border-top: 1px solid #666;
+    opacity: 0.75;
 }
 
 .fullheight-red {
     min-height:100vh;
-    background-color: #a05252;
+    background-color: #d4886a; /*d8da95;*/
     overflow: visible;
     padding-bottom: 20px;
+    border-left: 1px solid #666;
+    border-top: 1px solid #666;    
+    opacity: 0.75;
 }
 
 .fullheight-green-archive {
@@ -81,29 +97,17 @@ html, body {
 }
 
 .greenItem {
-    background-color: #aee4c1;
-    box-shadow: inset -1px -1px 36px 3px #088F18;
-    -webkit-box-shadow: inset -1px -1px 36px 3px #088F18;
-    -moz-box-shadow: inset -1px -1px 36px 3px #088F18;
-    -o-box-shadow: inset -1px -1px 36px 3px #088F18;
+    background-color: transparent;
     padding: 7px;
 }
 
 .yellowItem {
-    background-color: #f5f1b8;
-    box-shadow: inset -1px -1px 36px 3px rgb(192, 192, 2);
-    -webkit-box-shadow: inset -1px -1px 36px 3px rgb(192, 192, 2);
-    -moz-box-shadow: inset -1px -1px 36px 3px rgb(192, 192, 2);
-    -o-box-shadow: inset -1px -1px 36px 3px rgb(192, 192, 2);
+    background-color: transparent;
     padding: 7px;
 }
 
 .redItem {
-    background-color: #d6b6b6;
-    box-shadow: inset -1px -1px 36px 3px rgb(143, 48, 48);
-    -webkit-box-shadow: inset -1px -1px 36px 3px rgb(143, 48, 48);
-    -moz-box-shadow: inset -1px -1px 36px 3px rgb(143, 48, 48);
-    -o-box-shadow: inset -1px -1px 36px 3px rgb(143, 48, 48);
+    background-color: transparent;
     padding: 7px;
 }
 
@@ -114,12 +118,13 @@ html, body {
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #5e9671;
-    background-color: #ace0bf;
+    border: 1px solid #123652; /*5e9671; */
+    background-color: #718EA4;/*ace0bf;*/
     box-shadow: none;
     overflow: hidden;
     outline: none;
     resize: none;
+    color: #000;
 }
 
 .yellowItem textarea {
@@ -129,8 +134,8 @@ html, body {
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #b3a703;
-    background-color: #ebebad;
+    border: 1px solid #806515;/*944a4a;*/
+    background-color: #ffeaaa;/*f3b5b5;*/
     box-shadow: none;
     overflow: hidden;
     outline: none;
@@ -144,8 +149,8 @@ html, body {
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
     -webkit-border-radius: 4px 4px 4px 4px;
-    border: 1px solid #944a4a;
-    background-color: #e2c8c8;
+    border: 1px solid #803315;/*b3a703;*/
+    background-color: #ffc2aa;/*ebebad;*/
     box-shadow: none;
     overflow: hidden;
     outline: none;
@@ -153,16 +158,16 @@ html, body {
 }
 
 .listItem {
-    background-color: #efefef;
-    opacity: 0.90;
-    color: #333;
+    background-color: #fff;
+    opacity: 0.80;
+    color: #000;
     font-size: 1.5em;
     overflow: hidden;
 }
 
 .listItemCompleted {
     background-color: #d6d6d6;
-    opacity: 0.90;
+    opacity: 0.65;
     color: rgb(126, 124, 124);
     font-size: 1.5em;
 }
@@ -225,16 +230,18 @@ html, body {
 /* tab color */
 .nav-tabs>li>a {
     background-color: transparent;
-    border-color: #cecece;
+    border-color: #777;
     color: #000;;
     margin-bottom: 0;
     font-size: 1.1em;
 }
 
 .nav-tabs {
+    position: relative;
     border-bottom: 0;
     padding-bottom: 0;
     margin-bottom: 0;
+    z-index: 1000
  }
 
 /* active tab color */
@@ -242,14 +249,14 @@ html, body {
     color: #000;
     font-weight: bold;
     background-color: transparent;
-    border: 1px solid #dfdfdf;
-    /* border-bottom: 1px #094394 solid; */
+    border: 1px solid #444;
+    /* border-bottom: 1px #b5b2b6 solid; */
     font-size: 1.1em;
 }
 
 /* hover tab color */
 .nav-tabs>li>a:hover {
-    border-color: #b6b6b6;
+    border-color: #000;
     color: #000;
     background-color: transparent;
     font-size: 1.1em;
@@ -258,15 +265,20 @@ html, body {
 .tab-content {
     margin: 0;
     padding:0;
-    border-top: 1px rgb(212, 212, 212) solid;
+    border-top: 0px rgb(212, 212, 212) solid;
 }
 
 li.happyTab.active{
-    border-bottom: #337a4e 1px solid;
+    border-bottom: #7690a5 1px solid;
+
 }
 
 li.mehTab.active{
-    border-bottom: #cec327 1px solid;
+    border-bottom: #e0c87e 1px solid;
+}
+
+li.sadTab.active{
+    border-bottom: #e2a3a3 1px solid;
 }
 
 .menuRed {
@@ -276,6 +288,32 @@ li.mehTab.active{
     color: #2b71cc;
 }
 
-li.sadTab.active{
-    border-bottom: #a05252 1px solid;
+
+
+::-webkit-input-placeholder { /* WebKit, Blink, Edge */
+    color:    #444;
+    font-style: italic;
+}
+:-moz-placeholder { /* Mozilla Firefox 4 to 18 */
+   color:    #444;
+   opacity:  1;
+   font-style: italic;
+}
+::-moz-placeholder { /* Mozilla Firefox 19+ */
+   color:    #444;
+   opacity:  1;
+   font-style: italic;
+}
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+   color:    #444;
+   font-style: italic;
+}
+::-ms-input-placeholder { /* Microsoft Edge */
+   color:    #444;
+   font-style: italic;
+}
+
+::placeholder { /* Most modern browsers support this now. */
+   color:    #444;
+   font-style: italic;
 }

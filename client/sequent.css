@@ -274,7 +274,6 @@ html, body {
 
 li.happyTab.active{
     border-bottom: #7690a5 1px solid;
-
 }
 
 li.mehTab.active{
@@ -284,6 +283,31 @@ li.mehTab.active{
 li.sadTab.active{
     border-bottom: #e2a3a3 1px solid;
 }
+
+li.happyTabArchive {
+    opacity: 0.75;
+}
+
+li.mehTabArchive {
+    opacity: 0.75;
+}
+
+li.sadTabArchive {
+    opacity: 0.75;
+}
+
+li.happyTabArchive.active{
+    border-bottom: #d6d4d4 1px solid;
+}
+
+li.mehTabArchive.active{
+    border-bottom: rgb(224, 223, 223) 1px solid;
+}
+
+li.sadTabArchive.active{
+    border-bottom: rgb(190, 190, 190) 1px solid;
+}
+
 
 .menuRed {
     color: #990000;

@@ -1,4 +1,4 @@
-import { Retros, RetroActions } from '../../lib/sequent'
+import { Retros, RetroActions, Settings, Sequent, GetSettings } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 import autosize from '../autosize'
@@ -8,11 +8,7 @@ Template.retroBoard.onCreated(function(){
     
     self.retro = {}
     self.currentlyHighlighted = null
-    
-    // self.refreshData(){
-                
-    // }   
-    
+
     self.insertItem = (itemType, title) => {
         Meteor.call(
             'createRetroItem', 
@@ -25,6 +21,7 @@ Template.retroBoard.onCreated(function(){
             }
         })
     }
+
 })
 
 Template.retroBoard.onRendered(function(){
@@ -118,7 +115,24 @@ Template.retroBoard.helpers({
                 $( "a.completeButton" ).addClass('hidden')        
             }
         }
+    },
+    backGround(){
+        const settings = GetSettings()
+        return settings.backgroundImage
+    },
+    happyPlaceholder(){
+        const settings = GetSettings()
+        return settings.happyPlaceholder
+    },
+    mehPlaceholder(){
+        const settings = GetSettings()
+        return settings.mehPlaceholder
+    },
+    sadPlaceholder(){
+        const settings = GetSettings()
+        return settings.sadPlaceholder
     }
+
 })
 
 Template.retroBoard.events({

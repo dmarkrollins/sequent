@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 import { BlazeLayout } from 'meteor/kadira:blaze-layout'
-import { Retros, RetroActions } from '../lib/sequent'
+import { Retros, RetroActions, Settings } from '../lib/sequent'
 
 FlowRouter.route('/', {
     action: function() {
@@ -34,6 +34,7 @@ RetroRouter.route('/board', {
     subscriptions: function(params) {
       this.register('retros', Meteor.subscribe('active-retros'))  
       this.register('actions', Meteor.subscribe('open-actions'))
+      this.register('settings', Meteor.subscribe('settings'))
     },
     action: function() {
         BlazeLayout.render('retroLayout', {content: 'retroBoard'});
@@ -45,6 +46,7 @@ RetroRouter.route('/actions', {
     subscriptions: function(params) {
       this.register('retros', Meteor.subscribe('active-retros'))  
       this.register('actions', Meteor.subscribe('open-actions'))
+      this.register('settings', Meteor.subscribe('settings'))
     },
     action: function() {
         BlazeLayout.render('retroLayout', {content: 'actionsList'});
@@ -56,9 +58,21 @@ RetroRouter.route('/versions', {
     subscriptions: function(params) {
         this.register('retros', Meteor.subscribe('active-retros'))  
         this.register('actions', Meteor.subscribe('open-actions'))
+        this.register('settings', Meteor.subscribe('settings'))
       },
       action: function() {
         BlazeLayout.render('retroLayout', {content: 'sequentVersions'});
+    }    
+})
+
+RetroRouter.route('/settings', {
+    subscriptions: function(params) {
+        this.register('retros', Meteor.subscribe('active-retros'))  
+        this.register('actions', Meteor.subscribe('open-actions'))
+        this.register('backgrounds', Meteor.subscribe('backgrounds'))
+        this.register('settings', Meteor.subscribe('settings'))
+      },
+      action: function() {
+        BlazeLayout.render('retroLayout', {content: 'settings'});
     }
-    
 })

@@ -17,4 +17,4 @@ const RetroPrompts = {
     }
 }
 
-module.exports = { retroPrompts }
+module.exports = { RetroPrompts }

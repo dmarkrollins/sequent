@@ -1,4 +1,4 @@
-import { Retros, RetroActions } from '../../lib/sequent'
+import { Retros, RetroActions, GetSettings } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 import autosize from '../autosize'
@@ -47,6 +47,10 @@ Template.archiveBoard.helpers({
             unHighlight: function(){
             }
         }
+    },
+    backGround(){
+        const settings = GetSettings()
+        return settings.backgroundImage
     }
 })
 

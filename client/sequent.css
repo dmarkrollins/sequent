@@ -65,25 +65,29 @@ html, body {
 }
 
 .fullheight-green-archive {
-    min-height:100vh;
     background-color: #afafaf;
+    min-height:100vh;
     overflow: visible;
     padding-bottom: 20px;
+    border-top: 1px solid #666;
+    opacity: 0.75;
 }
 
 .fullheight-yellow-archive {
-    min-height:100vh;
     background-color: #bbb;
+    min-height:100vh;
     overflow: visible;
     padding-bottom: 20px;
-}
+    border-top: 1px solid #666;
+    opacity: 0.75;}
 
 .fullheight-red-archive {
-    min-height:100vh;
     background-color: #999;
+    min-height:100vh;
     overflow: visible;
     padding-bottom: 20px;
-}
+    border-top: 1px solid #666;
+    opacity: 0.75;}
 
 .retroItem {
     margin-left: auto;

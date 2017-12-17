@@ -69,6 +69,18 @@ RetroRouter.route('/actions', {
     
 })
 
+RetroRouter.route('/settings', {
+    subscriptions: function(params) {
+        this.register('retros', Meteor.subscribe('active-retros'))  
+        this.register('actions', Meteor.subscribe('open-actions'))
+        this.register('backgrounds', Meteor.subscribe('backgrounds'))
+        this.register('settings', Meteor.subscribe('settings'))
+      },
+      action: function() {
+        BlazeLayout.render('retroLayout', {content: 'settings'});
+    }
+})
+
 RetroRouter.route('/archives', {
     subscriptions: function(params) {
         this.register('retros', Meteor.subscribe('archived-retros'))  
@@ -85,6 +97,7 @@ RetroRouter.route('/archives/:retroId', {
     subscriptions: function(params) {
       this.register('retros', Meteor.subscribe('single-archived-retro', params.retroId))  
       this.register('actions', Meteor.subscribe('open-actions'))
+      this.register('settings', Meteor.subscribe('settings'))
     },
     action: function() {
         BlazeLayout.render('retroLayout', {content: 'archiveBoard'});

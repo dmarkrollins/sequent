@@ -7,7 +7,6 @@ html, body {
     height:100vh;
     width: 100%;
     display: table;
-    background-image: url(graypattern.png)
 }
 
 
@@ -255,7 +254,10 @@ li.happyTab.active{
 
 li.mehTab.active{
     border-bottom: #e0c87e 1px solid;
+}
 
+li.sadTab.active{
+    border-bottom: #e2a3a3 1px solid;
 }
 
 .menuRed {
@@ -265,29 +267,32 @@ li.mehTab.active{
     color: #2b71cc;
 }
 
-li.sadTab.active{
-    border-bottom: #e2a3a3 1px solid;
 
-}
 
 ::-webkit-input-placeholder { /* WebKit, Blink, Edge */
-    color:    #666;
+    color:    #444;
+    font-style: italic;
 }
 :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
-   color:    #666;
+   color:    #444;
    opacity:  1;
+   font-style: italic;
 }
 ::-moz-placeholder { /* Mozilla Firefox 19+ */
-   color:    #666;
+   color:    #444;
    opacity:  1;
+   font-style: italic;
 }
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-   color:    #666;
+   color:    #444;
+   font-style: italic;
 }
 ::-ms-input-placeholder { /* Microsoft Edge */
-   color:    #666;
+   color:    #444;
+   font-style: italic;
 }
 
 ::placeholder { /* Most modern browsers support this now. */
-   color:    #666;
+   color:    #444;
+   font-style: italic;
 }

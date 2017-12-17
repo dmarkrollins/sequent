@@ -12,8 +12,16 @@ if (!String.prototype.toProperCase) {
 
 Template.registerHelper('formatDate', function(value) {
     if(_.isDate(value)){
-        var d = new Date(value.getUTCFullYear(), value.getUTCMonth(), value.getUTCDate());
-        return moment(d).format("MM-DD-YYYY");
+        return moment(value).format("MM-DD-YYYY");
+    }
+    else{
+        return "";
+    }
+});
+
+Template.registerHelper('formatDateWithTime', function(value) {
+    if(_.isDate(value)){
+        return moment(value).format("MM-DD-YYYY - LT");
     }
     else{
         return "";

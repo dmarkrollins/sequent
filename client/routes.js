@@ -11,13 +11,15 @@ FlowRouter.route('/', {
         else {
             BlazeLayout.render('layout', { content: 'start' });
         }
-    }
+    },
+    name: 'start'
 });
 
 FlowRouter.route('/new', {
     action: function() {
         BlazeLayout.render('layout', {content: 'newTeam'});
-    }
+    },
+    name: 'new-team'
 });
 
 FlowRouter.route('/versions', {
@@ -27,7 +29,8 @@ FlowRouter.route('/versions', {
       },
       action: function() {
         BlazeLayout.render('retroLayout', {content: 'sequentVersions'});
-    }
+    },
+    name: 'versions'
     
 })
 
@@ -48,8 +51,8 @@ RetroRouter.route('/board', {
     },
     action: function() {
         BlazeLayout.render('retroLayout', {content: 'retroBoard'});
-    }
-    
+    },
+    name: 'retro-board'
 })
 
 RetroRouter.route('/actions', {
@@ -59,7 +62,8 @@ RetroRouter.route('/actions', {
     },
     action: function() {
         BlazeLayout.render('retroLayout', {content: 'actionsList'});
-    }
+    },
+    name: 'actions'
     
 })
 
@@ -70,6 +74,17 @@ RetroRouter.route('/archives', {
       },
       action: function() {
         BlazeLayout.render('retroLayout', {content: 'archive'});
-    }
-    
+    },
+    name: 'archives'
+})
+
+RetroRouter.route('/archives/:retroId', {
+    subscriptions: function(params) {
+      this.register('retros', Meteor.subscribe('single-archived-retro', params.retroId))  
+      this.register('actions', Meteor.subscribe('open-actions'))
+    },
+    action: function() {
+        BlazeLayout.render('retroLayout', {content: 'archiveBoard'});
+    },
+    name: 'archive-board'
 })

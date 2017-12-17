@@ -1,6 +1,7 @@
 /* global PackageInfo */
-import { Retros, RetroActions } from '../../lib/sequent'
-import { Constants } from '../../lib/constants'
+import moment from 'moment'
+import { Retros, RetroActions, Sequent } from '../../lib/sequent'
+import { Constants} from '../../lib/constants'
 
 Template.retroNav.helpers({
     projectName() {
@@ -27,14 +28,26 @@ Template.retroNav.helpers({
     },
     freezeTitle(){
         const retro = Retros.findOne()
-        if(!retro) return
-        if (retro.status === Constants.RetroStatuses.FROZEN) {
-            return ' - FROZEN'
+        if(!retro) return ''
+
+        if(FlowRouter.current().route.name === Sequent.archiveRouteName){
+            return ''
         }
-        return ''
+
+        switch(retro.status){
+            case Constants.RetroStatuses.FROZEN: 
+                return Spacebars.SafeString('<span style="color: #00BFFF;"> - FROZEN</span>')
+            case Constants.RetroStatuses.ARCHIVED:
+                const dateToUse = retro.archivedAt || retro.createdAt
+                const dateVal = moment(dateToUse).format("MM-DD-YYYY - LT")
+                return Spacebars.SafeString(`<span style="color: #DAA520;"> - ARCHIVED ${dateVal}</span>`)
+            default:
+                return ''
+        }
     },
-    displayShowCompletedMenuItem() {
-        const retro = Retros.findOne()
+    showActiveRetroMenuItems() {
+        // {$or: [{expires: {$gte: new Date()}}, {expires: null}]}
+        const retro = Retros.findOne({ $or: [{ status: Constants.RetroStatuses.ACTIVE }, { status: Constants.RetroStatuses.FROZEN }] })
         if(!retro) return false
         return true
     },

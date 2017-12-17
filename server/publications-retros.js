@@ -29,3 +29,13 @@ Meteor.publish('archived-retros', function() {
     return Retros.find({ createdBy: this.userId, status: Constants.RetroStatuses.ARCHIVED})
  
 });
+
+Meteor.publish('single-archived-retro', function(retroId) {
+    
+    if(!this.userId) {
+        return null
+    }
+
+    return Retros.find({ _id: retroId, createdBy: this.userId, status: Constants.RetroStatuses.ARCHIVED})
+ 
+});

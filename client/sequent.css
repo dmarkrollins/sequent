@@ -48,6 +48,27 @@ html, body {
     padding-bottom: 20px;
 }
 
+.fullheight-green-archive {
+    min-height:100vh;
+    background-color: #afafaf;
+    overflow: visible;
+    padding-bottom: 20px;
+}
+
+.fullheight-yellow-archive {
+    min-height:100vh;
+    background-color: #bbb;
+    overflow: visible;
+    padding-bottom: 20px;
+}
+
+.fullheight-red-archive {
+    min-height:100vh;
+    background-color: #999;
+    overflow: visible;
+    padding-bottom: 20px;
+}
+
 .retroItem {
     margin-left: auto;
     margin-right: auto;

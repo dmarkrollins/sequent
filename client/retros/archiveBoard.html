@@ -1,0 +1,74 @@
+<template name="archiveBoard">
+    <div class="backgroundBlue">
+        {{> actionInput}}
+        <div class="row">
+            {{#if Template.subscriptionsReady}}
+                <div class="col-sm-12 col-xs-12 hidden-md hidden-lg hidden-xl">
+                    <ul class="nav nav-tabs" role="tablist">
+                        <li role="presentation" class="active happyTab" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#337a4e; border-bottom: 0;">:)</a></li>
+                        <li role="presentation" class="mehTab" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #cec327; border-bottom: 0;">:-</a></li>
+                        <li role="presentation" class="sadTab"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #a05252; border-bottom: 0;">:/</a></li>
+                    </ul>
+
+                    <div class="tab-content">
+                        <div role="tabpanel" class="tab-pane active" id="happy">
+                            <div class="fullheight-green-archive text-center" style="padding-top: 5px;">
+                                {{#each greenItem}}
+                                    <div class="retroItem {{itemClass}}">
+                                        {{> retroItem currentItem }}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="meh">
+                            <div class="fullheight-yellow-archive text-center" style="padding-top: 5px;">
+                                {{#each yellowItem}}
+                                    <div class="retroItem {{itemClass}}">
+                                        {{> retroItem currentItem }}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                        <div role="tabpanel" class="tab-pane" id="sad">
+                            <div class="fullheight-red-archive text-center" style="padding-top: 5px;">
+                                {{#each redItem}}
+                                    <div class="retroItem {{itemClass}}">
+                                        {{> retroItem currentItem }}
+                                    </div>
+                                {{/each}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="hidden-sm hidden-xs col-md-12">
+                    <div class="row row-eq-height">
+                        <div class="col-md-4 fullheight-green-archive text-center" style="display: table-cell;">
+                            {{#each greenItem}}
+                                <div class="retroItem {{itemClass}}">
+                                    {{> retroItem currentItem }}
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-4 fullheight-yellow-archive text-center" style="display: table-cell;">
+                            {{#each yellowItem}}
+                                <div class="retroItem {{itemClass}}">
+                                    {{> retroItem currentItem}}
+                                </div>
+                            {{/each}}
+                        </div>
+                        <div class="col-md-4 fullheight-red-archive text-center" style="display: table-cell;">
+                            {{#each redItem}}
+                                <div class="retroItem {{itemClass}}">
+                                    {{> retroItem currentItem}}
+                                </div>
+                            {{/each}}
+                        </div>
+                    </div>
+                </div>
+            {{else}}
+                {{> spinner}}
+            {{/if}}
+        </div>
+    </div>    
+    
+</template>

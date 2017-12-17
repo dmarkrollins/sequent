@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating' 
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Settings, Backgrounds, Sequent, GetSettings } from '../../lib/sequent'
+import { RetroPrompts } from '../../lib/prompts'
 
 Template.settings.onCreated(function() {
 
@@ -150,5 +151,20 @@ Template.settings.events({
     },
     'click #btnCancel': function(event, instance) {
         FlowRouter.go('/retro/board')
+    },
+    'click #btnRandom': function(event, instance) {
+        const promptSet = RetroPrompts.getRandomPromptSet()
+        $('#happyPlaceholder').val(promptSet.happyPlaceholder)
+        $('#mehPlaceholder').val(promptSet.mehPlaceholder)
+        $('#sadPlaceholder').val(promptSet.sadPlaceholder)
+        
+        const settings = GetSettings()
+
+        settings.happyPlaceholder = promptSet.happyPlaceholder
+        settings.mehPlaceholder = promptSet.mehPlaceholder
+        settings.sadPlaceholder = promptSet.sadPlaceholder
+
+        instance.updateSettings(settings)        
+ 
     }
 })

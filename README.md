@@ -5,7 +5,7 @@ Taking your teamperature every week is a great way to measure know how things ar
 PRs are welcome keeping in mind:
 
 - It's about the discussion not the tool - anything that promotes better team discussion is welcome.
-- Team members should be able to participate from whereever they using whatever device is available so cross browser compatibility on different display formats is really important.
+- Team members should be able to participate from whereever they are using whatever device is available so cross browser compatibility on different display formats is really important.
 
 Start using Sequent - https://sequent.herokuapps.com
 

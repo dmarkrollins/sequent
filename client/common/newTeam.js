@@ -3,6 +3,8 @@ import { Template } from 'meteor/templating'
 import { Sequent, Settings } from '../../lib/sequent'
 import { ReactiveVar } from 'meteor/reactive-var'
 
+import './newTeam.html'
+
 Template.newTeam.onCreated(function(){
     
     this.message = new ReactiveVar('')
@@ -17,14 +19,8 @@ Template.newTeam.helpers({
         return Template.instance().message.get()
     },
     backGround(){
-        const settings = Settings.findOne()
-
-        if(!settings){
-            return Sequent.defaultBackground
-        }
-        else {
-            return settings.backgoundImage
-        }
+        const settings = Sequent.getSettings()
+        return settings.backgroundImage
     }
 })
 

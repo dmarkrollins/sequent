@@ -1,5 +1,5 @@
 <template name="retroBoard">
-    <div style="background-image: url({{backGround}})">
+    <div id='boardWrapper' style="background-image: url({{backGround}})">
         {{> actionInput}}
         <div class="row">
             {{#if Template.subscriptionsReady}}
@@ -55,7 +55,8 @@
                         </div>
                     </div>
                 </div>
-                <div class="hidden-sm hidden-xs col-md-12">
+                
+                <div id="fullSizeCol" class="hidden-sm hidden-xs col-md-12">
                     <div class="row row-eq-height">
                         <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
                             {{#if notFrozen}}

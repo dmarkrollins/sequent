@@ -1,5 +1,7 @@
 import { Meteor } from 'meteor/meteor'
-import { Retros, GetSettings } from '../../lib/sequent'
+import { Retros, Sequent } from '../../lib/sequent'
+
+import './archive.html'
 
 Template.archive.helpers({
     items(){
@@ -9,11 +11,11 @@ Template.archive.helpers({
     },
     myName(){
         if(Meteor.user()){
-            return Meteor.user().username
+            return Meteor.user().username.toProperCase()
         }
     },
     backGround() {
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.backgroundImage
     },
 

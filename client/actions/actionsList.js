@@ -1,6 +1,10 @@
 import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
+import './actionsList.html'
+import './actionInput.html'
+import './actionItem.html'
+
 Template.actionsList.onCreated(function() {
     this.currentlyHighlighted = null
 })
@@ -10,14 +14,8 @@ Template.actionsList.helpers({
         return RetroActions.find()
     },
     backGround(){
-        const settings = Settings.findOne()
-
-        if(!settings){
-            return Sequent.defaultBackground
-        }
-        else {
-            return settings.backgroundImage
-        }
+        const settings = Sequent.getSettings()
+        return settings.backgroundImage
     }
 })
 

@@ -6,9 +6,9 @@
                 {{#if showVoteButton}}
                     <a href="#" data-id={{data.itemId}} id="voteButton" class="btn"><img src="/thumb.png" width=20 ></a>
                 {{/if}}
-                <p style="width: 20px; font-size: 12pt !important; color: #666; margin: 0 auto;">{{data.votes}}</p>
+                <p id="voteCount" style="width: 20px; font-size: 12pt !important; color: #666; margin: 0 auto;">{{data.votes}}</p>
             </div>
-            <div class="tappable-text" style="min-width: 200px; max-width: 275px; border: 0px dashed red; display: table-cell; text-align: left; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;"> {{data.title}} </div>
+            <div class="tappable-text" style="min-width: 200px; max-width: 275px; border: 0px dashed red; display: table-cell; text-align: left; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{data.title}}</div>
             <div class="tappable-icon" style="width: 40px; display: table-cell; text-align: center; padding: 7px 12px 7px 7px;"> 
                 {{#if notCompleted}}
                     <a href="#" id={{data.itemId}} class="hidden completeButton" style="margin-right: 12px;"><img src="/{{okButton}}" width=24 ></a>

@@ -1,8 +1,10 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating' 
 import { ReactiveVar } from 'meteor/reactive-var'
-import { Settings, Backgrounds, Sequent, GetSettings } from '../../lib/sequent'
-import { RetroPrompts } from '../../lib/prompts'
+import { Settings, Backgrounds, Sequent } from '../../lib/sequent'
+import { RetroPrompts } from './prompts'
+
+import './settings.html'
 
 Template.settings.onCreated(function() {
 
@@ -57,19 +59,19 @@ Template.settings.helpers({
         return this.value === Sequent.defaultBackground
     },
     backGround(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.backgroundImage
     },
     happy(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.happyPlaceholder
     },
     meh(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.mehPlaceholder
     },
     sad(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.sadPlaceholder
     }
 })
@@ -84,7 +86,7 @@ Template.settings.events({
             return
         }
 
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
 
         settings.backgroundImage = background
        
@@ -104,7 +106,7 @@ Template.settings.events({
             return
         }
 
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
 
         settings.happyPlaceholder = prompt
 
@@ -124,7 +126,7 @@ Template.settings.events({
             return
         }
 
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
 
         settings.mehPlaceholder = prompt
 
@@ -143,7 +145,7 @@ Template.settings.events({
             return
         }
 
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
 
         settings.sadPlaceholder = prompt
 
@@ -158,7 +160,7 @@ Template.settings.events({
         $('#mehPlaceholder').val(promptSet.mehPlaceholder)
         $('#sadPlaceholder').val(promptSet.sadPlaceholder)
         
-        const settings = GetSettings()
+        const settings = Sequent.GetSettings()
 
         settings.happyPlaceholder = promptSet.happyPlaceholder
         settings.mehPlaceholder = promptSet.mehPlaceholder

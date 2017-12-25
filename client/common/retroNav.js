@@ -3,6 +3,9 @@ import moment from 'moment'
 import { Retros, RetroActions, Sequent } from '../../lib/sequent'
 import { Constants} from '../../lib/constants'
 
+import '../version'
+import './retroNav.html'
+
 Template.retroNav.helpers({
     projectName() {
         if (!Meteor.user()) return ''

@@ -1,7 +1,8 @@
-import { Retros, RetroActions, Settings, Sequent, GetSettings } from '../../lib/sequent'
+import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 import autosize from '../autosize'
+import './retroBoard.html'
 
 Template.retroBoard.onCreated(function(){
     const self = this
@@ -117,19 +118,19 @@ Template.retroBoard.helpers({
         }
     },
     backGround(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.backgroundImage
     },
     happyPlaceholder(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.happyPlaceholder
     },
     mehPlaceholder(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.mehPlaceholder
     },
     sadPlaceholder(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.sadPlaceholder
     }
 

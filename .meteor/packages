@@ -26,3 +26,6 @@ kadira:blaze-layout
 twbs:bootstrap
 fortawesome:fontawesome
 check
+hwillson:stub-collections
+practicalmeteor:mocha
+johanbrook:publication-collector

@@ -1,5 +1,7 @@
 import { Constants } from '../../lib/constants'
 
+import './actionItem.html'
+
 Template.actionItem.onCreated(function(){
     this.currentlyHighlighted = null
 })

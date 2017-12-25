@@ -1,3 +1,5 @@
+import './archiveItem.html'
+
 Template.archiveItem.helpers({
     itemCount(){
         return this.items.length

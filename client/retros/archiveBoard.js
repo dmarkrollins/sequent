@@ -1,7 +1,8 @@
-import { Retros, RetroActions, GetSettings } from '../../lib/sequent'
+import { Retros, RetroActions, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 import autosize from '../autosize'
+import './archiveBoard.html'
 
 Template.archiveBoard.onCreated(function(){
     const self = this
@@ -49,7 +50,7 @@ Template.archiveBoard.helpers({
         }
     },
     backGround(){
-        const settings = GetSettings()
+        const settings = Sequent.getSettings()
         return settings.backgroundImage
     }
 })

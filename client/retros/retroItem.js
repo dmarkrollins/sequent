@@ -2,6 +2,8 @@
 import { Retros } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
+import './retroItem.html'
+
 Template.retroItem.onCreated(function(){
     const self = this
 

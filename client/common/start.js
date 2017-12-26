@@ -37,7 +37,7 @@ Template.start.events({
     },
     'submit #start-form': function(event, template) {
         event.preventDefault();
-        
+
         template.message.set('')
         const name = event.target.teamName.value || '';
         const password = event.target.password.value || '';
@@ -52,7 +52,7 @@ Template.start.events({
         Meteor.loginWithPassword(name, password, function(err){
             $("#start-fs").prop('disabled',false);
             if(err){
-                template.setMessage(err)
+                template.setMessage('Invalid user name password combination!')
                 return
             }
             FlowRouter.go('/retro/board')

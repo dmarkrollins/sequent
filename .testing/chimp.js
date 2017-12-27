@@ -12,7 +12,7 @@ const isCi = process.argv[2] === '--ci';
 const startTestApp = function(onStarted, options) {
   return processes.start({
     name: 'Testing App',
-    command: 'meteor --port=3100',
+    command: 'meteor --port 3100',
     waitForMessage: 'App running at: http://localhost:3100',
     options: {
       cwd: srcDir,
@@ -27,19 +27,19 @@ const startTestApp = function(onStarted, options) {
 const startChimpWatch = function() {
   processes.start({
     name: 'Chimp Watch',
-    command: 'chimp .config/chimp.js --ddp=http://localhost:3100 --watch --path=tests --mocha --chai --browser=chrome',
+    command: 'chimp .config/chimp.js --ddp=http://localhost:3100 --path=tests --watch --mocha --chai --browser=chrome',
     options: { cwd: baseDir }
   });
 };
 
-// const startChimpCi = function() {
-//   var command = 'chimp --ddp=http://localhost:3100 --path=tests --browser=chrome --mocha --chai';
-//   processes.start({
-//     name: 'Chimp CI',
-//     command: command,
-//     options: { cwd: baseDir }
-//   });
-// };
+const startChimpCi = function() {
+  var command = 'chimp .config/chimp.js --ddp=http://localhost:3100 --path=tests --browser=chrome --mocha --chai';
+  processes.start({
+    name: 'Chimp Once',
+    command: command,
+    options: { cwd: baseDir }
+  });
+};
 
 // if (isCi) {
 //   // CI mode -> run once
@@ -62,4 +62,14 @@ const startChimpWatch = function() {
 //     MONGO_URL: 'mongodb://localhost:3002/chimp_db'
 // });
 
-startTestApp(startChimpWatch);
+const watch = process.argv.slice(2)
+
+if(watch){
+    startTestApp(startChimpWatch, {
+        MONGO_URL: 'mongodb://localhost:27017/chimp_db'
+    })
+}
+else{
+    startTestApp(startChimpCi)
+}
+

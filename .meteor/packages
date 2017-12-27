@@ -29,3 +29,5 @@ check
 hwillson:stub-collections
 practicalmeteor:mocha
 johanbrook:publication-collector
+xolvio:backdoor
+xolvio:cleaner

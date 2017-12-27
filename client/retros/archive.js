@@ -1,22 +1,24 @@
-import { Meteor } from 'meteor/meteor'
-import { Retros, Sequent } from '../../lib/sequent'
+import { Meteor } from 'meteor/meteor';
+import { Template } from 'meteor/templating';
 
-import './archive.html'
+import { Retros, Sequent } from '../../lib/sequent';
+
+import './archive.html';
 
 Template.archive.helpers({
-    items(){
+    items() {
         return Retros.find({}, {
-            sort: { createdAt: -1 }
+            sort: { createdAt: -1 },
         });
     },
-    myName(){
-        if(Meteor.user()){
-            return Meteor.user().username.toProperCase()
+    myName() {
+        if (Meteor.user()) {
+            return Meteor.user().username.toProperCase();
         }
     },
     backGround() {
-        const settings = Sequent.getSettings()
-        return settings.backgroundImage
+        const settings = Sequent.getSettings();
+        return settings.backgroundImage;
     },
 
-})
+});

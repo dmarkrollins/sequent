@@ -1,5 +1,6 @@
 /* global PackageInfo */
 import moment from 'moment'
+import { ConfirmDialog } from './confirmDialog'
 import { Retros, RetroActions, Sequent } from '../../lib/sequent'
 import { Constants} from '../../lib/constants'
 
@@ -86,6 +87,25 @@ Template.retroNav.helpers({
 })
 
 Template.retroNav.events({
+
+    'click #archiveRetro'(){
+        const title = 'Archive Retro?'
+        const msg = 'Are you sure you want to archive this retro?'
+
+        ConfirmDialog.showConfirmation(msg, title, 'warning', null, function(){
+            const retro = Retros.findOne()
+
+            if(!retro) return
+    
+            Meteor.call('archiveRetro', retro._id, function(err){
+                if(err){
+                    console.log(err)
+                    toastr.error('Failed to archive the retro!')
+                }
+            })
+        })
+    },
+
     'click #signOut'() {
         Meteor.logout((err)=>{
             if(!err){
@@ -103,21 +123,6 @@ Template.retroNav.events({
             if(err){
                 console.log(err)
                 toastr.error('Failed to freeze the retro!')
-            }
-        })
-    },
-    'click #archiveRetro'() {
-        const r = confirm('Are you sure?')
-        if(!r) return
-        
-        const retro = Retros.findOne()
-
-        if(!retro) return
-
-        Meteor.call('archiveRetro', retro._id, function(err){
-            if(err){
-                console.log(err)
-                toastr.error('Failed to archive the retro!')
             }
         })
     },

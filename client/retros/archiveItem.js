@@ -1,10 +1,11 @@
+import { Template } from 'meteor/templating'
 import './archiveItem.html'
 
 Template.archiveItem.helpers({
-    itemCount(){
+    itemCount() {
         return this.items.length
     },
-    archiveDate(){
+    archiveDate() {
         return this.archivedAt || this.createdAt
-    }
+    },
 })

@@ -1,0 +1,20 @@
+<template name="confirmDialog">
+
+	<div class="modal fade" id="confirmDialog" tabindex="-1" role="dialog" aria-labelledby="confirmModal" aria-hidden="true">
+		<div class="modal-dialog">
+			<div class="modal-content">
+				<div id="dialogHeader">
+					<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+					<h4 class="modal-title" id="confirmTitle">This Action Requires Confirmation</h4>
+				</div>
+				<div id="confirmMessage" class="modal-body" style="color: #444;">
+				</div>
+				<div class="modal-footer">
+					<button type="button" data-dismiss="modal" class="btn btn-primary" id="btnConfirm">OK</button>
+					<button type="button" data-dismiss="modal" class="btn btn-default" id="btnCancel">Cancel</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+</template>

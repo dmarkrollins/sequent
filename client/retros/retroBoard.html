@@ -1,13 +1,25 @@
 <template name="retroBoard">
-    <div id='boardWrapper' style="background-image: url({{backGround}})">
+    <div id='boardWrapper' class="fullscreen" style="background-image: url({{backGround}})">
         {{> actionInput}}
-        <div class="row">
-            {{#if Template.subscriptionsReady}}
+        {{#if Template.subscriptionsReady}}
+            <div class="row">
                 <div class="col-sm-12 col-xs-12 hidden-md hidden-lg hidden-xl">
-                    <ul class="nav nav-tabs" role="tablist">
-                        <li role="presentation" class="active happyTab" ><a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#496d89; border-bottom: 0; opacity: 0.75;">:)</a></li>
-                        <li role="presentation" class="mehTab" ><a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #d4ba6a; border-bottom: 0; opacity: 0.75;">:|</a></li>
-                        <li role="presentation" class="sadTab"><a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #d4886a; border-bottom: 0; opacity: 0.75;">:/</a></li>
+                    <ul class="nav nav-tabs" role="tablist" style="z-index: 1;">
+                        <li role="presentation" class="active happyTab" >
+                            <a href="#happy" aria-controls="happy" role="tab" data-toggle="tab" style="background-color:#496d89; border-bottom: 0; opacity: 0.75;">
+                                :)
+                            </a>
+                        </li>
+                        <li role="presentation" class="mehTab" >
+                            <a href="#meh" aria-controls="meh" role="tab" data-toggle="tab"  style="background-color: #d4ba6a; border-bottom: 0; opacity: 0.75;">
+                                :|
+                            </a>
+                        </li>
+                        <li role="presentation" class="sadTab">
+                            <a href="#sad" aria-controls="sad" role="tab" data-toggle="tab" style="background-color: #d4886a; border-bottom: 0; opacity: 0.75;">
+                                :/
+                            </a>
+                        </li>
                     </ul>
 
                     <div class="tab-content">
@@ -55,7 +67,8 @@
                         </div>
                     </div>
                 </div>
-                
+            </div>
+            <div class="row">        
                 <div id="fullSizeCol" class="hidden-sm hidden-xs col-md-12">
                     <div class="row row-eq-height">
                         <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
@@ -96,10 +109,10 @@
                         </div>
                     </div>
                 </div>
-            {{else}}
-                {{> spinner}}
-            {{/if}}
-        </div>
-    </div>    
+            </div>
+        {{else}}
+            {{> spinner}}
+        {{/if}}
+</div>    
     
 </template>

@@ -160,7 +160,7 @@ Template.settings.events({
         $('#mehPlaceholder').val(promptSet.mehPlaceholder)
         $('#sadPlaceholder').val(promptSet.sadPlaceholder)
         
-        const settings = Sequent.GetSettings()
+        const settings = Sequent.getSettings()
 
         settings.happyPlaceholder = promptSet.happyPlaceholder
         settings.mehPlaceholder = promptSet.mehPlaceholder

@@ -5,10 +5,21 @@ module.exports = {
         "mocha",
         "underscore"
     ],
+    "parser": "babel-eslint",
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "sourceType": "module",
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "allowImportExportEverywhere": true
+    },
     "extends": [
         "airbnb", "plugin:meteor/recommended"
     ],
     "rules": {
+        "comma-dangle": "off",
+        "no-unused-expressions": "off",
         "func-names": "off",
         "consistent-return": "off",
         "import/no-extraneous-dependencies": "off",
@@ -56,5 +67,5 @@ module.exports = {
     },
     "settings": {
         "import/resolver": "meteor"
-    }
+    } 
 }

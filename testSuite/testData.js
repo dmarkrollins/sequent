@@ -4,52 +4,51 @@ import { Meteor } from 'meteor/meteor'
 import { Random } from 'meteor/random'
 import { _ } from 'meteor/underscore'
 import { Constants } from '../lib/constants'
+
 const faker = Meteor.isTest && require('faker') // eslint-disable-line global-require
 
 const TestData = {
 
-    fakeSettings(parameters){
-    
+    fakeSettings(parameters) {
         let parms = {}
-    
-        if (!_.isUndefined(parameters)){
+
+        if (!_.isUndefined(parameters)) {
             parms = parameters;
         }
-    
+
         const Settings = {}
         Settings.backgroundImage = '/fakeOne.jpg'
         Settings.happyPlaceholder = 'Fake happy placeholder'
         Settings.mehPlaceholder = 'Fake meh placeholder'
         Settings.sadPlaceholder = 'Fake sad placeholder'
-    
+
         return Settings
     },
     fakeBackgroundsArray(parameters) {
         let parms = {}
-    
-        if (!_.isUndefined(parameters)){
+
+        if (!_.isUndefined(parameters)) {
             parms = parameters;
         }
-    
+
         const Backgrounds = []
-    
-        Backgrounds.push({ name: 'fakeOne', value: '/fakeOne.jpg'})
-        Backgrounds.push({ name: 'fakeTwo', value: '/fakeTwo.jpg'})
-        Backgrounds.push({ name: 'fakeThree', value: '/fakeThree.jpg'})
-        Backgrounds.push({ name: 'fakeFour', value: '/fakeFour.jpg'})
-        Backgrounds.push({ name: 'fakeFive', value: '/fakeFive.jpg'})
-    
+
+        Backgrounds.push({ name: 'fakeOne', value: '/fakeOne.jpg' })
+        Backgrounds.push({ name: 'fakeTwo', value: '/fakeTwo.jpg' })
+        Backgrounds.push({ name: 'fakeThree', value: '/fakeThree.jpg' })
+        Backgrounds.push({ name: 'fakeFour', value: '/fakeFour.jpg' })
+        Backgrounds.push({ name: 'fakeFive', value: '/fakeFive.jpg' })
+
         return Backgrounds
-    
     },
-    
+
     fakeRetroAction(parameters) {
         let parms = {}
-    
-        if (!_.isUndefined(parameters)){
+
+        if (!_.isUndefined(parameters)) {
             parms = parameters;
         }
-    
+
         const RetroAction = {}
 
         RetroAction._id = parms._id || Random.id()
@@ -64,8 +63,8 @@ const TestData = {
 
     fakeRetroItem(parameters) {
         let parms = {}
-    
-        if (!_.isUndefined(parameters)){
+
+        if (!_.isUndefined(parameters)) {
             parms = parameters;
         }
 
@@ -82,23 +81,21 @@ const TestData = {
     },
 
     fakeRetroItems(parameters, count) {
-
         const items = []
 
-        if(!count) count = 1
+        if (!count) count = 1
 
-        for(let i = 0; i < count; i += 1){
+        for (let i = 0; i < count; i += 1) {
             items.push(this.fakeRetroItem(parameters))
         }
 
         return items
-
     },
 
-    fakeRetro(parameters){
+    fakeRetro(parameters) {
         let parms = {}
-    
-        if (!_.isUndefined(parameters)){
+
+        if (!_.isUndefined(parameters)) {
             parms = parameters;
         }
 
@@ -113,7 +110,6 @@ const TestData = {
         Retro.archivedAt = parms.archivedAt || new Date()
 
         return Retro
-
     }
 }
 

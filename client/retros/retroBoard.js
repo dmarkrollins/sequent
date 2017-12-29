@@ -14,6 +14,7 @@ Template.retroBoard.onCreated(function () {
 
     self.retro = {}
     self.currentlyHighlighted = null
+    self.selectedItemId = new ReactiveVar(null)
 
     self.insertItem = (itemType, title) => {
         Meteor.call(
@@ -120,6 +121,7 @@ Template.retroBoard.helpers({
                 $('div.retroItem').removeClass('itemHighlight')
                 $('a.completeButton').addClass('hidden')
             },
+            selectedItemId: Template.instance().selectedItemId
         }
     },
     backGround() {
@@ -174,9 +176,11 @@ Template.retroBoard.events({
 
         $('div.retroItem').removeClass('itemHighlight')
         $('a.completeButton').addClass('hidden')
+        $('a.editButton').addClass('hidden')
 
         if (instance.currentlyHighlighted === event.currentTarget) {
             instance.currentlyHighlighted = null
+            instance.selectedItemId.set(null)
             return
         }
 
@@ -189,7 +193,9 @@ Template.retroBoard.events({
         }
 
         $(event.currentTarget).find('a.completeButton').removeClass('hidden')
+        $(event.currentTarget).find('a.editButton').removeClass('hidden')
         event.currentTarget.classList.add('itemHighlight')
+        instance.selectedItemId.set(this.itemId)
         instance.currentlyHighlighted = event.currentTarget
     },
     'keypress #actionInput': function (event, instance) {

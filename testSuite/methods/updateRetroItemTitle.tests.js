@@ -17,59 +17,66 @@ import { TestData } from '../testData'
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer) {
-    import '../../lib/method-removeRetroItem.js'
+if (Meteor.isServer){
 
-    describe('Remove Retro Item Method', function () {
+    import '../../lib/method-updateRetroItemTitle.js'
+
+    describe('Update Retro Item Title Method', function (){
+
         let userId
         let sandbox
         let subject
 
         const fakeUser = {
-            username: 'faketeamname',
+            username: 'faketeamname'
         }
 
-        beforeEach(function () {
+        beforeEach(function (){
             sandbox = sinon.createSandbox()
             userId = Random.id()
-            subject = Meteor.server.method_handlers.removeRetroItem;
+            subject = Meteor.server.method_handlers.updateRetroItemTitle;
         });
 
-        afterEach(function () {
+        afterEach(function (){
             Retros.remove({})
             sandbox.restore()
         })
 
-        it('must be logged in', function () {
+        it('must be logged in', function(){
+
             const context = {};
             let msg = '';
 
             try {
-                resultId = subject.apply(context, ['fake-id']);
-            } catch (error) {
+                resultId = subject.apply(context, ['fake-id', 'fake-title']);
+            }
+            catch (error){
                 msg = error.message;
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
+
         })
 
-        it('not found error - stubbed', function () {
-            sandbox.stub(Retros, 'findOne').returns(null)
+        it('retro not found error', function(){
+
+            sandbox.stub(Retros, 'findOne')
 
             const context = { userId: userId };
             let msg = '';
 
             try {
-                subject.apply(context, ['fake-id'])
-            } catch (error) {
+                subject.apply(context, ['fake-id', 'fake-title'])
+            }
+            catch (error){
                 msg = error.message;
             }
 
-            expect(Retros.findOne).to.have.been.called
-            expect(msg).to.equal('Retro not found! [not-found]')
+           expect(msg).to.equal('Retro not found! [not-found]')
         })
 
-        it('retro item not found', function () {
+        it('retro item not found', function(){
+
             const fakeId = Random.id()
 
             const fakeRetro = TestData.fakeRetro({ _id: fakeId, status: Constants.RetroStatuses.ACTIVE, showCompleted: false })
@@ -82,7 +89,8 @@ if (Meteor.isServer) {
 
             try {
                 subject.apply(context, ['fakeItemId', 'fake-title'])
-            } catch (error) {
+            }
+            catch (error){
                 msg = error.message;
             }
 
@@ -91,11 +99,11 @@ if (Meteor.isServer) {
             expect(msg).to.equal('Retro Item not found! [not-found]')
         })
 
+        it('title updated - stubbed', function(){
 
-        it('removes retro item - stubbed', function () {
             const fakeId = Random.id()
 
-            const fakeRetro = TestData.fakeRetro({ _id: fakeId })
+            const fakeRetro = TestData.fakeRetro({ _id: fakeId, status: Constants.RetroStatuses.ACTIVE, showCompleted: true })
 
             sandbox.stub(Retros, 'findOne').returns(fakeRetro)
             sandbox.stub(Retros, 'update')
@@ -104,21 +112,25 @@ if (Meteor.isServer) {
             let msg = '';
 
             try {
-                subject.apply(context, [fakeRetro.items[0].itemId])
-            } catch (error) {
+                subject.apply(context, [fakeRetro.items[0].itemId, 'fake-title'])
+            }
+            catch (error){
                 msg = error.message;
             }
 
+            expect(msg).to.equal('')
+
             expect(Retros.findOne).to.have.been.called
             expect(Retros.update).to.have.been.called
+
             const parm1 = Retros.update.args[0][0]
             expect(parm1._id).to.equal(fakeId)
-            expect(parm1._id).to.equal(fakeRetro._id)
+            expect(parm1['items.itemId']).to.equal(fakeRetro.items[0].itemId)
 
             const parm2 = Retros.update.args[0][1]
-            expect(parm2.$pull.items.itemId).to.equal(fakeRetro.items[0].itemId)
+            expect(parm2.$set['items.$.title']).to.equal('fake-title')
 
-            expect(msg).to.equal('')
         })
+
     })
 }

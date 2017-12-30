@@ -206,27 +206,27 @@ if (Meteor.isClient) {
                 Tracker.flush()
 
                 // should have text input and no buttons
-                expect($(el).find('input#titleTextbox'), 'should have title edit input').to.have.length(1)
+                expect($(el).find('textarea#titleTextBox'), 'should have title textarea').to.have.length(1)
                 expect($(el).find('a.completeButton'), 'hide complete button').to.have.length(0)
                 expect($(el).find('a.editButton'), 'hide edit button').to.have.length(0)
                 expect($(el).find('a.deleteButton'), 'hide delete button').to.have.length(0)
+                expect($(el).find('a#btnCancel'), 'cancel button visible').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
 
-                $(el).find('input#titleTextbox').val('new fake title')
 
-                const press = jQuery.Event('keyup');
-                press.keyCode = 27;
-                press.which = 27;
+                $(el).find('textarea#titleTextBox').val('new fake title')
 
-                $(el).find('input#titleTextbox').trigger(press)
+                $(el).find('a#btnCancel')[0].click()
                 Tracker.flush()
 
-                expect($(el).find('input#titleTextbox'), 'should have no title edit input').to.have.length(0)
+                expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
                 expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
                 expect($(el).find('div.tappable-text')[0].innerText).to.equal(item.data.title)
-                expect($(el).find('input#titleTextbox'), 'should have no title edit input').to.have.length(0)
                 expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
                 expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
                 expect($(el).find('a.deleteButton'), 'has delete button').to.have.length(1)
+                expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
+                expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
             });
         })
 
@@ -252,15 +252,13 @@ if (Meteor.isClient) {
                 $(el).find('a.editButton')[0].click()
                 Tracker.flush()
 
-                expect($(el).find('input#titleTextbox'), 'should title edit input').to.have.length(1)
+                expect($(el).find('textarea#titleTextBox'), 'should title textarea').to.have.length(1)
+                expect($(el).find('a#btnCancel'), 'cancel button visible').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
 
-                $(el).find('input#titleTextbox').val('new fake title')
+                $(el).find('textarea#titleTextBox').val('new fake title')
 
-                const press = jQuery.Event('keyup');
-                press.keyCode = 13;
-                press.which = 13;
-
-                $(el).find('input#titleTextbox').trigger(press)
+                $(el).find('a#btnSave')[0].click()
                 Tracker.flush()
 
                 expect(Meteor.call).to.have.been.called
@@ -268,10 +266,12 @@ if (Meteor.isClient) {
 
                 setTimeout(function () {
                     expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
-                    expect($(el).find('input#titleTextbox'), 'should have no title edit input').to.have.length(0)
+                    expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
                     expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
                     expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
                     expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
+                    expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
+                    expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
                     done()
                 }, 500)
             });
@@ -360,6 +360,29 @@ if (Meteor.isClient) {
                     }, 100)
                 }, 100)
             });
+        })
+
+        it('timer starts on select', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            Retros.insert(TestData.fakeRetro())
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            withRenderedTemplate('retroItem', item, (el, template) => {
+                selectedVar.set(item.data.itemId)
+                Tracker.flush()
+                setTimeout(function () {
+                    expect($(el).find('div#timer')[0].innerText).to.equal('00:00:01')
+                    done()
+                }, 1200)
+            })
         })
     })
 }

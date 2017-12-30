@@ -6,6 +6,7 @@ import { $ } from 'meteor/jquery'
 import { ConfirmDialog } from '../common/confirmDialog'
 import { Retros } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
+import autosize from '../autosize'
 
 import './retroItem.html'
 
@@ -18,6 +19,30 @@ Template.retroItem.onCreated(function () {
 
     self.editing = new ReactiveVar(false)
     self.title = ''
+
+    self.timer = null
+    self.timerValue = 0
+    self.timerText = new ReactiveVar('00:00:00')
+
+    self.startTimer = () => {
+        if (!self.timer) {
+            self.timer = setInterval(function () {
+                self.timerValue += 1
+                const secs = self.timerValue % 60;
+                const mins = parseInt(self.timerValue / 60, 10);
+                const hours = parseInt(self.timerValue / 60 / 60, 10);
+                self.timerText.set(`${(hours < 10 ? '0' : '')}${hours}:${(mins < 10 ? '0' : '')}${mins}:${(secs < 10 ? '0' : '')}${secs}`)
+            }, 1000);
+        }
+    }
+
+    self.stopTimer = () => {
+        if (self.timer) {
+            clearInterval(self.timer);
+            self.timer = null;
+            self.timerValue = 0
+        }
+    }
 })
 
 Template.retroItem.helpers({
@@ -65,19 +90,37 @@ Template.retroItem.helpers({
         return Template.instance().editBtn.get()
     },
     editMode() {
+        if (Template.instance().data.status === Constants.RetroItemStatuses.COMPLETE) {
+            return false
+        }
         return Template.instance().editing.get()
     },
     notEditing() {
+        if (Template.instance().data.status === Constants.RetroItemStatuses.COMPLETE) {
+            return true
+        }
         return !Template.instance().editing.get()
     },
     isSelected() {
         const instance = Template.instance()
+        if (instance.data.status === Constants.RetroItemStatuses.COMPLETE) {
+            instance.stopTimer()
+            instance.timerText.set('00:00:00')
+            instance.editing.set(false)
+            return false
+        }
         if (instance.data.selectedItemId.get() === this.data.itemId) {
+            instance.startTimer()
             return true
         }
+        instance.stopTimer()
+        instance.timerText.set('00:00:00')
         instance.editing.set(false)
         return false
     },
+    currentTimer() {
+        return Template.instance().timerText.get()
+    }
 })
 
 Template.retroItem.events({
@@ -130,34 +173,27 @@ Template.retroItem.events({
         instance.title = this.data.title
         instance.editing.set(true)
         setTimeout(function () {
-            $('input#titleTextbox').focus().select()
+            autosize($('textarea#titleTextBox'))
+            $('textarea#titleTextBox').focus().select()
         }, 100)
     },
 
-    'keyup input': function (event, instance) {
+    'click a#btnSave'(event, instance) {
         event.stopPropagation()
-        const self = instance
-
-        if (event.keyCode === 13) {
-            // enter - save the info
-            event.stopPropagation()
-            const newTitle = event.currentTarget.value || ''
-            Meteor.call('updateRetroItemTitle', event.currentTarget.dataset.id, newTitle, function (err) {
-                if (err) {
-                    toastr.error(err.message);
-                }
-                self.editing.set(false)
-                return false
-            })
-        }
-        if (event.keyCode === 27) {
-            // escape - put things back
-            event.stopPropagation()
-            $('input#titleTextbox').val(instance.title)
-            instance.title = ''
+        const newTitle = $('textarea#titleTextBox')[0].value
+        Meteor.call('updateRetroItemTitle', event.currentTarget.dataset.id, newTitle, function (err) {
+            if (err) {
+                toastr.error(err.message);
+            }
             instance.editing.set(false)
-            return false
-        }
-        return true
+        })
     },
+
+    'click a#btnCancel'(event, instance) {
+        event.stopPropagation()
+        $('textarea#titleTextbox').val(instance.title)
+        instance.title = ''
+        instance.editing.set(false)
+    }
+
 })

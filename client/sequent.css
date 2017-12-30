@@ -404,10 +404,10 @@ li.sadTabArchive.active{
     border-top-right-radius: 5px;
   }
 
-input.retro-edit {
+textarea.retro-edit {
     width: 100%; 
     padding: 7px; 
-    font-size: 1.25em; 
+    font-size: .75em !important; 
     min-height: 50px;
     border-radius: 4px 4px 4px 4px;
     -moz-border-radius: 4px 4px 4px 4px;
@@ -415,5 +415,7 @@ input.retro-edit {
     border: 1px solid #999;
     background-color: #fdfdfd !important;
     opacity: 1 !important;
+    overflow-x: scroll;
+    margin: 0 auto;
 }
   

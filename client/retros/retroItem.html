@@ -5,7 +5,8 @@
             <div class="row" style="padding: 12px;">
                 <div class="col-sm-12">
                     {{#if editMode}}
-                        <input type='text' id="titleTextbox" class="retro-edit" style="opacity: 1;" data-id={{data.itemId}} value="{{data.title}}" />
+                        <textarea id="titleTextBox" class="retro-edit" rows=1>{{data.title}}</textarea>
+                        <!-- <input type='text' id="titleTextbox" class="retro-edit" style="opacity: 1;" data-id={{data.itemId}} value="{{data.title}}" /> -->
                     {{else}}
                         <div class="tappable-text text-left" style="width: 100%; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{data.title}}</div>
                     {{/if}}
@@ -15,16 +16,17 @@
                         <div class="col-xs-2 text-center" style="min-width: 30px;">
                             <img src="/thumb-gray.png" width="16" style="margin-top: 7px;"><div id="voteCount" style="display: inline; margin-left: 7px; font-size: 9pt !important; color: #939393;">{{data.votes}}</div>
                         </div>
-                        <div class="col-xs-4 text-center;">
-                            <div id="timer" style="display: inline; font-size: 12pt !important;">00:00:00</div>
+                        <div class="col-xs-5 text-center;">
+                            <div id="timer" style="display: inline; font-size: 12pt !important;">{{currentTimer}}</div>
                         </div>
-                        <div class="col-xs-6 text-right">
+                        <div class="col-xs-5 text-right">
                             {{#if notEditing}}
                                 <a href="#" data-id={{data.itemId}} class="editButton" style="margin-right: 12px;"><img src="/edit-blue.png" width=16 ></a>
                                 <a href="#" data-id={{data.itemId}} class="deleteButton" style="margin-right: 12px;"><img src="/deleteItem.png" width=16 ></a>
                                 <a href="#" data-id={{data.itemId}} class="completeButton" style="margin-right: 0px;"><img src="/{{okButton}}" width=24 ></a>
                             {{else}}
-                                <div style="display: inline; color: #aaa; font-size: 9pt; font-style: italic;">press esc to cancel, return to save</div>
+                                <a href="#" id="btnCancel" data-id={{data.itemId}} style="margin-right: 7px; font-size: 12pt !important;">Cancel</a>
+                                <a href="#" id="btnSave" data-id={{data.itemId}} style="font-size: 12pt !important;">Save</a>
                             {{/if}}
                         </div>
                     </div>

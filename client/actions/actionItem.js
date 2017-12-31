@@ -35,7 +35,7 @@ Template.actionItem.helpers({
 Template.actionItem.events({
     'click a.deleteButton'(event, instance) {
         const title = 'Delete Action Item?'
-        const msg = `Are you sure you want permanently delete action item: '${this.title}' ?`
+        const msg = `Are you sure you want permanently delete action item: '${this.data.title}' ?`
 
         ConfirmDialog.showConfirmation(msg, title, 'danger', null, () => {
             Meteor.call('removeAction', event.currentTarget.dataset.id, function (err) {

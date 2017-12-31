@@ -7,7 +7,7 @@
         {{#if Template.subscriptionsReady}}
             {{#each item}}
                 <div class="retroItem listItem">
-                    {{> actionItem this}}
+                    {{> actionItem currentItem}}
                 </div>
             {{/each}}
         {{else}}

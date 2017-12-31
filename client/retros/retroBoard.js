@@ -3,6 +3,7 @@ import { Template } from 'meteor/templating'
 import { $ } from 'meteor/jquery'
 import { toastr } from 'meteor/chrismbeckett:toastr'
 import { _ } from 'meteor/underscore'
+import { ReactiveVar } from 'meteor/reactive-var'
 import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
@@ -23,7 +24,6 @@ Template.retroBoard.onCreated(function () {
             itemType,
             function (err, result) {
                 if (err) {
-                    console.log(err)
                     toastr.error('Error occurred - retro not created')
                 }
             },
@@ -119,7 +119,6 @@ Template.retroBoard.helpers({
             data: this,
             unHighlight: function () {
                 $('div.retroItem').removeClass('itemHighlight')
-                $('a.completeButton').addClass('hidden')
             },
             selectedItemId: Template.instance().selectedItemId
         }
@@ -175,8 +174,6 @@ Template.retroBoard.events({
         const retro = Retros.findOne()
 
         $('div.retroItem').removeClass('itemHighlight')
-        $('a.completeButton').addClass('hidden')
-        $('a.editButton').addClass('hidden')
 
         if (instance.currentlyHighlighted === event.currentTarget) {
             instance.currentlyHighlighted = null
@@ -192,8 +189,6 @@ Template.retroBoard.events({
             }
         }
 
-        $(event.currentTarget).find('a.completeButton').removeClass('hidden')
-        $(event.currentTarget).find('a.editButton').removeClass('hidden')
         event.currentTarget.classList.add('itemHighlight')
         instance.selectedItemId.set(this.itemId)
         instance.currentlyHighlighted = event.currentTarget
@@ -203,7 +198,6 @@ Template.retroBoard.events({
             if (event.currentTarget.value !== '') {
                 Meteor.call('createRetroAction', event.currentTarget.value, function (err) {
                     if (err) {
-                        console.log(err)
                         toastr.error('Error occurred - action not created')
                     }
                     event.currentTarget.value = ''

@@ -18,6 +18,7 @@ module.exports = {
         "airbnb", "plugin:meteor/recommended"
     ],
     "rules": {
+        "no-extend-native": "off",
         "comma-dangle": "off",
         "no-unused-expressions": "off",
         "func-names": "off",

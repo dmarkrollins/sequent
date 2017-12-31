@@ -54,7 +54,7 @@ const TestData = {
         RetroAction._id = parms._id || Random.id()
         RetroAction.createdBy = parms.createdBy || Random.id()
         RetroAction.createdAt = parms.createdAt || new Date()
-        RetroAction.title = faker.name.title()
+        RetroAction.title = parms.title || faker.name.title()
         RetroAction.status = parms.status || Constants.RetroItemStatuses.PENDING
         RetroAction.completedAt = parms.completedAt || null
 

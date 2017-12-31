@@ -180,7 +180,7 @@ if (Meteor.isClient) {
             });
         })
 
-        it('once in edit mode with new text - escape cancels edit', function () {
+        it('once in edit mode with new text - cancel edit', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
             Retros.insert(TestData.fakeRetro())
@@ -230,7 +230,7 @@ if (Meteor.isClient) {
             });
         })
 
-        it('once in edit mode with new text - enter saves new title', function (done) {
+        it('once in edit mode with new text - save new title', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
             Retros.insert(TestData.fakeRetro())

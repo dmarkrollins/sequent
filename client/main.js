@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { Session } from 'meteor/session'
 import { Template } from 'meteor/templating'
 import { _ } from 'meteor/underscore'
 import { BlazeLayout } from 'meteor/kadira:blaze-layout'
@@ -6,6 +7,7 @@ import moment from 'moment'
 
 Meteor.startup(() => {
     BlazeLayout.setRoot('body')
+    Session.set('sortDescending', false)
 })
 
 if (!String.prototype.toProperCase) {

@@ -17,6 +17,8 @@
                     </a>
                     <ul class="dropdown-menu pull-right">
                         {{#if showActiveRetroMenuItems}}
+                            <li><a href="#" id="sortByVotes"><i class="fa {{sortIcon}}" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{sortText}}</a></li>
+                            <li role="separator" class="divider"></li>
                             <li><a href="#" id="freezeRetro"><i class="fa fa-bolt" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{freezeText}}</a></li>
                             <li><a href="#" id="showCompleted"><i class="fa {{completeViewClass}}" aria-hidden="true"></i> {{showCompletedText}}</a></li>
                             <li role="separator" class="divider"></li>

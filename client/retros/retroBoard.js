@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { Session } from 'meteor/session'
 import { Template } from 'meteor/templating'
 import { $ } from 'meteor/jquery'
 import { toastr } from 'meteor/chrismbeckett:toastr'
@@ -29,6 +30,14 @@ Template.retroBoard.onCreated(function () {
             },
         )
     }
+
+    self.sortedList = (list) => {
+        const sortDesc = Session.get('sortDescending')
+        if (sortDesc) {
+            return list.sort(function (a, b) { return b.votes - a.votes })
+        }
+        return list
+    }
 })
 
 Template.retroBoard.onRendered(function () {
@@ -37,6 +46,7 @@ Template.retroBoard.onRendered(function () {
 
 Template.retroBoard.helpers({
     greenItem() {
+        const instance = Template.instance()
         const retro = Retros.findOne()
         if (retro) {
             const list = _.filter(retro.items, function (item) {
@@ -46,12 +56,13 @@ Template.retroBoard.helpers({
                 const list2 = _.filter(retro.items, function (item) {
                     return (item.itemType === Constants.RetroItemTypes.HAPPY && item.status === Constants.RetroItemStatuses.COMPLETE)
                 })
-                return list.concat(list2)
+                return instance.sortedList(list.concat(list2))
             }
-            return list
+            return instance.sortedList(list)
         }
     },
     yellowItem() {
+        const instance = Template.instance()
         const retro = Retros.findOne()
         if (retro) {
             const list = _.filter(retro.items, function (item) {
@@ -61,12 +72,13 @@ Template.retroBoard.helpers({
                 const list2 = _.filter(retro.items, function (item) {
                     return (item.itemType === Constants.RetroItemTypes.MEH && item.status === Constants.RetroItemStatuses.COMPLETE)
                 })
-                return list.concat(list2)
+                return instance.sortedList(list.concat(list2))
             }
-            return list
+            return instance.sortedList(list)
         }
     },
     redItem() {
+        const instance = Template.instance()
         const retro = Retros.findOne()
         if (retro) {
             const list = _.filter(retro.items, function (item) {
@@ -76,9 +88,9 @@ Template.retroBoard.helpers({
                 const list2 = _.filter(retro.items, function (item) {
                     return (item.itemType === Constants.RetroItemTypes.SAD && item.status === Constants.RetroItemStatuses.COMPLETE)
                 })
-                return list.concat(list2)
+                return instance.sortedList(list.concat(list2))
             }
-            return list
+            return instance.sortedList(list)
         }
     },
     action() {

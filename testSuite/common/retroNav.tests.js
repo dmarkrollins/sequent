@@ -72,7 +72,7 @@ if (Meteor.isClient) {
                 expect($(el).find('a#viewArchives'), 'view archives').to.have.length(1)
                 expect($(el).find('a#preferences'), 'preferences').to.have.length(1)
                 expect($(el).find('a#shareSequent'), 'share sequent').to.have.length(1)
-                expect($(el).find('li#versionInfo'), 'version info').to.have.length(1)
+                expect($(el).find('a#versionInfo'), 'version info').to.have.length(1)
             });
         })
 

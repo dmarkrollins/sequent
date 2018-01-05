@@ -1,3 +1,5 @@
+/* global Image */
+
 import { Meteor } from 'meteor/meteor'
 import { Session } from 'meteor/session'
 import { Template } from 'meteor/templating'
@@ -5,9 +7,25 @@ import { _ } from 'meteor/underscore'
 import { BlazeLayout } from 'meteor/kadira:blaze-layout'
 import moment from 'moment'
 
+let loadedImages = []
+
+const preLoadImages = () => {
+    Meteor.call('componentImages', function (error, result) {
+        if (!error) {
+            loadedImages = []
+            result.forEach((item) => {
+                const img = new Image()
+                img.src = `https://${window.location.hostname}${item.fileName}`
+                loadedImages.push(img)
+            })
+        }
+    })
+}
+
 Meteor.startup(() => {
     BlazeLayout.setRoot('body')
     Session.set('sortDescending', false)
+    preLoadImages()
 })
 
 if (!String.prototype.toProperCase) {

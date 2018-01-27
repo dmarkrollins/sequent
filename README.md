@@ -35,7 +35,7 @@ Use the tool bar to navigate between Sequent core functions. Tap or click on one
 ### Retro Board
 This is where your team shares ideas has discussions and creates action items.
 
-Each member logs into the team account and anonymously puts in their team feedback. 
+Each member logs into the team account and anonymously puts in their team feedback in one of the 3 appropriate buckets.
 
 Everyone sees everyone else's items without knowing who put them in. 
 

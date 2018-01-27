@@ -40,7 +40,7 @@ The team then takes a minute to vote on the items then discusses each in a team 
 ### Actions
 You can add, change delete actions here.
 
-<img src="/private/actions.jpg" widht="400">
+<img src="/private/actions.jpg" width="400">
 
 ### Tools
 - Sort - sort the retro board by votes descending

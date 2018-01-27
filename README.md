@@ -59,4 +59,4 @@ Here you can change the default retro board prompts manually or try the randomiz
 
 You can also set your teams preferred background pattern. 
 
-![Custom](/private/custom.jpg?raw=true "Custom" width="400")
+<img src="/private/custom.jpg" width="250">

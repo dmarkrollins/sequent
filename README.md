@@ -14,17 +14,17 @@ You need to install Meteor - currently this project is on v1.6
 
 ### Login - Landing Page
 
-![Login](/private/login.jpg?raw=true "Login - landing page" | width=250)
+![Login](/private/login.jpg?raw=true "Login - landing page" =250x)
 
 ### Create Team
 
-![Create Team](/private/create-team.jpg?raw=true "Create team" | width=250)
+![Create Team](/private/create-team.jpg?raw=true "Create team" =250x)
 
 ### Tool bar area
 
 Use the tool bar to navigate between Sequent core functions. Tap or click on one of the 3 icons to navigate. 
 
-![Toolbar](/private/toolbar.jpg?raw=true "Toolbar" | width=150)
+![Toolbar](/private/toolbar.jpg?raw=true "Toolbar" =150x)
 
 ### Retro Board
 This is where your team shares ideas has discussions and creates action items.
@@ -35,12 +35,12 @@ Everyone sees everyone else's items without knowing who put them in.
 
 The team then takes a minute to vote on the items then discusses each in a team discussion bonding session.
 
-![Retro Board](/private/main_board.jpg?raw=true "Main retro board" | width=500 }
+![Retro Board](/private/main_board.jpg?raw=true "Main retro board" =500x)
 
 ### Actions
 You can add, change delete actions here.
 
-![Retro Board](/private/actions.jpg?raw=true "Managing actions" | width=500)
+![Retro Board](/private/actions.jpg?raw=true "Managing actions" =500x)
 
 ### Tools
 - Sort - sort the retro board by votes descending
@@ -51,6 +51,6 @@ You can add, change delete actions here.
 - Preferences - Sequent customization options - see customizing sequent
 - Share Sequent - send a link to your installation to someone via email
 
-![Tools](/private/tools.jpg?raw=true "Tools" | width=150)
+![Tools](/private/tools.jpg?raw=true "Tools" =150x)
 
 ### Customizing Sequent

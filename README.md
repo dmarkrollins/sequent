@@ -10,6 +10,12 @@ PRs are welcome.
 
 You need to install Meteor - currently this project is on v1.6
 
+## Installation
+
+- Install [Meteor](https://www.meteor.com)
+- Clone this repo 
+- From the root folder run the project with the command `meteor`
+
 ## Core Features
 
 ### Login - Landing Page
@@ -43,6 +49,9 @@ You can add, change delete actions here.
 <img src="/private/actions.jpg" width="400">
 
 ### Tools
+
+Sequent has a few tools to make sure your retros be the best they can be.
+
 - Sort - sort the retro board by votes descending
 - Freeze - toggle allowing new retro items to be created
 - Show Completed - toggle showing completed items
@@ -55,8 +64,9 @@ You can add, change delete actions here.
 
 ### Customizing Sequent
 
-Here you can change the default retro board prompts manually or try the randomizer!
+Change the default retro board prompts manually or try the randomizer!
 
 You can also set your teams preferred background pattern. 
 
 <img src="/private/custom.jpg" width="250">
+

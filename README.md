@@ -16,6 +16,13 @@ You need to install Meteor - currently this project is on v1.6
 - Clone this repo 
 - From the root folder run the project with the command `meteor`
 
+## Testing
+You need to update the coffescript package to get practicalmeteor:mocha to work with Meteor 1.6.
+
+[Update Coffee Script Package Info](https://forums.meteor.com/t/mocha-tests-not-working-after-upgrade-to-1-6/40221)
+
+
+
 ## Core Features
 
 ### Login - Landing Page

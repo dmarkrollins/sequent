@@ -17,12 +17,10 @@ import { TestData } from '../testData'
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../lib/method-createRetroItem.js'
 
-    describe('Create Retro Item Method', function (){
-
+    describe('Create Retro Item Method', function () {
         let userId
         let sandbox
         let subject
@@ -31,35 +29,31 @@ if (Meteor.isServer){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             subject = Meteor.server.method_handlers.createRetroItem;
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Retros.remove({})
             sandbox.restore()
         })
 
-        it('must be logged in', function(){
-
+        it('must be logged in', function () {
             const context = {};
             let msg = '';
 
             try {
                 resultId = subject.apply(context, ['fake-id']);
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
-
         })
 
-        it('creates the item - new retro - stubbed', function(){
-
+        it('creates the item - new retro - stubbed', function () {
             const fakeId = Random.id()
 
             const findOne = sandbox.stub(Retros, 'findOne')
@@ -70,14 +64,13 @@ if (Meteor.isServer){
             sandbox.stub(Retros, 'update')
 
             findOne.onCall(1).returns(TestData.fakeRetro({ _id: fakeId, items: [] }))
-            
+
             const context = { userId: userId };
             let msg = '';
 
             try {
                 subject.apply(context, ['fake-title', Constants.RetroItemTypes.HAPPY])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -92,12 +85,11 @@ if (Meteor.isServer){
             expect(doc.itemType).to.equal(Constants.RetroItemTypes.HAPPY)
             expect(doc.status).to.equal(Constants.RetroItemStatuses.PENDING)
             expect(doc.votes).to.equal(0)
-            expect(doc.createdAt).to.not.be.null             
+            expect(doc.createdAt).to.not.be.null
 
         })
-        
-        it('creates the item - existing retro - stubbed', function(){
 
+        it('creates the item - existing retro - stubbed', function () {
             const fakeId = Random.id()
 
             sandbox.stub(Retros, 'findOne').returns(TestData.fakeRetro({ _id: fakeId, items: [] }))
@@ -110,8 +102,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, ['fake-title', Constants.RetroItemTypes.HAPPY])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -126,8 +117,7 @@ if (Meteor.isServer){
             expect(doc.itemType).to.equal(Constants.RetroItemTypes.HAPPY)
             expect(doc.status).to.equal(Constants.RetroItemStatuses.PENDING)
             expect(doc.votes).to.equal(0)
-            expect(doc.createdAt).to.not.be.null             
+            expect(doc.createdAt).to.not.be.null
         })
-
     })
 }

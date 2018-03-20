@@ -15,7 +15,7 @@ const preLoadImages = () => {
             loadedImages = []
             result.forEach((item) => {
                 const img = new Image()
-                img.src = `https://${window.location.hostname}${item.fileName}`
+                img.src = `https://${window.location.hostname}${item.fileName}` //eslint-disable-line
                 loadedImages.push(img)
             })
         }

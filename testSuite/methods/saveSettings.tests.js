@@ -17,12 +17,10 @@ import { TestData } from '../testData'
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../lib/method-saveSettings.js'
 
-    describe('Save Settings Method', function (){
-
+    describe('Save Settings Method', function () {
         let userId
         let sandbox
         let subject
@@ -31,35 +29,31 @@ if (Meteor.isServer){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             subject = Meteor.server.method_handlers.saveSettings;
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Retros.remove({})
             sandbox.restore()
         })
 
-        it('must be logged in', function(){
-
+        it('must be logged in', function () {
             const context = {};
             let msg = '';
 
             try {
                 resultId = subject.apply(context, ['fake-id']);
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
-
         })
 
-        it('not found insert - stubbed', function(){
-
+        it('not found insert - stubbed', function () {
             sandbox.stub(Settings, 'findOne')
             sandbox.stub(Settings, 'insert')
 
@@ -70,8 +64,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, [fakeSettings])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -85,8 +78,7 @@ if (Meteor.isServer){
             expect(msg).to.equal('')
         })
 
-        it('found update - stubbed', function(){
-
+        it('found update - stubbed', function () {
             const fakeId = Random.id()
 
             const fakeSettings = TestData.fakeSettings({ _id: fakeId })
@@ -99,8 +91,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, [fakeSettings])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -114,10 +105,9 @@ if (Meteor.isServer){
             expect(parm2.$set.happyPlaceholder).to.equal(fakeSettings.happyPlaceholder)
             expect(parm2.$set.mehPlaceholder).to.equal(fakeSettings.mehPlaceholder)
             expect(parm2.$set.sadPlaceholder).to.equal(fakeSettings.sadPlaceholder)
-            
+
 
             expect(msg).to.equal('')
         })
-
     })
 }

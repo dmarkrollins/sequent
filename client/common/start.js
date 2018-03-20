@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
-import { Sequent, Settings } from '../../lib/sequent'
 import { FlowRouter } from 'meteor/kadira:flow-router'
+import { Sequent, Settings } from '../../lib/sequent'
 
 import './start.html'
 

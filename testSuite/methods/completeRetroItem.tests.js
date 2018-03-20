@@ -17,12 +17,10 @@ import { TestData } from '../testData'
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../lib/method-completeRetroItem.js'
 
-    describe('Complete Retro Item Method', function (){
-
+    describe('Complete Retro Item Method', function () {
         let userId
         let sandbox
         let subject
@@ -31,35 +29,31 @@ if (Meteor.isServer){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             subject = Meteor.server.method_handlers.completeRetroItem;
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Retros.remove({})
             sandbox.restore()
         })
 
-        it('must be logged in', function(){
-
+        it('must be logged in', function () {
             const context = {};
             let msg = '';
 
             try {
                 resultId = subject.apply(context, ['fake-id']);
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
-
         })
 
-        it('not found error - stubbed', function(){
-
+        it('not found error - stubbed', function () {
             sandbox.stub(Retros, 'findOne').returns(null)
 
             const context = { userId: userId };
@@ -67,8 +61,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, ['fake-id'])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -76,8 +69,7 @@ if (Meteor.isServer){
             expect(msg).to.equal('Retro not found! [not-found]')
         })
 
-        it('completes retro item - stubbed', function(){
-
+        it('completes retro item - stubbed', function () {
             const fakeId = Random.id()
 
             const fakeRetro = TestData.fakeRetro({ _id: fakeId })
@@ -90,8 +82,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, [fakeRetro.items[0]._id])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -106,7 +97,5 @@ if (Meteor.isServer){
 
             expect(msg).to.equal('')
         })
-
-
     })
 }

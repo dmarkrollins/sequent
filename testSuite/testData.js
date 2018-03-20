@@ -68,7 +68,7 @@ const TestData = {
             parms = parameters;
         }
 
-        RetroItem = {}
+        const RetroItem = {}
 
         RetroItem.itemId = parms.itemId || Random.id()
         RetroItem.title = parms.title || faker.name.title()
@@ -99,7 +99,7 @@ const TestData = {
             parms = parameters;
         }
 
-        Retro = {}
+        const Retro = {}
 
         Retro._id = parms._id || Random.id()
         Retro.createdBy = parms.createdBy || Random.id()

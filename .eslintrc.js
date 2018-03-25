@@ -60,6 +60,7 @@ module.exports = {
         "no-unused-vars": "off",
         "no-tabs": "off",
         "object-shorthand": 0,
+        "prefer-destructuring": "warn",
         "prefer-arrow-callback": "off",
         "no-param-reassign": "off",
         "no-return-assign": "off",

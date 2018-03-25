@@ -17,12 +17,10 @@ import { TestData } from '../testData'
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../lib/method-removeAction.js'
 
-    describe('Remove Action Method', function (){
-
+    describe('Remove Action Method', function () {
         let userId
         let sandbox
         let subject
@@ -31,35 +29,31 @@ if (Meteor.isServer){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             subject = Meteor.server.method_handlers.removeAction;
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Retros.remove({})
             sandbox.restore()
         })
 
-        it('must be logged in', function(){
-
+        it('must be logged in', function () {
             const context = {};
             let msg = '';
 
             try {
                 resultId = subject.apply(context, ['fake-id']);
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
-
         })
 
-        it('not found error', function(){
-
+        it('not found error', function () {
             sandbox.stub(RetroActions, 'findOne').returns(null)
 
             const context = { userId: userId };
@@ -67,8 +61,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, ['fake-id'])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -76,8 +69,7 @@ if (Meteor.isServer){
             expect(msg).to.equal('Action not found! [not-found]')
         })
 
-        it('removes action - stubbed', function(){
-
+        it('removes action - stubbed', function () {
             const fakeId = Random.id()
 
             sandbox.stub(RetroActions, 'findOne').returns(TestData.fakeRetroAction({ _id: fakeId }))
@@ -89,8 +81,7 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, [fakeId])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
@@ -99,7 +90,5 @@ if (Meteor.isServer){
             expect(RetroActions.remove).to.have.been.calledWith({ _id: fakeId })
             expect(msg).to.equal('')
         })
-
-
     })
 }

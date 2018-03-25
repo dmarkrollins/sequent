@@ -16,14 +16,12 @@ import { TestData } from '../testData'
 
 const should = chai.should();
 
-if (Meteor.isClient){
-
+if (Meteor.isClient) {
     import '../../client/retros/archiveBoard.js'
     import '../../client/retros/retroItem.js'
     import '../../client/main.js'
 
-    describe('Archive Board', function (){
-
+    describe('Archive Board', function () {
         let userId
         let sandbox
         const fakeSettings = {
@@ -37,25 +35,24 @@ if (Meteor.isClient){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             Template.registerHelper('_', key => key);
-            StubCollections.stub([ Retros, RetroActions, Settings ]);
+            StubCollections.stub([Retros, RetroActions, Settings]);
             sandbox.stub(Meteor, 'subscribe').callsFake(() => ({
                 subscriptionId: 0,
                 ready: () => true,
             }));
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Template.deregisterHelper('_')
             StubCollections.restore()
             sandbox.restore()
         })
 
-        it('displays correctly', function(){
-
+        it('displays correctly', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
@@ -67,15 +64,13 @@ if (Meteor.isClient){
 
             Retros.insert(TestData.fakeRetro({ archivedAt: new Date(), status: Constants.RetroStatuses.ARCHIVED, items: retroItems }))
 
-            withRenderedTemplate('archiveBoard', {}, el => {
+            withRenderedTemplate('archiveBoard', {}, (el) => {
                 expect($(el).find('div#fullSizeCol div.row div.col-md-4')).to.have.length(3)
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-green-archive div.retroItem')).to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow-archive div.retroItem')).to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-red-archive div.retroItem')).to.have.length(1)                
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-green-archive div.retroItem')).to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow-archive div.retroItem')).to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-red-archive div.retroItem')).to.have.length(1)
                 expect($(el).find('div#boardWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
-            });          
-
+            });
         })
-
     })
 }

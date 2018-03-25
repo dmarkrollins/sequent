@@ -14,32 +14,29 @@ import { RetroActions, Retros } from '../../lib/sequent'
 
 const should = chai.should();
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../server/publications-retros.js'
 
-    describe('Retro Publications', function (){
-
+    describe('Retro Publications', function () {
         let sandbox;
         let userId
         let archivedId
 
-        beforeEach(function (){
+        beforeEach(function () {
             userId = Random.id()
             sandbox = sinon.sandbox.create();
             sandbox.stub(Meteor, 'userId').returns(userId);
             Retros.insert(TestData.fakeRetro({ createdBy: userId }))
-            Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN}))
-            archivedId = Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED}))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
+            archivedId = Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
         });
 
-        afterEach(function (){
+        afterEach(function () {
             sandbox.restore();
             Retros.remove({})
         });
 
-        it('active retros published correctly', function (done){
-
+        it('active retros published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
             collector.collect('active-retros', null, (collections) => {
@@ -48,10 +45,8 @@ if (Meteor.isServer){
                 expect(retros).to.have.length(2);
                 done();
             });
-
         })
-        it('archived retros published correctly', function (done){
-
+        it('archived retros published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
             collector.collect('archived-retros', null, (collections) => {
@@ -60,11 +55,9 @@ if (Meteor.isServer){
                 expect(retros).to.have.length(1);
                 done();
             });
-
         })
 
-        it('single archived retro published correctly', function (done){
-
+        it('single archived retro published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
             collector.collect('single-archived-retro', archivedId, (collections) => {
@@ -73,8 +66,6 @@ if (Meteor.isServer){
                 expect(retros).to.have.length(1);
                 done();
             });
-
         })
-
     })
 }

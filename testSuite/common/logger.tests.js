@@ -1,28 +1,27 @@
 /* eslint-env mocha */
 /* eslint-disable func-names, prefer-arrow-callback */
+import { Meteor } from 'meteor/meteor'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
+import { Logger } from '../../lib/logger'
 
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer){
+if (Meteor.isServer) {
+    let sandbox
 
-    import { Logger } from '../../lib/logger.js'
-
-    describe('Logger', function (){
-
-        beforeEach(function (){
+    describe('Logger', function () {
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
         });
 
-        afterEach(function (){
+        afterEach(function () {
             sandbox.restore()
         })
 
-        it('logs to console', function(){
-
+        it('logs to console', function () {
             sandbox.stub(console, 'log')
 
             Logger.log('fake message')
@@ -30,35 +29,29 @@ if (Meteor.isServer){
             expect(console.log).to.have.been.called
 
             expect(console.log).to.have.been.calledWith('fake message')
-
         })
     })
 }
 
-if (Meteor.isClient){
-
-    import { Logger } from '../../lib/logger.js'
-
-    describe('Logger', function (){
-
-        beforeEach(function (){
+if (Meteor.isClient) {
+    let sandbox
+    describe('Logger', function () {
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
         });
 
-        afterEach(function (){
+        afterEach(function () {
             sandbox.restore()
         })
 
-        it('logs to console', function(){
-
-            sandbox.stub(console, 'log')
+        it('logs to console', function () {
+            sandbox.spy(console, 'log')
 
             Logger.log('fake message')
 
             expect(console.log).to.have.been.called
 
             expect(console.log).to.have.been.calledWith('fake message')
-
         })
     })
 }

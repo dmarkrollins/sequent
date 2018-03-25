@@ -14,25 +14,22 @@ import { RetroActions } from '../../lib/sequent'
 
 const should = chai.should();
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../server/publications-actions.js'
 
-    describe('Action Publication', function (){
-
+    describe('Action Publication', function () {
         let sandbox;
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.sandbox.create();
         });
 
-        afterEach(function (){
+        afterEach(function () {
             sandbox.restore();
             RetroActions.remove({})
         });
 
-        it('actions published correctly', function (done){
-
+        it('actions published correctly', function (done) {
             sandbox.stub(Meteor, 'userId').returns(Random.id());
 
             RetroActions.insert(TestData.fakeRetroAction())
@@ -43,12 +40,11 @@ if (Meteor.isServer){
             const collector = new PublicationCollector();
 
             collector.collect('open-actions', null, (collections) => {
-                //console.log('The collections', JSON.stringify(collections, null, 4));
+                // console.log('The collections', JSON.stringify(collections, null, 4));
                 const actions = collections['retro-actions'];
                 expect(actions).to.have.length(2);
                 done();
             });
-
         })
     })
 }

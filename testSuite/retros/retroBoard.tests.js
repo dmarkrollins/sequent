@@ -16,14 +16,12 @@ import { TestData } from '../testData'
 
 const should = chai.should();
 
-if (Meteor.isClient){
-
+if (Meteor.isClient) {
     import '../../client/retros/retroBoard.js'
     import '../../client/retros/retroItem.js'
     import '../../client/main.js'
 
-    describe('Retro Board', function (){
-
+    describe('Retro Board', function () {
         let userId
         let sandbox
 
@@ -39,27 +37,26 @@ if (Meteor.isClient){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             Template.registerHelper('_', key => key);
-            StubCollections.stub([ Retros, RetroActions, Settings ]);
+            StubCollections.stub([Retros, RetroActions, Settings]);
             sandbox.stub(Meteor, 'subscribe').callsFake(() => ({
                 subscriptionId: 0,
                 ready: () => true,
             }));
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Template.deregisterHelper('_')
             StubCollections.restore()
             sandbox.restore()
         })
 
-        it('displays default correctly - not frozen', function(){
-
+        it('displays default correctly - not frozen', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
-            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png'})
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
 
             const retroItems = []
 
@@ -69,21 +66,20 @@ if (Meteor.isClient){
 
             Retros.insert(TestData.fakeRetro({ status: Constants.RetroStatuses.ACTIVE, items: retroItems }))
 
-            withRenderedTemplate('retroBoard', {}, el => {
+            withRenderedTemplate('retroBoard', {}, (el) => {
                 expect($(el).find('div#fullSizeCol div.row div.col-md-4'), 'column count').to.have.length(3)
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.greenItem'), 'green input').to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.yellowItem'), 'yellow input').to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.redItem'), 'red input').to.have.length(1)                
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.greenItem'), 'green input').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.yellowItem'), 'yellow input').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.redItem'), 'red input').to.have.length(1)
 
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.retroItem'), 'green items').to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.retroItem'), 'yellow items').to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.retroItem'), 'red items').to.have.length(1)                
-            });          
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.retroItem'), 'green items').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.retroItem'), 'yellow items').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.retroItem'), 'red items').to.have.length(1)
+            });
 
         })
 
-        it('displays default correctly - frozen', function(){
-
+        it('displays default correctly - frozen', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
@@ -93,22 +89,20 @@ if (Meteor.isClient){
             retroItems.push(TestData.fakeRetroItem({ itemType: Constants.RetroItemTypes.MEH }))
             retroItems.push(TestData.fakeRetroItem({ itemType: Constants.RetroItemTypes.SAD }))
 
-            Retros.insert(TestData.fakeRetro({ status: Constants.RetroStatuses.FROZEN, items: retroItems}))
+            Retros.insert(TestData.fakeRetro({ status: Constants.RetroStatuses.FROZEN, items: retroItems }))
 
-            withRenderedTemplate('retroBoard', {}, el => {
+            withRenderedTemplate('retroBoard', {}, (el) => {
                 expect($(el).find('div#fullSizeCol div.row div.col-md-4'), 'column count').to.have.length(3)
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.greenItem'), 'green input').to.have.length(0)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.yellowItem'), 'yellow input').to.have.length(0)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.redItem'), 'red input').to.have.length(0)                
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.greenItem'), 'green input').to.have.length(0)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.yellowItem'), 'yellow input').to.have.length(0)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.redItem'), 'red input').to.have.length(0)
 
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.retroItem'), 'green items').to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.retroItem'), 'yellow items').to.have.length(1)                
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.retroItem'), 'red items').to.have.length(1)                
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.retroItem'), 'green items').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.retroItem'), 'yellow items').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.retroItem'), 'red items').to.have.length(1)
                 expect($(el).find('div#boardWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
-
-            });          
+            });
 
         })
-
     })
 }

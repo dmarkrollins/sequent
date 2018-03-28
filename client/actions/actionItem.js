@@ -10,7 +10,6 @@ import autosize from '../autosize'
 import './actionItem.html'
 
 Template.actionItem.onCreated(function () {
-    ``
     const self = this
     self.currentlyHighlighted = null
     self.editing = new ReactiveVar(false)

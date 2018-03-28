@@ -6,6 +6,10 @@ Sequent lets you customize the questions you ask each week to make sure your tea
 
 PRs are welcome.
 
+## Check it Out
+
+https://sequent.herokuapp.com/
+
 ## Development Info
 
 You need to install Meteor - currently this project is on v1.6
@@ -17,11 +21,10 @@ You need to install Meteor - currently this project is on v1.6
 - From the root folder run the project with the command `meteor`
 
 ## Testing
+
 You need to update the coffescript package to get practicalmeteor:mocha to work with Meteor 1.6.
 
 [Update Coffee Script Package Info](https://forums.meteor.com/t/mocha-tests-not-working-after-upgrade-to-1-6/40221)
-
-
 
 ## Core Features
 
@@ -40,6 +43,7 @@ Use the tool bar to navigate between Sequent core functions. Tap or click on one
 <img src="/private/toolbar.jpg" width="150">
 
 ### Retro Board
+
 This is where your team shares ideas has discussions and creates action items.
 
 Each member logs into the team account and anonymously puts in their team feedback in one of the 3 appropriate buckets.
@@ -51,6 +55,7 @@ The team then takes a minute to vote on the items then discusses each in a team 
 <img src="/private/main_board.jpg" width="400">
 
 ### Actions
+
 You can add, change delete actions here.
 
 <img src="/private/actions.jpg" width="400">
@@ -76,4 +81,3 @@ Change the default retro board prompts manually or try the randomizer!
 You can also set your teams preferred background pattern. 
 
 <img src="/private/custom.jpg" width="250">
-

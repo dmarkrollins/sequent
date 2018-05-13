@@ -1,0 +1,15 @@
+{
+  "name": "sequent",
+  "private": true,
+  "scripts": {
+    "start": "node launcher.js",
+    "postinstall": "tar -xf sequent.tar.gz && (cd bundle/programs/server && npm install)"
+  },
+  "engines": {
+    "node": "8.9.3"
+  },
+  "dependencies": {
+    "meteor-deque": "~2.1.0",
+    "cfenv": "1.0.4"
+  }
+}

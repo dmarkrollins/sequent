@@ -1,0 +1,19 @@
+<template name="actionsList">
+    
+    <div id="listWrapper" class="fullscreen" style="background-image: url({{backGround}})">
+        
+        {{> actionInput}}
+
+        {{#if Template.subscriptionsReady}}
+            {{#each item}}
+                <div class="retroItem listItem">
+                    {{> actionItem currentItem}}
+                </div>
+            {{/each}}
+        {{else}}
+            {{> spinner}}
+        {{/if}}
+        
+    </div>            
+    
+</template>

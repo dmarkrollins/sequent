@@ -1,0 +1,39 @@
+<template name="newTeam">
+                    
+    <div class="fullscreen" style="background-image: url({{backGround}})">
+        <div class="vertical-center"  style="padding: 7px;">
+            <div class="panel panel-default" style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #999;">
+                <img src="/Sequent.png" id="logoimage" width="64"/>
+                <h3 style="margin-top: 7px; margin-bottom: 21px;">Sequent</h3>
+                <p>
+                    <strong>Create Your Team</strong>
+                </p>
+                <div style="width: 80%; margin: 0 auto;">
+                    <form>
+                        <div class="form-group">
+                            <input type="text" class="form-control" id="teamName" placeholder="Team-Name">
+                        </div>
+                        <div class="form-group">
+                            <textarea class="form-control" rows="5" id="description" placeholder="Description"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="password" placeholder="Password">
+                        </div>
+                        <div class="form-group">
+                            <input type="password" class="form-control" id="confirmPassword" placeholder="Password Confirmation">
+                        </div>
+                        <p>
+                            <span id="errorMessage" class="error-message">{{errMessage}}</span>
+                        </p>
+                        <p>
+                            <button type="button" class="btn btn-default" id="btnCancel">Cancel</button>
+                            <button type="submit" id="btnCreateNewTeam" class="btn btn-success">OK</button>
+                        </p>
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+                
+</template>

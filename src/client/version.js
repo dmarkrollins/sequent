@@ -1,0 +1,1 @@
+PackageInfo = require('../package.json');

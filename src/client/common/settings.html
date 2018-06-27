@@ -1,0 +1,59 @@
+<template name="settings">
+
+    <div class="fullscreen" style="background-image: url({{backGround}})">
+        <div class="vertical-center"  style="padding: 7px;">
+            <div class="panel panel-default" style="max-width: 500px; margin: 0 auto; padding: 20px;">
+                <img src="/Sequent.png" width="64"/>
+                <h3 style="margin-top: 7px; margin-bottom: 21px;">Sequent</h3>
+                <p><strong>Sequent Preferences</strong></p>                
+                <div style="width: 80%; margin: 0 auto;">
+                    <form id="settingsForm">
+                        {{#if Template.subscriptionsReady}}
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <p style="color: #999;">Use Custom Prompts to Drive Team Discussion</p>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="happyPlaceholder" placeholder=":)" value="{{happy}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="mehPlaceholder" placeholder=":|" value="{{meh}}">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="sadPlaceholder" placeholder=":(" value="{{sad}}">
+                                    </div>
+                                    <p>
+                                        <button type="button" id='btnRandom' class='btn btn-default'><i class="fa fa-random" aria-hidden="true"></i> Random</button>
+                                    </p>
+                                </div>
+                            </div>
+
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <p style="color: #999;">Choose a Special Background</p>
+                                    <div class="form-group">
+                                        <select id="selectedBackground" class="form-control">
+                                            <option value="">None Chosen</option>
+                                            {{#each background}}
+                                                <option value="{{value}}" selected="{{selected}}" >{{name}}</option>
+                                            {{/each}}
+                                        </select>
+                                    </div>
+                                </div>  
+                            </div>              
+                            <p>
+                                <span class="error-message">{{errMessage}}</span>
+                            </p>
+                            <p>
+                                <button type="button" id="btnCancel" class="btn btn-default">Done</button>
+                            </p>
+                        {{else}}
+                            {{> spinner}}
+                        {{/if}}
+                    </form>
+                </div>
+            </div>
+        </div>
+        
+    </div>
+
+</template>

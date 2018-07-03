@@ -31,17 +31,17 @@ You need to update the coffescript package to get practicalmeteor:mocha to work 
 
 ### Login - Landing Page
 
-<img src="/private/login.jpg" width="250">
+<img src="/src/private/login.jpg" width="250">
 
 ### Create Team
 
-<img src="/private/create-team.jpg" width="250">
+<img src="/src/private/create-team.jpg" width="250">
 
 ### Tool bar area
 
 Use the tool bar to navigate between Sequent core functions. Tap or click on one of the 3 icons to navigate. 
 
-<img src="/private/toolbar.jpg" width="150">
+<img src="/src/private/toolbar.jpg" width="150">
 
 ### Retro Board
 
@@ -53,13 +53,13 @@ Everyone sees everyone else's items without knowing who put them in.
 
 The team then takes a minute to vote on the items then discusses each in a team discussion bonding session.
 
-<img src="/private/main_board.jpg" width="400">
+<img src="/src/private/main_board.jpg" width="400">
 
 ### Actions
 
 You can add, change delete actions here.
 
-<img src="/private/actions.jpg" width="400">
+<img src="/src/private/actions.jpg" width="400">
 
 ### Tools
 
@@ -73,7 +73,7 @@ Sequent has a few tools to make sure your retros be the best they can be.
 - Preferences - Sequent customization options - see customizing sequent
 - Share Sequent - send a link to your installation to someone via email
 
-<img src="/private/tools.jpg" width="125">
+<img src="/src/private/tools.jpg" width="125">
 
 ### Customizing Sequent
 
@@ -81,7 +81,7 @@ Change the default retro board prompts manually or try the randomizer!
 
 You can also set your teams preferred background pattern. 
 
-<img src="/private/custom.jpg" width="250">
+<img src="/src/private/custom.jpg" width="250">
 
 
 https://github.com/meteor/meteor/issues/9871#issuecomment-392897692

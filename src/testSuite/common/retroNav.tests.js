@@ -58,6 +58,7 @@ if (Meteor.isClient) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
             withRenderedTemplate('retroNav', null, (el) => {
+                expect($(el).find('a.navbar-brand')[0].href).to.contain('/retro/board')
                 expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname')
                 expect($(el).find('a#actionCount span.badge-error')).to.have.length(0)
                 expect($(el).find('a#actionCount')[0].innerText).to.equal('0')

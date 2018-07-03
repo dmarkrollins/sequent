@@ -14,6 +14,16 @@ Template.actionItem.onCreated(function () {
     self.currentlyHighlighted = null
     self.editing = new ReactiveVar(false)
     self.title = ''
+
+    self.saveAction = (id, newTitle) => {
+        Meteor.call('updateActionTitle', id, newTitle, function (err) {
+            if (err) {
+                toastr.error(err.message);
+            }
+            self.editing.set(false)
+            self.data.unHighlight()
+        })
+    }
 })
 
 Template.actionItem.helpers({
@@ -66,13 +76,7 @@ Template.actionItem.events({
     'click a#btnSave'(event, instance) {
         event.stopPropagation()
         const newTitle = $('textarea#actionItemTextarea')[0].value
-        Meteor.call('updateActionTitle', event.currentTarget.dataset.id, newTitle, function (err) {
-            if (err) {
-                toastr.error(err.message);
-            }
-            instance.editing.set(false)
-            instance.data.unHighlight()
-        })
+        instance.saveAction(event.currentTarget.dataset.id, newTitle)
     },
 
     'click a#btnCancel'(event, instance) {
@@ -81,7 +85,13 @@ Template.actionItem.events({
         instance.title = ''
         instance.editing.set(false)
         instance.data.unHighlight()
-    }
+    },
 
+    'keypress #actionItemTextarea': function (event, instance) {
+        if (event.which === 13) {
+            const newTitle = event.currentTarget.value
+            instance.saveAction(event.currentTarget.dataset.id, newTitle)
+        }
+    }
 
 })

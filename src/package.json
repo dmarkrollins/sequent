@@ -7,15 +7,15 @@
   "scripts": {
     "start": "meteor run",
     "start:visualize": "meteor --extra-packages bundle-visualizer --production",
-    "test": "meteor test --driver-package practicalmeteor:mocha --port 3100",
+    "test": "meteor test --driver-package cultofcoders:mocha --port 3100",
     "acceptance": "node ./.testing/chimp.js",
     "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests-acceptance",
     "chimp-test": "chimp --mocha --path=tests-acceptance"
   },
   "dependencies": {
-    "babel-runtime": "^6.26.0",
+    "@babel/runtime": "^7.0.0-beta.51",
     "bcrypt": "^2.0.1",
-    "meteor-node-stubs": "^0.3.2",
+    "meteor-node-stubs": "^0.4.1",
     "moment": "^2.20.1"
   },
   "devDependencies": {

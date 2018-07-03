@@ -82,3 +82,6 @@ Change the default retro board prompts manually or try the randomizer!
 You can also set your teams preferred background pattern. 
 
 <img src="/private/custom.jpg" width="250">
+
+
+https://github.com/meteor/meteor/issues/9871#issuecomment-392897692

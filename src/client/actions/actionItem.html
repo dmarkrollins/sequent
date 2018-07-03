@@ -3,7 +3,7 @@
         <div style="display: table-row; min-height: 50px;" >
             {{#if editing}}
                 <div class="tappable-text" style="width: 70%; display: table-cell; text-align: left;padding: 12px;">
-                    <textarea id="actionItemTextarea" rows="1" style="width: 100%;">{{data.title}}</textarea>
+                    <textarea id="actionItemTextarea" data-id={{data._id}} rows="1" style="width: 100%;">{{data.title}}</textarea>
                 </div>
                 <div class="tappable-icon" style="display: table-cell; text-align: right; vertical-align: middle;"> 
                     <div style="position: relative; top: -12; margin-right: 20px;">

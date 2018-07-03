@@ -2,9 +2,9 @@ import { Meteor } from 'meteor/meteor'
 import { Session } from 'meteor/session'
 import { Template } from 'meteor/templating'
 import { $ } from 'meteor/jquery'
-import { toastr } from 'meteor/chrismbeckett:toastr'
 import { _ } from 'meteor/underscore'
 import { ReactiveVar } from 'meteor/reactive-var'
+import { Toast } from '../common/toast'
 import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
@@ -25,7 +25,7 @@ Template.retroBoard.onCreated(function () {
             itemType,
             function (err, result) {
                 if (err) {
-                    toastr.error('Error occurred - retro not created')
+                    Toast.showError('Error occurred - retro not created')
                 }
             },
         )
@@ -210,7 +210,7 @@ Template.retroBoard.events({
             if (event.currentTarget.value !== '') {
                 Meteor.call('createRetroAction', event.currentTarget.value, function (err) {
                     if (err) {
-                        toastr.error('Error occurred - action not created')
+                        Toast.showError('Error occurred - action not created')
                     }
                     event.currentTarget.value = ''
                     return false

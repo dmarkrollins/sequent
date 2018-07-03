@@ -1,7 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { _ } from 'meteor/underscore'
-import { toastr } from 'meteor/chrismbeckett:toastr'
+import { Toast } from '../common/toast'
 import { Retros, RetroActions, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
@@ -63,7 +63,7 @@ Template.archiveBoard.events({
             if (event.currentTarget.value !== '') {
                 Meteor.call('createRetroAction', event.currentTarget.value, function (err) {
                     if (err) {
-                        toastr.error('Error occurred - action not created')
+                        Toast.showError('Error occurred - action not created')
                     }
                     event.currentTarget.value = ''
                     return false

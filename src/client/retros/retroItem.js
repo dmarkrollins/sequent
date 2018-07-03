@@ -1,9 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
-import { toastr } from 'meteor/chrismbeckett:toastr'
 import { $ } from 'meteor/jquery'
 import { ConfirmDialog } from '../common/confirmDialog'
+import { Toast } from '../common/toast'
 import { Retros } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 import autosize from '../autosize'
@@ -137,7 +137,7 @@ Template.retroItem.events({
         ConfirmDialog.showConfirmation(msg, title, 'danger', event.currentTarget.dataset.id, (id) => {
             Meteor.call('removeRetroItem', id, function (err) {
                 if (err) {
-                    toastr.error('Could not remove item - try again later')
+                    Toast.showError('Could not remove item - try again later')
                 }
                 instance.data.selectedItemId.set(null)
                 instance.data.unHighlight()
@@ -151,7 +151,7 @@ Template.retroItem.events({
         setTimeout(function () {
             Meteor.call('completeRetroItem', event.currentTarget.dataset.id, function (err) {
                 if (err) {
-                    toastr.error(err.message);
+                    Toast.showError(err.message);
                 }
                 instance.data.selectedItemId.set(null)
                 instance.data.unHighlight()
@@ -164,7 +164,7 @@ Template.retroItem.events({
         event.stopPropagation()
         Meteor.call('upVoteItem', event.currentTarget.dataset.id, function (err) {
             if (err) {
-                toastr.error('Could not upvote - try again later')
+                Toast.showError('Could not upvote - try again later')
             }
         })
     },
@@ -183,7 +183,7 @@ Template.retroItem.events({
         const newTitle = $('textarea#titleTextBox')[0].value
         Meteor.call('updateRetroItemTitle', event.currentTarget.dataset.id, newTitle, function (err) {
             if (err) {
-                toastr.error(err.message);
+                Toast.showError(err.message);
             }
             instance.editing.set(false)
         })

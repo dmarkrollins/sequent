@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
-import { toastr } from 'meteor/chrismbeckett:toastr'
+import { Toast } from '../common/toast'
 import { $ } from 'meteor/jquery'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Constants } from '../../lib/constants'
@@ -18,7 +18,7 @@ Template.actionItem.onCreated(function () {
     self.saveAction = (id, newTitle) => {
         Meteor.call('updateActionTitle', id, newTitle, function (err) {
             if (err) {
-                toastr.error(err.message);
+                Toast.showError(err.message);
             }
             self.editing.set(false)
             self.data.unHighlight()
@@ -49,7 +49,7 @@ Template.actionItem.events({
         ConfirmDialog.showConfirmation(msg, title, 'danger', null, () => {
             Meteor.call('removeAction', event.currentTarget.dataset.id, function (err) {
                 if (err) {
-                    toastr.error('Could not remove action - try again later')
+                    Toast.showError('Could not remove action - try again later')
                 }
             })
         })
@@ -59,7 +59,7 @@ Template.actionItem.events({
         event.stopPropagation()
         Meteor.call('toggleAction', event.currentTarget.dataset.id, function (err) {
             if (err) {
-                toastr.error('Could not remove action - try again later')
+                Toast.showError('Could not remove action - try again later')
             }
         })
     },

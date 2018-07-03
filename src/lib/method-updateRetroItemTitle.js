@@ -14,11 +14,12 @@ Meteor.methods({
             throw new Meteor.Error('not-logged-in', 'You must be logged into a retro board!')
         }
 
-        // validate item type
-
         const retro = Retros.findOne({
             createdBy: this.userId,
-            status: Constants.RetroStatuses.ACTIVE
+            $or: [
+                { status: Constants.RetroStatuses.ACTIVE },
+                { status: Constants.RetroStatuses.FROZEN },
+            ],
         })
 
         // need to see if there is

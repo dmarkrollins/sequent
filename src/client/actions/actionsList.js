@@ -2,7 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { $ } from 'meteor/jquery'
 import { ReactiveVar } from 'meteor/reactive-var'
-import { toastr } from 'meteor/chrismbeckett:toastr'
+import { Toast } from '../../client/common/toast'
 import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
@@ -40,7 +40,7 @@ Template.actionsList.events({
             if (event.currentTarget.value !== '') {
                 Meteor.call('createRetroAction', event.currentTarget.value, function (err) {
                     if (err) {
-                        toastr.error('Error occurred - action not created')
+                        Toast.showError('Error occurred - action not created')
                     }
                     event.currentTarget.value = ''
                     return false

@@ -5,7 +5,7 @@ import { Meteor } from 'meteor/meteor'
 import { Session } from 'meteor/session'
 import { Template } from 'meteor/templating'
 import { FlowRouter } from 'meteor/kadira:flow-router'
-import { toastr } from 'meteor/chrismbeckett:toastr'
+import { Toast } from '../../client/common/toast'
 import { ConfirmDialog } from './confirmDialog'
 import { Retros, RetroActions, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
@@ -119,7 +119,7 @@ Template.retroNav.events({
 
             Meteor.call('archiveRetro', retro._id, function (err) {
                 if (err) {
-                    toastr.error('Failed to archive the retro!')
+                    Toast.showError('Failed to archive the retro!')
                 }
             })
         })
@@ -139,7 +139,7 @@ Template.retroNav.events({
 
         Meteor.call('toggleRetroFrozen', function (err) {
             if (err) {
-                toastr.error('Failed to freeze the retro!')
+                Toast.showError('Failed to freeze the retro!')
             }
         })
     },
@@ -150,7 +150,7 @@ Template.retroNav.events({
 
         Meteor.call('toggleShowCompleted', retro._id, function (err) {
             if (err) {
-                toastr.error('Failed to toggle completed view!')
+                Toast.showError('Failed to toggle completed view!')
             }
         })
     },

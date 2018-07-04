@@ -18,6 +18,7 @@ if (Meteor.isServer) {
     describe('Component Images Method', function () {
         let sandbox
         let subject
+        let result
 
         beforeEach(function () {
             sandbox = sinon.createSandbox()

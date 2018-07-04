@@ -43,6 +43,15 @@ Template.retroItem.onCreated(function () {
             self.timerValue = 0
         }
     }
+
+    self.saveAction = (id, title) => {
+        Meteor.call('updateRetroItemTitle', id, title, function (err) {
+            if (err) {
+                Toast.showError(err.message);
+            }
+            self.editing.set(false)
+        })
+    }
 })
 
 Template.retroItem.helpers({
@@ -181,12 +190,14 @@ Template.retroItem.events({
     'click a#btnSave'(event, instance) {
         event.stopPropagation()
         const newTitle = $('textarea#titleTextBox')[0].value
-        Meteor.call('updateRetroItemTitle', event.currentTarget.dataset.id, newTitle, function (err) {
-            if (err) {
-                Toast.showError(err.message);
-            }
-            instance.editing.set(false)
-        })
+        instance.saveAction(event.currentTarget.dataset.id, newTitle)
+    },
+
+    'keypress textarea#titleTextBox': function (event, instance) {
+        if (event.which === 13) {
+            const newTitle = event.currentTarget.value
+            instance.saveAction(event.currentTarget.dataset.id, newTitle)
+        }
     },
 
     'click a#btnCancel'(event, instance) {
@@ -195,5 +206,6 @@ Template.retroItem.events({
         instance.title = ''
         instance.editing.set(false)
     }
+
 
 })

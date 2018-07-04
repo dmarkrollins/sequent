@@ -13,7 +13,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-componentImages.js'
+    import '../../server/method-componentImages.js'
 
     describe('Component Images Method', function () {
         let sandbox

@@ -277,6 +277,56 @@ if (Meteor.isClient) {
             });
         })
 
+        it('once in edit mode with new text - save new title with return', async function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            Retros.insert(await TestData.fakeRetro())
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroItem', item, (el, template) => {
+                selectedVar.set(item.data.itemId)
+                Tracker.flush()
+
+                $(el).find('a.editButton')[0].click()
+                Tracker.flush()
+
+                expect($(el).find('textarea#titleTextBox'), 'should title textarea').to.have.length(1)
+                expect($(el).find('a#btnCancel'), 'cancel button visible').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
+
+                $(el).find('textarea#titleTextBox').val('new fake title')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#titleTextBox')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                expect(Meteor.call).to.have.been.called
+                expect(Meteor.call).to.have.been.calledWith('updateRetroItemTitle', item.data.itemId, 'new fake title')
+
+                setTimeout(function () {
+                    expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
+                    expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
+                    expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
+                    expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
+                    expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
+                    expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
+                    expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
+                    done()
+                }, 500)
+            });
+        })
+
+
         it('completes the item', async function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 

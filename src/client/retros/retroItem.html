@@ -5,7 +5,7 @@
             <div class="row" style="padding: 12px;">
                 <div class="col-sm-12">
                     {{#if editMode}}
-                        <textarea id="titleTextBox" class="retro-edit" rows=1>{{data.title}}</textarea>
+                        <textarea id="titleTextBox" data-id={{data.itemId}} class="retro-edit" rows=1>{{data.title}}</textarea>
                         <!-- <input type='text' id="titleTextbox" class="retro-edit" style="opacity: 1;" data-id={{data.itemId}} value="{{data.title}}" /> -->
                     {{else}}
                         <div class="tappable-text text-left" style="width: 100%; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{data.title}}</div>

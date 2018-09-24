@@ -10,15 +10,15 @@ Meteor.methods({
             throw new Meteor.Error('not-logged-in', 'You must be logged in to perform this action!')
         }
 
-        const retro = Retros.findOne({ _id: currentRetro })
+        // const retro = Retros.findOne({ _id: currentRetro })
 
-        if (!retro) {
-            throw new Meteor.Error('not-found', 'Retro not found!')
-        }
+        // if (!retro) {
+        //     throw new Meteor.Error('not-found', 'Retro not found!')
+        // }
 
-        if (retro.createdBy !== this.userId) {
-            throw new Meteor.Error('not-the-owner', 'You are not the owner of this retro!')
-        }
+        // if (retro.createdBy !== this.userId) {
+        //     throw new Meteor.Error('not-the-owner', 'You are not the owner of this retro!')
+        // }
 
         const actions = RetroActions.find({
             createdBy: this.userId,

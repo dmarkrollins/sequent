@@ -49,33 +49,33 @@ if (Meteor.isServer) {
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged in to perform this action!');
         })
 
-        it('must be valid retro', function () {
-            const context = { userId };
-            let msg = '';
-            sandbox.stub(Retros, 'findOne').returns(undefined)
+        // it('must be valid retro', function () {
+        //     const context = { userId };
+        //     let msg = '';
+        //     sandbox.stub(Retros, 'findOne').returns(undefined)
 
-            try {
-                subject.apply(context, ['fake-id', 'fake-email']);
-            } catch (error) {
-                msg = error.reason;
-            }
+        //     try {
+        //         subject.apply(context, ['fake-id', 'fake-email']);
+        //     } catch (error) {
+        //         msg = error.reason;
+        //     }
 
-            expect(msg, 'should throw retro not found').to.be.equal('Retro not found!');
-        })
+        //     expect(msg, 'should throw retro not found').to.be.equal('Retro not found!');
+        // })
 
-        it('must be the retro owner', function () {
-            const context = { userId };
-            let msg = '';
-            sandbox.stub(Retros, 'findOne').returns(TestData.fakeRetro())
+        // it('must be the retro owner', function () {
+        //     const context = { userId };
+        //     let msg = '';
+        //     sandbox.stub(Retros, 'findOne').returns(TestData.fakeRetro())
 
-            try {
-                subject.apply(context, ['fake-id', 'fake-email']);
-            } catch (error) {
-                msg = error.reason;
-            }
+        //     try {
+        //         subject.apply(context, ['fake-id', 'fake-email']);
+        //     } catch (error) {
+        //         msg = error.reason;
+        //     }
 
-            expect(msg, 'should throw not retro owner').to.be.equal('You are not the owner of this retro!');
-        })
+        //     expect(msg, 'should throw not retro owner').to.be.equal('You are not the owner of this retro!');
+        // })
 
         it('there must be actions', function () {
             const context = { userId };

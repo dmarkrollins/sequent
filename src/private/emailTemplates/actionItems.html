@@ -1,0 +1,15 @@
+<div style="width: 600px; margin: 0 auto; padding: 7px; font-family: Arial, Helvetica, sans-serif; font-size: 12pt">
+    <div style="font-weight: bold; font-size: 14pt;">{{retroName}} - Action Items</div>
+
+    {{#each actions}}
+        {{#if isComplete}}
+            <div style="width: 100%; padding-left: 7px; color: #999;"><p>**Complete** {{title}}</p></div>
+        {{else}}
+            <div style="width: 100%; padding-left: 7px;"><p>{{title}}</p></div>
+        {{/if}}
+    {{/each}}
+
+    <hr style="height:1px; border:none; color:#ccc; background-color:#ccc;" />
+
+    <span style="font-size: 9pt; color: #999; margin-top: 5px;">Sequent Retrospectives - https://sequent.herokuapp.com</span>
+</div>

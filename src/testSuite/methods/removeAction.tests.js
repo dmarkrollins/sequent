@@ -18,12 +18,13 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-removeAction.js'
+    import '../../lib/method-removeAction'
 
     describe('Remove Action Method', function () {
         let userId
         let sandbox
         let subject
+        let resultId
 
         const fakeUser = {
             username: 'faketeamname'

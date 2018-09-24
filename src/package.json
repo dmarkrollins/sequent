@@ -5,7 +5,7 @@
   "version": "0.1.10",
   "author": "6thcents (http://6thcents.com/)",
   "scripts": {
-    "start": "meteor run",
+    "start": "bash local.sh",
     "start:visualize": "meteor --extra-packages bundle-visualizer --production",
     "test": "meteor test --driver-package cultofcoders:mocha --port 3100",
     "acceptance": "node ./.testing/chimp.js",

@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { Template } from 'meteor/templating';
 import { Random } from 'meteor/random'
 import { $ } from 'meteor/jquery';
+import { Session } from 'meteor/session'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import { Tracker } from 'meteor/tracker';
@@ -18,6 +19,10 @@ const should = chai.should();
 if (Meteor.isClient) {
     import '../../client/actions/actionsList.js'
     import '../../client/actions/actionItem.js'
+    import '../../client/actions/actionInput.js'
+    import { ConfirmDialog } from '../../client/common/confirmDialog'
+    import { UXUtils } from '../../client/common/uxUtils'
+
 
     describe('Actions List', function () {
         let userId
@@ -51,15 +56,28 @@ if (Meteor.isClient) {
             sandbox.restore()
         })
 
-        it('displays list correctly', function () {
+        it('displays list correctly with team email', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
 
             withRenderedTemplate('actionsList', {}, (el) => {
-                expect($(el).find('input#actionInput')).to.have.length(1)
-                expect($(el).find('div.retroItem')).to.have.length(2)
+                expect($(el).find('input#actionInput'), 'action input').to.have.length(1)
+                expect($(el).find('button#btnSend'), 'send button').to.have.length(1)
+                expect($(el).find('div.retroItem'), 'items').to.have.length(2)
+                expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
+            });
+        })
+
+        it('displays list correctly with no team email', function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
+
+            withRenderedTemplate('actionsList', {}, (el) => {
+                expect($(el).find('input#actionInput'), 'action input').to.have.length(1)
+                expect($(el).find('button#btnSend'), 'send button').to.have.length(0)
+                expect($(el).find('div.retroItem'), 'items').to.have.length(0)
                 expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
             });
         })
@@ -79,6 +97,32 @@ if (Meteor.isClient) {
 
                 expect($(el).find('div.retroItem a.editButton'), 'should have edit button').to.have.length(1)
                 expect($(el).find('div.retroItem a.deleteButton'), 'should have delete button').to.have.length(1)
+            });
+        })
+
+        it('when you tap send it sends correct email', function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
+            const retro = TestData.fakeRetro()
+            Retros.insert(retro)
+            RetroActions.insert(TestData.fakeRetroAction())
+            RetroActions.insert(TestData.fakeRetroAction())
+            sandbox.stub(Meteor, 'call')
+            sandbox.stub(ConfirmDialog, 'showConfirmation').yields(null)
+            sandbox.stub(Session, 'get').returns('fake-email')
+            sandbox.stub(UXUtils, 'findEmailInput').returns('fake-email')
+
+            withRenderedTemplate('actionsList', {}, (el, template) => {
+                expect($(el).find('button#btnSend'), 'send button').to.have.length(1)
+                expect($(el).find('div.retroItem'), 'items').to.have.length(2)
+
+                $(el).find('button#btnSend')[0].click()
+                Tracker.flush()
+
+                expect(Session.get, 'get session called').to.have.been.calledWith(Sequent.EMAIL_TARGET)
+                expect(ConfirmDialog.showConfirmation, 'launches prompt').to.have.been.called
+                expect(Meteor.call, 'should call send method').to.have.been.called
+                expect(Meteor.call, 'calls send method').to.have.been.calledWith('sendActionsByEmail', retro._id, 'fake-email')
             });
         })
     })

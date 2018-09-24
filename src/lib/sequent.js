@@ -21,7 +21,7 @@ const Sequent = {
     defaultBackground: '/backgrounds/triangles.png',
     defaultConfirmMsg: 'Are you sure?',
     ToastTimeOut: 3000,
-
+    EMAIL_TARGET: 'emailTarget',
     getSettings() {
         let settings = Settings.findOne()
 

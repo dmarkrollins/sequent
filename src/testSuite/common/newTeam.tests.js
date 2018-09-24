@@ -29,7 +29,6 @@ if (Meteor.isClient) {
         beforeEach(function () {
             sandbox = sinon.createSandbox()
             Template.registerHelper('_', key => key);
-            FlowRouter
         });
 
         afterEach(function () {

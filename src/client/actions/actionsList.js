@@ -76,7 +76,8 @@ Template.actionsList.events({
                 Session.setPersistent(Sequent.EMAIL_TARGET, email)
                 Meteor.call('sendActionsByEmail', event.currentTarget.dataset.id, email, function (err) {
                     if (err) {
-                        Toast.showError('Could send action items - try again later')
+                        console.log('Action item send error', err)
+                        Toast.showError('Could not send action items - try again later')
                     } else {
                         Toast.showSuccess('Action items have been sent!')
                     }

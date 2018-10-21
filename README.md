@@ -2,7 +2,7 @@
 
 Taking your teamperature every week is a great way to measure know how things are going with the group of people you spend most of your time with.
 
-Sequent lets you customize the questions you ask each week to make sure your team is having the right ongoing discussion. 
+Sequent lets you customize the questions you ask each week to make sure your team is having the right ongoing discussion.
 
 PRs are welcome.
 
@@ -12,7 +12,7 @@ https://sequent.herokuapp.com/
 
 ## Development Info
 
-You need to install Meteor - currently this project is on v1.7
+You need to install Meteor - currently this project is on v1.7x
 
 ## Installation
 
@@ -20,12 +20,6 @@ You need to install Meteor - currently this project is on v1.7
 - Clone this repo
 - cd sequent/src
 - From the root folder run the project with the command `meteor`
-
-## Testing
-
-You need to update the coffescript package to get practicalmeteor:mocha to work with Meteor 1.6.
-
-[Update Coffee Script Package Info](https://forums.meteor.com/t/mocha-tests-not-working-after-upgrade-to-1-6/40221)
 
 ## Core Features
 
@@ -51,19 +45,23 @@ Each member logs into the team account and anonymously puts in their team feedba
 
 Everyone sees everyone else's items without knowing who put them in. 
 
-The team then takes a minute to vote on the items then discusses each in a team discussion bonding session.
+The team then takes a minute to up-vote on the items then discusses each in a team discussion bonding session.
+
+There are no rules around how you vote. You can up vote stuff 1000 times. There is no down vote though. Your team should decide how you want to use voting in a way that helps your team have better discussions.
+
+Once you're done voting you can use the _sort feature_ - see __Tools__ below for more information.  
 
 <img src="/src/private/main_board.jpg" width="400">
 
-### Actions
+### Actions View
 
-You can add, change delete actions here.
+Add, change delete actions.
 
 <img src="/src/private/actions.jpg" width="400">
 
 #### Sending Actions Via Email
 
-You can share action items with your team by tapping the share button from the Action Items List page. 
+Post-retro you can share action items with your team by tapping the share button from the Action Items List page.
 
 <img src="/src/private/share-button.jpg" width="400">
 
@@ -75,9 +73,9 @@ You can send to multiple emails by seperating the addresses with a semi-colon.
 
 For example: myaddress@email1.com;myaddress@email2.com;myaddress@email3.com
 
-Or simply use a team group email.
+Or simply use a team group email. Note the group email needs to be public. Some companies do not make team group distribution lists public.
 
-Address values you enter will get "remembered" in local storage on the local device and will pre-populate next time that person decides to share action items.
+Email address values you enter will get "remembered" in local storage on _the local device_ and will pre-populate next time that person decides to share action items.
 
 By default action items are sent from _noreply@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
 
@@ -97,8 +95,21 @@ Sequent has a few tools to make sure your retros be the best they can be.
 
 ### Customizing Sequent
 
-Change the default retro board prompts manually or try the randomizer!
-
-You can also set your teams preferred background pattern. 
-
 <img src="/src/private/custom.jpg" width="250">
+
+#### Change Prompts
+
+Change the default retro board prompts manually or try the randomizer! 
+
+By default they are :), :| and :(
+
+You can change these to any text string you want that helps your achieve greatness during retro.
+
+#### Choose Background Pattern
+
+Set your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing onve of 15 or so unique patterns.
+
+Check it out let us know what you think.
+
+
+

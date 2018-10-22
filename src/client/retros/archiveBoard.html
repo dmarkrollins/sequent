@@ -44,6 +44,9 @@
                 <div id="fullSizeCol" class="hidden-sm hidden-xs col-md-12">
                     <div class="row row-eq-height">
                         <div class="col-md-4 fullheight-green-archive text-center" style="display: table-cell;">
+                            <div class="grayItem">
+                                <textarea id="happy-placeholder" rows="1" placeholder="{{happyPlaceholder}}" disabled></textarea>
+                            </div>
                             {{#each greenItem}}
                                 <div class="retroItem {{itemClass}}">
                                     {{> retroItem currentItem }}
@@ -51,6 +54,9 @@
                             {{/each}}
                         </div>
                         <div class="col-md-4 fullheight-yellow-archive text-center" style="display: table-cell;">
+                            <div class="grayItem">
+                                <textarea id="meh-placeholder" rows="1" placeholder="{{mehPlaceholder}}" disabled></textarea>
+                            </div>
                             {{#each yellowItem}}
                                 <div class="retroItem {{itemClass}}">
                                     {{> retroItem currentItem}}
@@ -58,6 +64,9 @@
                             {{/each}}
                         </div>
                         <div class="col-md-4 fullheight-red-archive text-center" style="display: table-cell;">
+                            <div class="grayItem">
+                                <textarea id="sad-placeholder" rows="1" placeholder="{{sadPlaceholder}}" disabled></textarea>
+                            </div>
                             {{#each redItem}}
                                 <div class="retroItem {{itemClass}}">
                                     {{> retroItem currentItem}}

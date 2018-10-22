@@ -54,6 +54,27 @@ Template.archiveBoard.helpers({
     backGround() {
         const settings = Sequent.getSettings()
         return settings.backgroundImage
+    },
+    happyPlaceholder() {
+        const retro = Retros.findOne()
+        if (retro) {
+            const settings = Sequent.getSettings()
+            return retro.happyPlaceholder || settings.happyPlaceholder
+        }
+    },
+    mehPlaceholder() {
+        const retro = Retros.findOne()
+        if (retro) {
+            const settings = Sequent.getSettings()
+            return retro.mehPlaceholder || settings.mehPlaceholder
+        }
+    },
+    sadPlaceholder() {
+        const retro = Retros.findOne()
+        if (retro) {
+            const settings = Sequent.getSettings()
+            return retro.sadPlaceholder || settings.sadPlaceholder
+        }
     }
 })
 

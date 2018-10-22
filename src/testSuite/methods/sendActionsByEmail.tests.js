@@ -7,7 +7,6 @@ import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
 import { RetroActions, Retros } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
-import { ServerUtils } from '../../server/serverUtils'
 import { TestData } from '../testData'
 
 const should = chai.should();
@@ -15,6 +14,7 @@ chai.use(sinonChai);
 
 if (Meteor.isServer) {
     import '../../server/method-sendActionsByEmail'
+    import { ServerUtils } from '../../server/serverUtils'
 
     describe('Method - Send Action Items', function () {
         let userId

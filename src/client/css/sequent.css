@@ -115,6 +115,23 @@ html, body {
     padding: 7px;
 }
 
+.grayItem textarea {
+    margin-top: 3px;
+    font-size: 1.5em;
+    width: 100%;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 1px solid #4a4a4b; /*5e9671; */
+    background-color: rgb(162, 163, 163);/*ace0bf;*/
+    box-shadow: none;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    color: #000;
+    padding-left: 7px;
+}
+
 .greenItem textarea {
     margin-top: 3px;
     font-size: 1.5em;
@@ -129,6 +146,7 @@ html, body {
     outline: none;
     resize: none;
     color: #000;
+    padding-left: 7px;
 }
 
 .yellowItem textarea {
@@ -144,6 +162,7 @@ html, body {
     overflow: hidden;
     outline: none;
     resize: none;
+    padding-left: 7px;
 }
 
 .redItem textarea {
@@ -159,6 +178,7 @@ html, body {
     overflow: hidden;
     outline: none;
     resize: none;
+    padding-left: 7px;
 }
 
 .listItem {

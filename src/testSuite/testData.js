@@ -105,6 +105,9 @@ const TestData = {
         Retro.items = parms.items || this.fakeRetroItems({}, parms.count || 3)
         Retro.showCompleted = _.isUndefined(parms.showCompleted) ? false : parms.showCompleted
         Retro.archivedAt = parms.archivedAt || new Date()
+        Retro.happyPlaceholder = 'Fake happy placeholder'
+        Retro.mehPlaceholder = 'Fake meh placeholder'
+        Retro.sadPlaceholder = 'Fake sad placeholder'
 
         return Retro
     }

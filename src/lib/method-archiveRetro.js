@@ -1,5 +1,5 @@
 import { Meteor } from 'meteor/meteor'
-import { Retros, RetroActions } from './sequent'
+import { Sequent, Retros } from './sequent'
 import { Schemas } from './schemas'
 import { Constants } from './constants'
 import { Logger } from './logger'
@@ -25,6 +25,8 @@ Meteor.methods({
             throw new Meteor.Error('already-archived', 'Retro was already archived!')
         }
 
+        const settings = Sequent.getSettings()
+
         try {
             Retros.update(
                 { _id: retro._id },
@@ -32,7 +34,10 @@ Meteor.methods({
                     $set:
                     {
                         status: Constants.RetroStatuses.ARCHIVED,
-                        archivedAt: new Date()
+                        archivedAt: new Date(),
+                        happyPlaceholder: settings.happyPlaceholder,
+                        mehPlaceholder: settings.mehPlaceholder,
+                        sadPlaceholder: settings.sadPlaceholder
                     }
                 }
             )

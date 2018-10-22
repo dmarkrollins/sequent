@@ -74,6 +74,18 @@ Schemas.Retros = new SimpleSchema({
     archivedAt: {
         type: Date,
         optional: true
+    },
+    happyPlaceholder: {
+        type: String,
+        optional: true
+    },
+    mehPlaceholder: {
+        type: String,
+        optional: true
+    },
+    sadPlaceholder: {
+        type: String,
+        optional: true
     }
 })
 

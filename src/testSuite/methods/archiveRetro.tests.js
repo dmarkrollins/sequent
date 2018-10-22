@@ -2,10 +2,11 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random'
+import { _ } from 'meteor/underscore'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
-import { Retros } from '../../lib/sequent'
+import { Sequent, Retros, Settings } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 
 import { TestData } from '../testData'
@@ -81,8 +82,10 @@ if (Meteor.isServer) {
         })
 
         it('archives the retro - stubbed', function () {
-            sandbox.stub(Retros, 'findOne').returns(TestData.fakeRetroAction())
+            const retro = TestData.fakeRetroAction()
+            sandbox.stub(Retros, 'findOne').returns(retro)
             sandbox.stub(Retros, 'update')
+            sandbox.stub(Settings, 'findOne').returns(TestData.fakeSettings())
 
             const context = { userId: userId };
             let msg = '';
@@ -93,7 +96,18 @@ if (Meteor.isServer) {
                 msg = error.message;
             }
 
-            expect(Retros.update).to.have.been.called
+            expect(Retros.update, 'retros update').to.have.been.called
+            const args = Retros.update.args[0]
+            expect(args[0]._id).to.equal(retro._id)
+
+            expect(args[1].$set.status).to.equal(Constants.RetroStatuses.ARCHIVED)
+            expect(_.isDate(args[1].$set.archivedAt)).to.be.true
+
+            expect(Settings.findOne, 'settings find one').to.have.been.called
+            expect(args[1].$set.happyPlaceholder).to.equal('Fake happy placeholder')
+            expect(args[1].$set.mehPlaceholder).to.equal('Fake meh placeholder')
+            expect(args[1].$set.sadPlaceholder).to.equal('Fake sad placeholder')
+
             expect(msg, 'should have no message').to.be.equal('');
         })
     })

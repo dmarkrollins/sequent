@@ -93,6 +93,16 @@ Sequent has a few tools to make sure your retros be the best they can be.
 
 <img src="/src/private/tools.jpg" width="125">
 
+### Archiving Retros
+
+Best practice is to archive your retro as soon as you're done. Archiving saves the retro in the retro archive and clears the retro board setting you up for your next retro meeting.  
+
+During the archive process the currently active happy, meh and sad prompts are saved along with archived retro items. 
+
+When you re-visit the archived retro (see __Tools__ above) you'll be able to see both the items that were captured and the column prompt values that were active when you held that retro.
+
+<img src="/src/private/archived.jpg" width="400">
+
 ### Customizing Sequent
 
 <img src="/src/private/custom.jpg" width="250">

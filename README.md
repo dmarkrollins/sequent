@@ -120,6 +120,3 @@ You can change these to any text string you want that helps your achieve greatne
 Set your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing onve of 15 or so unique patterns.
 
 Check it out let us know what you think.
-
-
-

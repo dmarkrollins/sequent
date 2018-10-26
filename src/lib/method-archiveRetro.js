@@ -1,12 +1,20 @@
 import { Meteor } from 'meteor/meteor'
+import moment from 'moment'
 import { Sequent, Retros } from './sequent'
 import { Schemas } from './schemas'
 import { Constants } from './constants'
 import { Logger } from './logger'
 
+const inputName = (name, dateVal) => {
+    if (!name) return `${dateVal}`
+    if (name === '') return `${dateVal}`
+    return name
+}
+
+
 Meteor.methods({
 
-    archiveRetro(retroId) {
+    archiveRetro(retroId, name) {
         if (!this.userId) {
             throw new Meteor.Error('not-logged-in', 'You must be logged into a retro board!')
         }
@@ -16,7 +24,6 @@ Meteor.methods({
             createdBy: this.userId
         })
 
-        // need to see if there is
         if (!retro) {
             throw new Meteor.Error('not-found', 'Retro could not be found!')
         }
@@ -24,6 +31,14 @@ Meteor.methods({
         if (retro.status === Constants.RetroStatuses.ARCHIVED) {
             throw new Meteor.Error('already-archived', 'Retro was already archived!')
         }
+
+        const archivedAt = new Date()
+
+        const dateVal = moment(archivedAt).format('MM-DD-YYYY - LT')
+
+        const archiveName = inputName(name, dateVal)
+
+        // console.log('Archive Name', archiveName)
 
         const settings = Sequent.getSettings()
 
@@ -34,7 +49,8 @@ Meteor.methods({
                     $set:
                     {
                         status: Constants.RetroStatuses.ARCHIVED,
-                        archivedAt: new Date(),
+                        archivedAt,
+                        archiveName,
                         happyPlaceholder: settings.happyPlaceholder,
                         mehPlaceholder: settings.mehPlaceholder,
                         sadPlaceholder: settings.sadPlaceholder

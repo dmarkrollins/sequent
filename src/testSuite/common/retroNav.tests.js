@@ -12,15 +12,15 @@ import sinon from 'sinon';
 import moment from 'moment'
 import StubCollections from 'meteor/hwillson:stub-collections';
 import { withRenderedTemplate } from '../client-test-helpers';
-import { RetroActions, Retros, Backgrounds, Settings } from '../../lib/sequent'
+import { RetroActions, Retros, Settings } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
-
 import { TestData } from '../testData'
 
 const should = chai.should();
 
 if (Meteor.isClient) {
     import '../../client/common/retroNav.js'
+    import { ConfirmDialog } from '../../client/common/confirmDialog'
 
     describe('RetroNav Menu', function () {
         let userId
@@ -157,6 +157,23 @@ if (Meteor.isClient) {
             });
         })
 
+        it('Displays correctly - archive - with name', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            const archivedDate = new Date()
+            const retro = await TestData.fakeRetro({ status: Constants.RetroStatuses.ARCHIVED, archivedAt: archivedDate, archiveName: 'fake retro' })
+            Retros.insert(retro)
+
+            RetroActions.insert(TestData.fakeRetroAction())
+            RetroActions.insert(TestData.fakeRetroAction())
+
+            const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
+
+            withRenderedTemplate('retroNav', {}, (el) => {
+                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname - ARCHIVED fake retro')
+            });
+        })
+
         it('Sort menu item toggles correctly', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
@@ -176,6 +193,32 @@ if (Meteor.isClient) {
                 expect($(el).find('a#sortByVotes')[0].innerText, 'sort text').to.equal(' Remove Sort')
                 expect($(el).find('a#sortByVotes i.fa-sort-amount-desc'), 'no asc sort icon').to.have.length(0)
                 expect($(el).find('a#sortByVotes i.fa-sort'), 'has default sort icon').to.have.length(1)
+            });
+        })
+
+        it('When archiving retro user is prompted for optional retro name', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Meteor, 'call')
+            sandbox.stub(ConfirmDialog, 'showConfirmation').yields('fake archive name')
+
+            const retro = await TestData.fakeRetro()
+            Retros.insert(retro)
+
+            withRenderedTemplate('retroNav', {}, (el) => {
+                expect($(el).find('a#archiveRetro'), 'archive retro option').to.have.length(1)
+
+                $(el).find('a#archiveRetro')[0].click()
+                Tracker.flush()
+
+                expect(ConfirmDialog.showConfirmation).to.have.been.called
+                const args = ConfirmDialog.showConfirmation.args[0]
+                expect(args, 'should have 7 args').to.have.length(7)
+                expect(args[6], 'input id').to.contain('archiveName')
+                expect(args[0], 'the message').to.contain('Are you sure you want to archive this retro?')
+                expect(args[0], 'the message input').to.contain('<input')
+                expect(args[0], 'the message input').to.contain('id="archiveName"')
+                expect(Meteor.call).to.have.been.called
+                expect(Meteor.call).to.have.been.calledWith('archiveRetro', retro._id, 'fake archive name')
             });
         })
     })

@@ -58,22 +58,19 @@ Template.archiveBoard.helpers({
     happyPlaceholder() {
         const retro = Retros.findOne()
         if (retro) {
-            const settings = Sequent.getSettings()
-            return retro.happyPlaceholder || settings.happyPlaceholder
+            return retro.happyPlaceholder || ':)'
         }
     },
     mehPlaceholder() {
         const retro = Retros.findOne()
         if (retro) {
-            const settings = Sequent.getSettings()
-            return retro.mehPlaceholder || settings.mehPlaceholder
+            return retro.mehPlaceholder || ':|'
         }
     },
     sadPlaceholder() {
         const retro = Retros.findOne()
         if (retro) {
-            const settings = Sequent.getSettings()
-            return retro.sadPlaceholder || settings.sadPlaceholder
+            return retro.sadPlaceholder || ':('
         }
     }
 })

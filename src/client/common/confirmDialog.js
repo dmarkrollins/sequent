@@ -8,7 +8,14 @@ let dialogMode = 'modal-header-warning';
 
 const ConfirmDialog = {}
 
-ConfirmDialog.showConfirmation = function (message, title, mode, params, okCB, cancelCB) {
+ConfirmDialog.showConfirmation = function (message, title, mode, params, okCB, cancelCB, inputName) {
+    const getInputValue = (name) => {
+        if ($(`#${name}`).length > 0) {
+            return $(`#${name}`)[0].value
+        }
+        return ''
+    }
+
     if (!message) {
         message = Sequent.defaultConfirmMsg;
     }
@@ -40,12 +47,24 @@ ConfirmDialog.showConfirmation = function (message, title, mode, params, okCB, c
     if (doCB && doCloseCB) {
         $('#confirmDialog').modal('show')
             .off('click', '#btnConfirm')
-            .one('click', '#btnConfirm', function () { okCB(params); })
+            .one('click', '#btnConfirm', function () {
+                if (inputName) {
+                    okCB(getInputValue(inputName))
+                } else {
+                    okCB(params)
+                }
+            })
             .one('hidden.bs.modal', null, cancelCB);
     } else if (doCB) {
         $('#confirmDialog').modal('show')
             .off('click', '#btnConfirm')
-            .one('click', '#btnConfirm', function () { okCB(params); });
+            .one('click', '#btnConfirm', function () {
+                if (inputName) {
+                    okCB(getInputValue(inputName))
+                } else {
+                    okCB(params)
+                }
+            });
     } else if (doCloseCB) {
         $('#confirmDialog').modal('show')
             .one('hidden.bs.modal', null, cancelCB);

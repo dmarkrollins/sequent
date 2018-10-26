@@ -63,7 +63,7 @@ Template.retroNav.helpers({
                 return Spacebars.SafeString('<span style="color: #00BFFF;"> - FROZEN</span>')
             case Constants.RetroStatuses.ARCHIVED:
                 dateToUse = retro.archivedAt || retro.createdAt
-                dateVal = moment(dateToUse).format('MM-DD-YYYY - LT')
+                dateVal = retro.archiveName || moment(dateToUse).format('MM-DD-YYYY - LT')
                 return Spacebars.SafeString(`<span style="color: #DAA520;"> - ARCHIVED ${dateVal}</span>`)
             default:
                 return ''
@@ -110,19 +110,19 @@ Template.retroNav.events({
 
     'click #archiveRetro'() {
         const title = 'Archive Retro?'
-        const msg = 'Are you sure you want to archive this retro?'
+        const msg = '<p>Are you sure you want to archive this retro?</p> <div class="form-group"><input type="text" class="form-control" id="archiveName" placeholder="Optional archive name" style="width: 90%; margin: auto;"></div>'
 
-        ConfirmDialog.showConfirmation(msg, title, 'warning', null, function () {
+        ConfirmDialog.showConfirmation(msg, title, 'warning', null, function (value) {
             const retro = Retros.findOne()
 
             if (!retro) return
 
-            Meteor.call('archiveRetro', retro._id, function (err) {
+            Meteor.call('archiveRetro', retro._id, value, function (err) {
                 if (err) {
                     Toast.showError('Failed to archive the retro!')
                 }
             })
-        })
+        }, null, 'archiveName')
     },
 
     'click #signOut'() {

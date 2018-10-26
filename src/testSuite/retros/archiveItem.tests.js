@@ -45,7 +45,7 @@ if (Meteor.isClient) {
             sandbox.restore()
         })
 
-        it('displays correctly', async function () {
+        it('displays correctly no archive name', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
             const dateValue = new Date()
@@ -57,6 +57,22 @@ if (Meteor.isClient) {
             withRenderedTemplate('archiveItem', data, (el) => {
                 expect($(el).find('td')[0].firstChild.attributes.href.value).to.contain(data._id)
                 expect($(el).find('td')[1].innerText).to.equal(formattedDate)
+                expect($(el).find('td')[2].innerText).to.equal('3')
+            });
+        })
+
+        it('displays correctly with archive name', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            const dateValue = new Date()
+
+            const formattedDate = moment(dateValue).format('MM-DD-YYYY - LT')
+
+            const data = await TestData.fakeRetro({ archivedAt: dateValue, archiveName: 'fake name' })
+
+            withRenderedTemplate('archiveItem', data, (el) => {
+                expect($(el).find('td')[0].firstChild.attributes.href.value).to.contain(data._id)
+                expect($(el).find('td')[1].innerText).to.equal('fake name')
                 expect($(el).find('td')[2].innerText).to.equal('3')
             });
         })

@@ -3,6 +3,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random'
 import { _ } from 'meteor/underscore'
+import moment from 'moment'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
@@ -81,7 +82,7 @@ if (Meteor.isServer) {
             expect(msg, 'should throw already archived').to.be.equal('Retro was already archived! [already-archived]');
         })
 
-        it('archives the retro - stubbed', function () {
+        it('archives the retro - stubbed with name', function () {
             const retro = TestData.fakeRetroAction()
             sandbox.stub(Retros, 'findOne').returns(retro)
             sandbox.stub(Retros, 'update')
@@ -91,7 +92,7 @@ if (Meteor.isServer) {
             let msg = '';
 
             try {
-                subject.apply(context, ['fake-id']);
+                subject.apply(context, ['fake-id', 'fake archive name']);
             } catch (error) {
                 msg = error.message;
             }
@@ -102,6 +103,42 @@ if (Meteor.isServer) {
 
             expect(args[1].$set.status).to.equal(Constants.RetroStatuses.ARCHIVED)
             expect(_.isDate(args[1].$set.archivedAt)).to.be.true
+            expect(args[1].$set.archiveName, 'archive name').to.equal('fake archive name')
+
+            expect(Settings.findOne, 'settings find one').to.have.been.called
+            expect(args[1].$set.happyPlaceholder).to.equal('Fake happy placeholder')
+            expect(args[1].$set.mehPlaceholder).to.equal('Fake meh placeholder')
+            expect(args[1].$set.sadPlaceholder).to.equal('Fake sad placeholder')
+
+            expect(msg, 'should have no message').to.be.equal('');
+        })
+
+        it('archives the retro - stubbed - no name', function () {
+            const retro = TestData.fakeRetroAction()
+            sandbox.stub(Retros, 'findOne').returns(retro)
+            sandbox.stub(Retros, 'update')
+            sandbox.stub(Settings, 'findOne').returns(TestData.fakeSettings())
+
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                subject.apply(context, ['fake-id', '']);
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(Retros.update, 'retros update').to.have.been.called
+            const args = Retros.update.args[0]
+            expect(args[0]._id).to.equal(retro._id)
+
+            expect(args[1].$set.status).to.equal(Constants.RetroStatuses.ARCHIVED)
+            expect(_.isDate(args[1].$set.archivedAt)).to.be.true
+
+            const archiveName = `${moment(retro.archivedAt).format('MM-DD-YYYY')}`
+
+            expect(args[1].$set.archiveName, 'archive name').to.contains(archiveName)
+            expect(args[1].$set.archiveName, 'archive name').to.not.contains('ARCHIVED')
 
             expect(Settings.findOne, 'settings find one').to.have.been.called
             expect(args[1].$set.happyPlaceholder).to.equal('Fake happy placeholder')

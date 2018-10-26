@@ -1,6 +1,6 @@
 import { Meteor } from 'meteor/meteor'
 import moment from 'moment'
-import { Sequent, Retros } from './sequent'
+import { Settings, Retros } from './sequent'
 import { Schemas } from './schemas'
 import { Constants } from './constants'
 import { Logger } from './logger'
@@ -40,7 +40,7 @@ Meteor.methods({
 
         // console.log('Archive Name', archiveName)
 
-        const settings = Sequent.getSettings()
+        const settings = Settings.findOne({ createdBy: this.userId })
 
         try {
             Retros.update(

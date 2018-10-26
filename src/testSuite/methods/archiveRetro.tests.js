@@ -106,6 +106,7 @@ if (Meteor.isServer) {
             expect(args[1].$set.archiveName, 'archive name').to.equal('fake archive name')
 
             expect(Settings.findOne, 'settings find one').to.have.been.called
+            expect(Settings.findOne, 'settings find one').to.have.been.calledWith({ createdBy: userId })
             expect(args[1].$set.happyPlaceholder).to.equal('Fake happy placeholder')
             expect(args[1].$set.mehPlaceholder).to.equal('Fake meh placeholder')
             expect(args[1].$set.sadPlaceholder).to.equal('Fake sad placeholder')
@@ -141,6 +142,7 @@ if (Meteor.isServer) {
             expect(args[1].$set.archiveName, 'archive name').to.not.contains('ARCHIVED')
 
             expect(Settings.findOne, 'settings find one').to.have.been.called
+            expect(Settings.findOne, 'settings find one').to.have.been.calledWith({ createdBy: userId })
             expect(args[1].$set.happyPlaceholder).to.equal('Fake happy placeholder')
             expect(args[1].$set.mehPlaceholder).to.equal('Fake meh placeholder')
             expect(args[1].$set.sadPlaceholder).to.equal('Fake sad placeholder')

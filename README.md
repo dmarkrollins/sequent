@@ -144,7 +144,7 @@ You can change these to any text string that helps your team achieve retro great
 
 For example you might want to ask specific questions to illicit a particular discussion.
 
-If you want some discussion prompt inspriation tap the __random__ button and see what happens :)
+If you want discussion prompt inspiration tap the __random__ button and see what happens :)
 
 #### Choose Background Pattern
 

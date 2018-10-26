@@ -1,6 +1,6 @@
 ## Sequent Retrospectives V1.1
 
-Taking your teamperature every week is a great way to measure know how things are going with the group of people you spend most of your time with.
+Taking your teamperature every week is a great way to measure how well things are going with the group of people you spend most of your time with.
 
 PRs are welcome.
 

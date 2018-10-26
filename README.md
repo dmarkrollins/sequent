@@ -108,13 +108,13 @@ To archive a retro you tap the archive tool from the Sequent system menu.
 
 When you choose to archive a retro you can assign it a name. This is sorta handy if you've captured something special during the retro and want to make it easy to find later.
 
-Naming retros is pretty easy. When you click the menu item to archive your retro you will are presented with the following dialog:
+Naming retros is pretty easy. When you click the menu item to archive your retro you are presented with the following dialog:
 
 <img src="/src/private/archiveName.jpg" width="400">
 
-You can specify a name for your retro if you want. The retro name is optional - so if you do NOT specific a name Sequent simply uses the _current date and time_ for the retro name.
+You can specify a name for your retro if you want. The retro name is optional - if you do NOT specify a name for your retro, Sequent will simply use the _current date and time_ for the retro name.
 
-During the archive process the current happy, meh and sad prompts that are _currently active_ get saved along with the retro items entered by your team. This makes it easy to understand what was discussed when if you go back and pull up the archived retro at some later point in time.
+During the archive process the _currently active_ happy, meh and sad prompts get saved along with the retro items entered by your team. This makes it easy to understand what was discussed if you go back and pull up the archived retro at some later point in time.
 
 > Note: if you change your prompts after you hold a retro but before you archive it, the prompts saved will not match the prompts active when the retro was actually held. You might need to read that again.
 
@@ -124,11 +124,11 @@ To view an archived retro you need to tap on the _View Archives_ Sequent system 
 
 You'll then be presented with a list of archived retros to choose from.
 
-If you had specified a name when you created the retro that name will show up in the retro archive list to make it easy to find.
+If you had specified a name when you created the retro that name will show up in the retro archive list to make it easy to locate.
 
 <img src="/src/private/archiveList.jpg" width="400">
 
-Tap the eye icon next to the archive you're interested in viewing to view that archive.
+Tap the eye icon next to the archive you're interested in to view that archive.
 
 ### Customizing Sequent
 

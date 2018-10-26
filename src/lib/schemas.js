@@ -86,6 +86,10 @@ Schemas.Retros = new SimpleSchema({
     sadPlaceholder: {
         type: String,
         optional: true
+    },
+    archiveName: {
+        type: String,
+        optional: true
     }
 })
 

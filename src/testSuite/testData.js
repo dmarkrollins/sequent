@@ -108,6 +108,9 @@ const TestData = {
         Retro.happyPlaceholder = 'Fake happy placeholder'
         Retro.mehPlaceholder = 'Fake meh placeholder'
         Retro.sadPlaceholder = 'Fake sad placeholder'
+        if (parms.archiveName) {
+            Retro.archiveName = parms.archiveName
+        }
 
         return Retro
     }

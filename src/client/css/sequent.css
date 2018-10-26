@@ -115,6 +115,11 @@ html, body {
     padding: 7px;
 }
 
+.grayItem {
+    width: 95%;
+    margin: auto;
+}
+
 .grayItem textarea {
     margin-top: 3px;
     font-size: 1.5em;

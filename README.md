@@ -2,8 +2,6 @@
 
 Taking your teamperature every week is a great way to measure know how things are going with the group of people you spend most of your time with.
 
-Sequent lets you customize the questions you ask each week to make sure your team is having the right ongoing discussion.
-
 PRs are welcome.
 
 ## Check it Out
@@ -20,6 +18,7 @@ You need to install Meteor - currently this project is on v1.7x
 - Clone this repo
 - cd sequent/src
 - From the root folder run the project with the command `meteor`
+- Sequent is currently on Meteor v1.7x
 
 ## Core Features
 
@@ -33,33 +32,35 @@ You need to install Meteor - currently this project is on v1.7x
 
 ### Tool bar area
 
-Use the tool bar to navigate between Sequent core functions. Tap or click on one of the 3 icons to navigate. 
+Use the tool bar to navigate between Sequent core functions. Tap or click on one of the 3 icons to navigate.
 
 <img src="/src/private/toolbar.jpg" width="150">
 
 ### Retro Board
 
-This is where your team shares ideas has discussions and creates action items.
+This is where your team shares ideas, has discussions, and creates action items.
 
 Each member logs into the team account and anonymously puts in their team feedback in one of the 3 appropriate buckets.
 
-Everyone sees everyone else's items without knowing who put them in. 
+Everyone sees everyone else's items without knowing who put them in.
 
-The team then takes a minute to up-vote on the items then discusses each in a team discussion bonding session.
+The team can then take a minute to up-vote items then discuss what was entered by team members in retospective session.
 
-There are no rules around how you vote. You can up vote stuff 1000 times. There is no down vote though. Your team should decide how you want to use voting in a way that helps your team have better discussions.
+There are no rules around how you vote. You can up vote stuff 1000 times. There is currently no down vote though. Your team should decide how you want to use voting in a way that helps your team have better discussions.
 
-Once you're done voting you can use the _sort feature_ - see __Tools__ below for more information.  
+Once you're done voting you can use the _sort feature_ (see __Tools__ below) to change how the items in each category are displayed. Sort will display items in # votes decending order with items with the most votes on top. 
+
+The idea is that in a case you run out of meeting time you'll at least end up discussing the most important (items with highest votes) items.
 
 <img src="/src/private/main_board.jpg" width="400">
 
 ### Actions View
 
-Add, change delete actions.
+Add, change delete actions. Tap on the red action item badge to manage action items.
 
 <img src="/src/private/actions.jpg" width="400">
 
-#### Sending Actions Via Email
+#### Sending Action items Via Email
 
 Post-retro you can share action items with your team by tapping the share button from the Action Items List page.
 
@@ -75,13 +76,17 @@ For example: myaddress@email1.com;myaddress@email2.com;myaddress@email3.com
 
 Or simply use a team group email. Note the group email needs to be public. Some companies do not make team group distribution lists public.
 
-Email address values you enter will get "remembered" in local storage on _the local device_ and will pre-populate next time that person decides to share action items.
+The email iaddress values you enter will get "remembered" in local storage on _the local device_ and will pre-populate next time you decide to share action items.
 
 By default action items are sent from _noreply@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
 
 ### Tools
 
-Sequent has a few tools to make sure your retros be the best they can be.
+Sequent has a few tools to make sure your retros are the best they can be.
+
+You access these from the Sequent system menu (gear icon in upper right hand corner)
+
+<img src="/src/private/tools.jpg" width="125">
 
 - Sort - sort the retro board by votes descending
 - Freeze - toggle allowing new retro items to be created
@@ -91,17 +96,39 @@ Sequent has a few tools to make sure your retros be the best they can be.
 - Preferences - Sequent customization options - see customizing sequent
 - Share Sequent - send a link to your installation to someone via email
 
-<img src="/src/private/tools.jpg" width="125">
-
 ### Archiving Retros
 
-Best practice is to archive your retro as soon as you're done. Archiving saves the retro in the retro archive and clears the retro board setting you up for your next retro meeting.  
+#### Best Practice
 
-During the archive process the current happy, meh and sad prompts are saved along with the retro items entered by your team.
+Best practice is to archive your retro as soon as you're session is done. The act of _archiving_ saves the retro in the retro archive and clears the retro board for your next retro meeting.  
 
-Later, when you visit the archived retro (see __Tools__ above), you'll be able to see both the items that were captured and the column prompt values that were active when you held that retro.
+To archive a retro you tap the archive tool from the Sequent system menu.
 
-<img src="/src/private/archived.jpg" width="400">
+<img src="/src/private/archiveRetroMenuItem.jpg" width="200">
+
+When you choose to archive a retro you can assign it a name. This is sorta handy if you've captured something special during the retro and want to make it easy to find later.
+
+Naming retros is pretty easy. When you click the menu item to archive your retro you will are presented with the following dialog:
+
+<img src="/src/private/archiveName.jpg" width="400">
+
+You can specify a name for your retro if you want. The retro name is optional - so if you do NOT specific a name Sequent simply uses the _current date and time_ for the retro name.
+
+During the archive process the current happy, meh and sad prompts that are _currently active_ get saved along with the retro items entered by your team. This makes it easy to understand what was discussed when if you go back and pull up the archived retro at some later point in time.
+
+> Note: if you change your prompts after you hold a retro but before you archive it, the prompts saved will not match the prompts active when the retro was actually held. You might need to read that again.
+
+#### Viewing Archived Retros
+
+To view an archived retro you need to tap on the _View Archives_ Sequent system menu item. See __Tools__ above.
+
+You'll then be presented with a list of archived retros to choose from.
+
+If you had specified a name when you created the retro that name will show up in the retro archive list to make it easy to find.
+
+<img src="/src/private/archiveList.jpg" width="400">
+
+Tap the eye icon next to the archive you're interested in viewing to view that archive.
 
 ### Customizing Sequent
 
@@ -111,12 +138,16 @@ Later, when you visit the archived retro (see __Tools__ above), you'll be able t
 
 Change the default retro board prompts manually or try the randomizer! 
 
-By default they are :), :| and :(
+By default they are ```:), :| and :(```
 
-You can change these to any text string you want that helps your achieve greatness during retro.
+You can change these to any text string that helps your team achieve retro greatness.
+
+For example you might want to ask specific questions to illicit a particular discussion.
+
+If you want some discussion prompt inspriation tap the __random__ button and see what happens :)
 
 #### Choose Background Pattern
 
-Set your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing onve of 15 or so unique patterns.
+Set your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing one of 15 or so unique background patterns.
 
 Check it out let us know what you think.

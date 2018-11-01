@@ -95,6 +95,52 @@ if (Meteor.isServer) {
             expect(msg, 'should throw no actions').to.be.equal('There are no actions to send!');
         })
 
+        it('must have a target email', function () {
+            const context = { userId };
+            let msg = '';
+            const fakeRetro = TestData.fakeRetro({ createdBy: userId })
+            sandbox.stub(Retros, 'findOne').returns(fakeRetro)
+            const actionItems = []
+            actionItems.push(TestData.fakeRetroAction())
+            actionItems.push(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE }))
+            sandbox.stub(RetroActions, 'find').returns({
+                fetch: () => actionItems
+            })
+
+            sandbox.stub(ServerUtils, 'sendHtmlEmail')
+            sandbox.stub(Meteor.users, 'findOne').returns({ username: 'fakeusername' })
+
+            try {
+                subject.apply(context, ['fake-id']);
+            } catch (error) {
+                msg = error.reason;
+            }
+            expect(msg, 'must specify email address').to.equal('An email address is required!')
+        })
+
+        it('email address may not contain html', function () {
+            const context = { userId };
+            let msg = '';
+            const fakeRetro = TestData.fakeRetro({ createdBy: userId })
+            sandbox.stub(Retros, 'findOne').returns(fakeRetro)
+            const actionItems = []
+            actionItems.push(TestData.fakeRetroAction())
+            actionItems.push(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE }))
+            sandbox.stub(RetroActions, 'find').returns({
+                fetch: () => actionItems
+            })
+
+            sandbox.stub(ServerUtils, 'sendHtmlEmail')
+            sandbox.stub(Meteor.users, 'findOne').returns({ username: 'fakeusername' })
+
+            try {
+                subject.apply(context, ['fake-id', '<script>alert("hi")</script>']);
+            } catch (error) {
+                msg = error.reason;
+            }
+            expect(msg, 'may not contain html').to.equal('Invalid email address!')
+        })
+
         it('sends email stubbed ', function () {
             const context = { userId };
             let msg = '';

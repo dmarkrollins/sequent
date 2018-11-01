@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor'
 import { Retros, RetroActions } from '../lib/sequent'
-import { Schemas } from './schemas'
-import { Constants } from './constants'
-import { Logger } from './logger'
+import { Schemas } from '../lib/schemas'
+import { Constants } from '../lib/constants'
+import { Logger } from '../lib/logger'
+import cleanInput from './cleanInput'
 
 Meteor.methods({
 
@@ -19,13 +20,21 @@ Meteor.methods({
             throw new Meteor.Error('not-found', 'RetroAction not found!')
         }
 
+        const newTitle = cleanInput(title)
+
+        console.log('the titles', newTitle, title)
+
+        if (newTitle !== title) {
+            throw new Meteor.Error('invalid-title', 'Invalid action! HTML tags not allowed.')
+        }
+
         try {
             RetroActions.update(
                 { _id: actionId },
                 {
                     $set:
                     {
-                        title: title
+                        title: newTitle
                     }
                 }
             )

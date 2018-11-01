@@ -14,7 +14,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-updateRetroItemTitle.js'
+    import '../../server/method-updateRetroItemTitle.js'
 
     describe('Update Retro Item Title Method', function () {
         let userId
@@ -85,6 +85,25 @@ if (Meteor.isServer) {
             expect(Retros.findOne).to.have.been.called
 
             expect(msg).to.equal('Retro Item not found! [not-found]')
+        })
+
+        it('html not allowed', async function () {
+            const fakeId = Random.id()
+
+            const fakeRetro = await TestData.fakeRetro({ _id: fakeId, status: Constants.RetroStatuses.ACTIVE, showCompleted: true })
+
+            sandbox.stub(Retros, 'findOne').returns(fakeRetro)
+            sandbox.stub(Retros, 'update')
+
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                subject.apply(context, [fakeRetro.items[0].itemId, '<script>alert("hi")</script>'])
+            } catch (error) {
+                msg = error.message;
+            }
+            expect(msg, 'no html').to.equal('Invalid Retro Item. HTML tags not allowed. [invalid-title]')
         })
 
         it('title updated - stubbed', async function () {

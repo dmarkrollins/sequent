@@ -18,6 +18,7 @@ const should = chai.should();
 if (Meteor.isClient) {
     import '../../client/actions/actionItem.js'
     import { ConfirmDialog } from '../../client/common/confirmDialog'
+    import { Toast } from '../../client/common/toast'
 
     describe('Action Item', function () {
         let userId
@@ -232,6 +233,44 @@ if (Meteor.isClient) {
                 expect(item.unHighlight, 'unhighlight should have been called').to.have.been.called
             });
         })
+
+        it('handles method call error correctly', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Toast, 'showError')
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: await TestData.fakeRetroAction({ title: 'fake action', status: Constants.RetroItemStatuses.PENDING }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            sandbox.stub(Meteor, 'call').yields({ reason: 'fake reason' })
+
+            withRenderedTemplate('actionItem', item, (el) => {
+                selectedVar.set(item.data._id)
+                Tracker.flush()
+
+                expect($(el).find('a.editButton'), 'should have edit button').to.have.length(1)
+
+                $(el).find('a.editButton')[0].click()
+                Tracker.flush()
+
+                $(el).find('textarea#actionItemTextarea').val('fake title')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#actionItemTextarea')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                expect(Meteor.call, 'method should have been called').to.have.been.called
+                expect(Meteor.call).to.have.been.calledWith('updateActionTitle', item.data._id, 'fake title')
+                expect(Toast.showError).to.have.been.called
+                expect(Toast.showError).to.have.been.calledWith('fake reason')
+            });
+        })
+
 
         it('pending selected item - cancel button works properly', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)

@@ -1,14 +1,16 @@
 import { Meteor } from 'meteor/meteor'
 import moment from 'moment'
-import { Settings, Retros } from './sequent'
-import { Schemas } from './schemas'
-import { Constants } from './constants'
-import { Logger } from './logger'
+import { Settings, Retros } from '../lib/sequent'
+import { Schemas } from '../lib/schemas'
+import { Constants } from '../lib/constants'
+import { Logger } from '../lib/logger'
+import cleanInput from './cleanInput'
 
 const inputName = (name, dateVal) => {
-    if (!name) return `${dateVal}`
-    if (name === '') return `${dateVal}`
-    return name
+    const newName = cleanInput(name)
+    if (!newName) return `${dateVal}`
+    if (newName === '') return `${dateVal}`
+    return newName
 }
 
 
@@ -38,7 +40,9 @@ Meteor.methods({
 
         const archiveName = inputName(name, dateVal)
 
-        // console.log('Archive Name', archiveName)
+        if (archiveName !== name && name !== '') {
+            throw new Meteor.Error('invalid-name', 'Invalid Archive name. May not contain HTML!')
+        }
 
         const settings = Settings.findOne({ createdBy: this.userId })
 

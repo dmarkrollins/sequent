@@ -117,9 +117,9 @@ Template.retroNav.events({
 
             if (!retro) return
 
-            Meteor.call('archiveRetro', retro._id, value, function (err) {
+            Meteor.call('archiveRetro', retro._id, value, function (err, result) {
                 if (err) {
-                    Toast.showError('Failed to archive the retro!')
+                    Toast.showError(err.reason)
                 }
             })
         }, null, 'archiveName')

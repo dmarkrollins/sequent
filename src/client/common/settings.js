@@ -1,17 +1,19 @@
 import { Meteor } from 'meteor/meteor'
-import { Template } from 'meteor/templating' 
+import { $ } from 'meteor/jquery'
+import { _ } from 'meteor/underscore'
+import { FlowRouter } from 'meteor/kadira:flow-router'
+import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Settings, Backgrounds, Sequent } from '../../lib/sequent'
 import { RetroPrompts } from './prompts'
 
 import './settings.html'
 
-Template.settings.onCreated(function() {
-
+Template.settings.onCreated(function () {
     const self = this
 
     self.message = new ReactiveVar('')
-    
+
     self.setMessage = (msg) => {
         self.message.set(msg)
     }
@@ -24,22 +26,21 @@ Template.settings.onCreated(function() {
         ];
         if (str.match(ranges.join('|'))) {
             return true;
-        } else {
-            return false;
         }
+        return false;
     }
 
     self.updateSettings = (settings) => {
+        $('#settingsForm').prop('disabled', true);
 
-        $("#settingsForm").prop('disabled',true);
-
-        Meteor.call('saveSettings', settings, function(err){
-            $("#start-fs").prop('disabled',false);
-            if(err){
-                self.setMessage(err)
-                return
+        Meteor.call('saveSettings', settings, function (err) {
+            $('#start-fs').prop('disabled', false);
+            if (err) {
+                self.setMessage(err.reason)
+                return false
             }
             self.setMessage('Settings saved!')
+            return true
         })
     }
 })
@@ -53,120 +54,126 @@ Template.settings.helpers({
     },
     selected() {
         const settings = Settings.findOne()
-        if(!_.isUndefined(settings)){
+        if (!_.isUndefined(settings)) {
             return this.value === settings.backgroundImage
         }
         return this.value === Sequent.defaultBackground
     },
-    backGround(){
+    backGround() {
         const settings = Sequent.getSettings()
         return settings.backgroundImage
     },
-    happy(){
+    happy() {
         const settings = Sequent.getSettings()
         return settings.happyPlaceholder
     },
-    meh(){
+    meh() {
         const settings = Sequent.getSettings()
         return settings.mehPlaceholder
     },
-    sad(){
+    sad() {
         const settings = Sequent.getSettings()
         return settings.sadPlaceholder
     }
 })
 
 Template.settings.events({
-    'change #selectedBackground': function(event, template) {
-        template.message.set('')
+    'change #selectedBackground': function (event, instance) {
+        instance.message.set('')
         const background = event.currentTarget.value || '';
-        
-        if(background === ''){
-            template.setMessage('Please choose a background!')
+
+        if (background === '') {
+            instance.setMessage('Please choose a background!')
             return
         }
 
         const settings = Sequent.getSettings()
 
         settings.backgroundImage = background
-       
-        template.updateSettings(settings)
 
+        instance.updateSettings(settings)
     },
-    'change #happyPlaceholder': function(event, template){
-        template.message.set('')
-        const prompt = event.currentTarget.value || ''
+    'change #happyPlaceholder': function (event, instance) {
+        instance.message.set('')
+        let prompt = event.currentTarget.value || ''
 
-        if(prompt === ''){
+        if (prompt === '') {
             prompt = ':)'
         }
 
-        if(template.containsEmoji(prompt)){
-            template.setMessage('Emoji not supported at this time')
+        if (instance.containsEmoji(prompt)) {
+            instance.setMessage('Emoji not supported at this time')
             return
         }
 
-        const settings = Sequent.getSettings()
+        let settings = Sequent.getSettings()
 
         settings.happyPlaceholder = prompt
 
-        template.updateSettings(settings)
-        
+        if (!instance.updateSettings(settings)) {
+            settings = Sequent.getSettings()
+            $('#happyPlaceholder').val(settings.happyPlaceholder)
+        }
     },
-    'change #mehPlaceholder': function(event, template){
-        template.message.set('')
-        const prompt = event.currentTarget.value || ''
+    'change #mehPlaceholder': function (event, instance) {
+        instance.message.set('')
+        let prompt = event.currentTarget.value || ''
 
-        if(prompt === ''){
+        if (prompt === '') {
             prompt = ':|'
         }
 
-        if(template.containsEmoji(prompt)){
-            template.setMessage('Emoji not supported at this time')
+        if (instance.containsEmoji(prompt)) {
+            instance.setMessage('Emoji not supported at this time')
             return
         }
 
-        const settings = Sequent.getSettings()
+        let settings = Sequent.getSettings()
 
         settings.mehPlaceholder = prompt
 
-        template.updateSettings(settings)        
+        if (!instance.updateSettings(settings)) {
+            settings = Sequent.getSettings()
+            $('#mehlaceholder').val(settings.mehPlaceholder)
+        }
     },
-    'change #sadPlaceholder': function(event, template){
-        template.message.set('')
-        const prompt = event.currentTarget.value || ''
+    'change #sadPlaceholder': function (event, instance) {
+        instance.message.set('')
+        let prompt = event.currentTarget.value || ''
 
-        if(prompt === ''){
+        if (prompt === '') {
             prompt = ':('
         }
 
-        if(template.containsEmoji(prompt)){
-            template.setMessage('Emoji not supported at this time')
+        if (instance.containsEmoji(prompt)) {
+            instance.setMessage('Emoji not supported at this time')
             return
         }
 
-        const settings = Sequent.getSettings()
+        let settings = Sequent.getSettings()
 
         settings.sadPlaceholder = prompt
 
-        template.updateSettings(settings)        
+        if (!instance.updateSettings(settings)) {
+            settings = Sequent.getSettings()
+            $('#sadPlaceholder').val(settings.sadPlaceholder)
+        }
     },
-    'click #btnCancel': function(event, instance) {
+    'click #btnCancel': function (event, instance) {
         FlowRouter.go('/retro/board')
     },
-    'click #btnRandom': function(event, instance) {
+    'click #btnRandom': function (event, instance) {
         const promptSet = RetroPrompts.getRandomPromptSet()
         $('#happyPlaceholder').val(promptSet.happyPlaceholder)
         $('#mehPlaceholder').val(promptSet.mehPlaceholder)
         $('#sadPlaceholder').val(promptSet.sadPlaceholder)
-        
+
         const settings = Sequent.getSettings()
 
         settings.happyPlaceholder = promptSet.happyPlaceholder
         settings.mehPlaceholder = promptSet.mehPlaceholder
         settings.sadPlaceholder = promptSet.sadPlaceholder
 
-        instance.updateSettings(settings)        
- 
+        instance.updateSettings(settings)
     }
 })

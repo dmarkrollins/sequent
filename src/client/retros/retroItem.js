@@ -47,7 +47,7 @@ Template.retroItem.onCreated(function () {
     self.saveAction = (id, title) => {
         Meteor.call('updateRetroItemTitle', id, title, function (err) {
             if (err) {
-                Toast.showError(err.message);
+                Toast.showError(err.reason);
             }
             self.editing.set(false)
         })

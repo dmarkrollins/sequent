@@ -18,12 +18,13 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-saveSettings.js'
+    import '../../server/method-saveSettings.js'
 
     describe('Save Settings Method', function () {
         let userId
         let sandbox
         let subject
+        let resultId
 
         const fakeUser = {
             username: 'faketeamname'
@@ -51,6 +52,63 @@ if (Meteor.isServer) {
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
+        })
+
+        it('does not allow html - happy placeholder', function () {
+            sandbox.stub(Settings, 'findOne')
+            sandbox.stub(Settings, 'insert')
+
+            const context = { userId: userId };
+            let msg = '';
+
+            const fakeSettings = TestData.fakeSettings()
+            fakeSettings.happyPlaceholder = '<script>alert("")</script>'
+
+            try {
+                subject.apply(context, [fakeSettings])
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'no html').to.equal('Invalid prompt! HTML Tags not allowed. [invalid-prompt]')
+        })
+
+        it('does not allow html - meh placeholder', function () {
+            sandbox.stub(Settings, 'findOne')
+            sandbox.stub(Settings, 'insert')
+
+            const context = { userId: userId };
+            let msg = '';
+
+            const fakeSettings = TestData.fakeSettings()
+            fakeSettings.mehPlaceholder = '<script>alert("")</script>'
+
+            try {
+                subject.apply(context, [fakeSettings])
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'no html').to.equal('Invalid prompt! HTML Tags not allowed. [invalid-prompt]')
+        })
+
+        it('does not allow html - sad placeholder', function () {
+            sandbox.stub(Settings, 'findOne')
+            sandbox.stub(Settings, 'insert')
+
+            const context = { userId: userId };
+            let msg = '';
+
+            const fakeSettings = TestData.fakeSettings()
+            fakeSettings.sadPlaceholder = '<script>alert("")</script>'
+
+            try {
+                subject.apply(context, [fakeSettings])
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'no html').to.equal('Invalid prompt! HTML Tags not allowed. [invalid-prompt]')
         })
 
         it('not found insert - stubbed', function () {

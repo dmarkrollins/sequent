@@ -18,7 +18,7 @@ Template.actionItem.onCreated(function () {
     self.saveAction = (id, newTitle) => {
         Meteor.call('updateActionTitle', id, newTitle, function (err) {
             if (err) {
-                Toast.showError(err.message);
+                Toast.showError(err.reason);
             }
             self.editing.set(false)
             self.data.unHighlight()

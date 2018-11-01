@@ -3,9 +3,10 @@ import { Random } from 'meteor/random'
 import { Match } from 'meteor/check'
 import { SimpleSchema } from 'meteor/aldeed:simple-schema'
 import { _ } from 'meteor/underscore'
-import { Settings } from './sequent'
-import { Schemas } from './schemas'
-import { Logger } from './logger'
+import { Settings } from '../lib/sequent'
+import { Schemas } from '../lib/schemas'
+import { Logger } from '../lib/logger'
+import cleanInput from './cleanInput'
 
 Meteor.methods({
 
@@ -18,6 +19,14 @@ Meteor.methods({
 
         const settings = Settings.findOne({ createdBy: this.userId })
 
+        const happy = cleanInput(doc.happyPlaceholder, ':)')
+        const meh = cleanInput(doc.mehPlaceholder, ':|')
+        const sad = cleanInput(doc.sadPlaceholder, ':(')
+
+        if (happy !== doc.happyPlaceholder || meh !== doc.mehPlaceholder || sad !== doc.sadPlaceholder) {
+            throw new Meteor.Error('invalid-prompt', 'Invalid prompt! HTML Tags not allowed.')
+        }
+
         try {
             if (_.isUndefined(settings)) {
                 Settings.insert(doc)
@@ -27,9 +36,9 @@ Meteor.methods({
                     {
                         $set: {
                             backgroundImage: doc.backgroundImage,
-                            happyPlaceholder: doc.happyPlaceholder,
-                            mehPlaceholder: doc.mehPlaceholder,
-                            sadPlaceholder: doc.sadPlaceholder
+                            happyPlaceholder: happy,
+                            mehPlaceholder: meh,
+                            sadPlaceholder: sad
                         }
                     }
                 )

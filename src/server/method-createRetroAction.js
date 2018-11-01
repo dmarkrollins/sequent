@@ -1,8 +1,9 @@
 import { Meteor } from 'meteor/meteor'
-import { Retros, RetroActions } from './sequent'
-import { Schemas } from './schemas'
-import { Constants } from './constants'
-import { Logger } from './logger'
+import { Retros, RetroActions } from '../lib/sequent'
+import { Schemas } from '../lib/schemas'
+import { Constants } from '../lib/constants'
+import { Logger } from '../lib/logger'
+import cleanInput from './cleanInput'
 
 Meteor.methods({
 
@@ -14,8 +15,12 @@ Meteor.methods({
         }
 
         const action = {}
-        action.title = title
+        action.title = cleanInput(title)
         action.status = Constants.RetroItemStatuses.PENDING
+
+        if (action.title === '') {
+            throw new Meteor.Error('title-required', 'Invalid action item! HTML Tags not allowed.')
+        }
 
         try {
             const actionId = RetroActions.insert(action)

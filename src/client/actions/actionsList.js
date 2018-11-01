@@ -43,7 +43,7 @@ Template.actionsList.events({
             if (event.currentTarget.value !== '') {
                 Meteor.call('createRetroAction', event.currentTarget.value, function (err) {
                     if (err) {
-                        Toast.showError('Error occurred - action not created')
+                        Toast.showError(err.reason)
                     }
                     event.currentTarget.value = ''
                     return false
@@ -76,7 +76,7 @@ Template.actionsList.events({
                 Session.setPersistent(Sequent.EMAIL_TARGET, email)
                 Meteor.call('sendActionsByEmail', event.currentTarget.dataset.id, email, function (err) {
                     if (err) {
-                        console.log('Action item send error', err)
+                        // console.log('Action item send error', err)
                         Toast.showError('Could not send action items - try again later')
                     } else {
                         Toast.showSuccess('Action items have been sent!')

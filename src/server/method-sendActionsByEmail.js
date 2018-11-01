@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { Retros, RetroActions } from '../lib/sequent'
 import { Constants } from '../lib/constants'
 import { ServerUtils } from './serverUtils'
+import cleanInput from './cleanInput'
 
 Meteor.methods({
     sendActionsByEmail(currentRetro, targetEmail) {
@@ -19,6 +20,20 @@ Meteor.methods({
         // if (retro.createdBy !== this.userId) {
         //     throw new Meteor.Error('not-the-owner', 'You are not the owner of this retro!')
         // }
+
+        const emailToUse = targetEmail || ''
+
+        if (emailToUse === '') {
+            throw new Meteor.Error('email-address-required', 'An email address is required!')
+        }
+
+        const newEmail = cleanInput(emailToUse)
+
+        if (newEmail === '') {
+            throw new Meteor.Error('contains-html', 'Invalid email address!')
+        }
+
+        console.log('email', newEmail)
 
         const actions = RetroActions.find({
             createdBy: this.userId,
@@ -47,6 +62,6 @@ Meteor.methods({
 
         const from = process.env.FROM_EMAIL_ADDRESS || 'noreply@6thcents.com'
 
-        ServerUtils.sendHtmlEmail(targetEmail, from, `${user.username.toProperCase()} Action Items`, 'actionItems', data)
+        ServerUtils.sendHtmlEmail(newEmail, from, `${user.username.toProperCase()} Action Items`, 'actionItems', data)
     }
 })

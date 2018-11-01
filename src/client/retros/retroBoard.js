@@ -25,7 +25,7 @@ Template.retroBoard.onCreated(function () {
             itemType,
             function (err, result) {
                 if (err) {
-                    Toast.showError('Error occurred - retro not created')
+                    Toast.showError(err.reason)
                 }
             },
         )
@@ -210,7 +210,7 @@ Template.retroBoard.events({
             if (event.currentTarget.value !== '') {
                 Meteor.call('createRetroAction', event.currentTarget.value, function (err) {
                     if (err) {
-                        Toast.showError('Error occurred - action not created')
+                        Toast.showError(err.reason)
                     }
                     event.currentTarget.value = ''
                     return false

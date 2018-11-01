@@ -14,29 +14,26 @@ import { Settings } from '../../lib/sequent'
 
 const should = chai.should();
 
-if (Meteor.isServer){
-
+if (Meteor.isServer) {
     import '../../server/publications-settings.js'
 
-    describe('Settings Publications', function (){
-
+    describe('Settings Publications', function () {
         let sandbox;
         let userId
 
-        beforeEach(function (){
+        beforeEach(function () {
             userId = Random.id()
             sandbox = sinon.sandbox.create();
             sandbox.stub(Meteor, 'userId').returns(userId);
             Settings.insert(TestData.fakeSettings())
         });
 
-        afterEach(function (){
+        afterEach(function () {
             sandbox.restore();
             Settings.remove({})
         });
 
-        it('settings published correctly', function (done){
-
+        it('settings published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
             collector.collect('settings', null, (collections) => {
@@ -45,7 +42,6 @@ if (Meteor.isServer){
                 expect(settings).to.have.length(1);
                 done();
             });
-
         })
     })
 }

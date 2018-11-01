@@ -18,7 +18,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-updateActionTitle.js'
+    import '../../server/method-updateActionTitle.js'
 
     describe('Update Action Title Method', function () {
         let userId
@@ -66,6 +66,26 @@ if (Meteor.isServer) {
             }
 
             expect(msg).to.equal('RetroAction not found! [not-found]')
+        })
+
+        it('html not allowed', function () {
+            const fakeId = Random.id()
+
+            const fakeAction = TestData.fakeRetroAction({ _id: fakeId })
+
+            sandbox.stub(RetroActions, 'findOne').returns(fakeAction)
+            sandbox.stub(RetroActions, 'update')
+
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                subject.apply(context, [fakeId, '<script>alert("")</script>'])
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'no html').to.equal('Invalid action! HTML tags not allowed. [invalid-title]')
         })
 
         it('found action updated - stubbed', function () {

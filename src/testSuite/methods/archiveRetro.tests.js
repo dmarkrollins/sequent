@@ -16,7 +16,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-archiveRetro.js'
+    import '../../server/method-archiveRetro.js'
 
     describe('Archive Retro Method', function () {
         let userId
@@ -80,6 +80,23 @@ if (Meteor.isServer) {
             }
 
             expect(msg, 'should throw already archived').to.be.equal('Retro was already archived! [already-archived]');
+        })
+
+        it('html not allowed', async function () {
+            const retro = TestData.fakeRetroAction()
+            sandbox.stub(Retros, 'findOne').returns(retro)
+            sandbox.stub(Settings, 'findOne').returns(TestData.fakeSettings())
+
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                resultId = subject.apply(context, ['fake-id', '<script>alert("hi")</script>']);
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'html not allowed').to.be.equal('Invalid Archive name. May not contain HTML! [invalid-name]');
         })
 
         it('archives the retro - stubbed with name', function () {

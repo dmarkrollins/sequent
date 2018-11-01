@@ -17,12 +17,12 @@ import { TestData } from '../testData'
 const should = chai.should();
 chai.use(sinonChai);
 
-if (Meteor.isServer){
+if (Meteor.isServer) {
+    import '../../server/method-createRetroAction.js'
 
-    import '../../lib/method-createRetroAction.js'
+    let resultId = ''
 
-    describe('Create Retro Action Method', function (){
-
+    describe('Create Retro Action Method', function () {
         let userId
         let sandbox
         let subject
@@ -31,35 +31,46 @@ if (Meteor.isServer){
             username: 'faketeamname'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             subject = Meteor.server.method_handlers.createRetroAction;
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Retros.remove({})
             sandbox.restore()
         })
 
-        it('must be logged in', function(){
-
+        it('must be logged in', function () {
             const context = {};
             let msg = '';
 
             try {
                 resultId = subject.apply(context, ['fake-id']);
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
-
         })
 
-        it('creates the action - stubbed', function(){
+        it('creates the action - fails if html present', function () {
+            sandbox.stub(RetroActions, 'insert')
 
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                subject.apply(context, ['<script>alert("hi")</script>'])
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'should throw no html error').to.be.equal('Invalid action item! HTML Tags not allowed. [title-required]');
+        })
+
+        it('creates the action - stubbed', function () {
             sandbox.stub(RetroActions, 'insert')
 
             const context = { userId: userId };
@@ -67,19 +78,15 @@ if (Meteor.isServer){
 
             try {
                 subject.apply(context, ['fake-title'])
-            }
-            catch (error){
+            } catch (error) {
                 msg = error.message;
             }
 
             expect(RetroActions.insert).to.have.been.called
             const parms = RetroActions.insert.args[0][0]
             expect(parms.title).to.equal('fake-title')
-            expect(parms.status).to.equal(Constants.RetroItemStatuses.PENDING)             
+            expect(parms.status).to.equal(Constants.RetroItemStatuses.PENDING)
             expect(msg, 'should have no message').to.be.equal('');
-
         })
-        
-
     })
 }

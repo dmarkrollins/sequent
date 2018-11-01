@@ -1,10 +1,11 @@
 import { Meteor } from 'meteor/meteor'
 import { Random } from 'meteor/random'
 import { _ } from 'meteor/underscore'
-import { Retros } from './sequent'
-import { Schemas } from './schemas'
-import { Constants } from './constants'
+import { Retros } from '../lib/sequent'
+import { Schemas } from '../lib/schemas'
+import { Constants } from '../lib/constants'
 import { Logger } from '../lib/logger'
+import cleanInput from './cleanInput'
 
 Meteor.methods({
 
@@ -35,9 +36,15 @@ Meteor.methods({
             retroId = retro._id
         }
 
+        const newTitle = cleanInput(title)
+
+        if (newTitle === '') {
+            throw new Meteor.Error('title-required', 'Invalid retro item! HTML Tags not allowed.')
+        }
+
         const doc = {}
         doc.itemId = Random.id()
-        doc.title = title
+        doc.title = cleanInput(title)
         doc.itemType = itemType
         doc.status = Constants.RetroItemStatuses.PENDING
         doc.votes = 0

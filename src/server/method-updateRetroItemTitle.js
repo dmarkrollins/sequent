@@ -1,9 +1,10 @@
 import { Meteor } from 'meteor/meteor'
 import { _ } from 'meteor/underscore'
-import { Retros } from './sequent'
-import { Schemas } from './schemas'
-import { Constants } from './constants'
-import { Logger } from './logger'
+import { Retros } from '../lib/sequent'
+import { Schemas } from '../lib/schemas'
+import { Constants } from '../lib/constants'
+import { Logger } from '../lib/logger'
+import cleanInput from './cleanInput'
 
 Meteor.methods({
 
@@ -39,6 +40,12 @@ Meteor.methods({
 
         voteCount += 1
 
+        const newTitle = cleanInput(title)
+
+        if (newTitle !== title) {
+            throw new Meteor.Error('invalid-title', 'Invalid Retro Item. HTML tags not allowed.')
+        }
+
         try {
             Retros.update(
                 {
@@ -47,7 +54,7 @@ Meteor.methods({
                 },
                 {
                     $set: {
-                        'items.$.title': title
+                        'items.$.title': newTitle
                     }
                 }
             )

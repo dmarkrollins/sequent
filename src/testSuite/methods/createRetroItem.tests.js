@@ -14,7 +14,7 @@ const should = chai.should();
 chai.use(sinonChai);
 
 if (Meteor.isServer) {
-    import '../../lib/method-createRetroItem.js'
+    import '../../server/method-createRetroItem.js'
 
     describe('Create Retro Item Method', function () {
         let userId
@@ -49,6 +49,27 @@ if (Meteor.isServer) {
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged into a retro board! [not-logged-in]');
         })
+
+        it('does not accept html', async function () {
+            const fakeId = Random.id()
+
+            sandbox.stub(Retros, 'findOne').returns(await TestData.fakeRetro({ _id: fakeId, items: [] }))
+
+            sandbox.stub(Retros, 'insert')
+            sandbox.stub(Retros, 'update')
+
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                subject.apply(context, ['<script>alert("")</script>', Constants.RetroItemTypes.HAPPY])
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(msg, 'invalid html').to.be.equal('Invalid retro item! HTML Tags not allowed. [title-required]')
+        })
+
 
         it('creates the item - new retro - stubbed', async function () {
             const fakeId = Random.id()

@@ -22,7 +22,7 @@ Meteor.methods({
 
         const newTitle = cleanInput(title)
 
-        console.log('the titles', newTitle, title)
+        // console.log('the titles', newTitle, title)
 
         if (newTitle !== title) {
             throw new Meteor.Error('invalid-title', 'Invalid action! HTML tags not allowed.')

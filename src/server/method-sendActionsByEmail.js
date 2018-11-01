@@ -33,7 +33,7 @@ Meteor.methods({
             throw new Meteor.Error('contains-html', 'Invalid email address!')
         }
 
-        console.log('email', newEmail)
+        // console.log('email', newEmail)
 
         const actions = RetroActions.find({
             createdBy: this.userId,

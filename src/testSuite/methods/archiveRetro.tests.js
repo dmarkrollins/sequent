@@ -96,7 +96,7 @@ if (Meteor.isServer) {
                 msg = error.message;
             }
 
-            expect(msg, 'html not allowed').to.be.equal('Invalid Archive name. May not contain HTML! [invalid-name]');
+            expect(msg, 'html not allowed').to.be.equal('Invalid Archive name. HTML tags not allowed! [invalid-name]');
         })
 
         it('archives the retro - stubbed with name', function () {

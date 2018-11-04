@@ -41,7 +41,7 @@ Meteor.methods({
         const archiveName = inputName(name, dateVal)
 
         if (archiveName !== name && name !== '') {
-            throw new Meteor.Error('invalid-name', 'Invalid Archive name. May not contain HTML!')
+            throw new Meteor.Error('invalid-name', 'Invalid Archive name. HTML tags not allowed!')
         }
 
         const settings = Settings.findOne({ createdBy: this.userId })

@@ -44,7 +44,15 @@ Meteor.methods({
             throw new Meteor.Error('invalid-name', 'Invalid Archive name. HTML tags not allowed!')
         }
 
-        const settings = Settings.findOne({ createdBy: this.userId })
+        let settings = Settings.findOne({ createdBy: this.userId })
+
+        if (!settings) {
+            settings = {
+                happyPlaceholder: ':)',
+                mehPlaceholder: ':|',
+                sadPlaceholder: ':('
+            }
+        }
 
         try {
             Retros.update(

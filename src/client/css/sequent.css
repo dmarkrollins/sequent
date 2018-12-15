@@ -443,4 +443,14 @@ textarea.retro-edit {
     overflow-x: scroll;
     margin: 0 auto;
 }
+
+.truncate {
+    /* min-width: 200px; */
+    width: 100%;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: block;
+    z-index: 999;
+}
   

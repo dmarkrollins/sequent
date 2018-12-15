@@ -59,7 +59,7 @@ if (Meteor.isClient) {
 
             withRenderedTemplate('retroNav', null, (el) => {
                 expect($(el).find('a.navbar-brand')[0].href).to.contain('/retro/board')
-                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname')
+                expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname')
                 expect($(el).find('a#actionCount span.badge-error')).to.have.length(0)
                 expect($(el).find('a#actionCount')[0].innerText).to.equal('0')
                 expect($(el).find('a#btnOptions')).to.have.length(1)
@@ -84,7 +84,7 @@ if (Meteor.isClient) {
             RetroActions.insert(TestData.fakeRetroAction())
 
             withRenderedTemplate('retroNav', {}, (el) => {
-                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname')
+                expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname')
                 expect($(el).find('a#actionCount span.badge-error')).to.have.length(1)
                 expect($(el).find('a#actionCount')[0].innerText).to.equal('2')
             });
@@ -99,7 +99,7 @@ if (Meteor.isClient) {
 
 
             withRenderedTemplate('retroNav', {}, (el) => {
-                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname')
+                expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname')
                 expect($(el).find('a#sortByVotes'), 'sort menu option').to.have.length(1)
                 expect($(el).find('a#sortByVotes')[0].innerText, 'sort text').to.equal(' Sort By Votes')
                 expect($(el).find('a#freezeRetro'), 'freeze menu option').to.have.length(1)
@@ -121,7 +121,7 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
 
             withRenderedTemplate('retroNav', {}, (el) => {
-                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname - FROZEN')
+                expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname - FROZEN')
                 expect($(el).find('a#freezeRetro'), 'freeze menu item').to.have.length(1)
                 expect($(el).find('a#freezeRetro')[0].innerText, 'freeze menu item text').to.equal(' Un-Freeze')
             });
@@ -153,7 +153,7 @@ if (Meteor.isClient) {
             const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
 
             withRenderedTemplate('retroNav', {}, (el) => {
-                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal(`Faketeamname - ARCHIVED ${dateVal}`)
+                expect($(el).find('a.navbar-brand div')[0].innerText).to.equal(`Faketeamname - ARCHIVED ${dateVal}`)
             });
         })
 
@@ -170,7 +170,7 @@ if (Meteor.isClient) {
             const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
 
             withRenderedTemplate('retroNav', {}, (el) => {
-                expect($(el).find('a.navbar-brand span')[0].innerText).to.equal('Faketeamname - ARCHIVED fake retro')
+                expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname - ARCHIVED fake retro')
             });
         })
 

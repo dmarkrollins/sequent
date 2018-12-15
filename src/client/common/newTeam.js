@@ -1,6 +1,7 @@
-import { Meteor } from 'meteor/meteor'
+import { Accounts } from 'meteor/accounts-base'
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
+import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Sequent, Settings } from '../../lib/sequent'
 
 import './newTeam.html'

@@ -166,5 +166,41 @@ if (Meteor.isServer) {
 
             expect(msg, 'should have no message').to.be.equal('');
         })
+
+        it('archives the retro - stubbed - no settings defined', function () {
+            const retro = TestData.fakeRetroAction()
+            sandbox.stub(Retros, 'findOne').returns(retro)
+            sandbox.stub(Retros, 'update')
+            sandbox.stub(Settings, 'findOne').returns(null)
+
+            const context = { userId: userId };
+            let msg = '';
+
+            try {
+                subject.apply(context, ['fake-id', '']);
+            } catch (error) {
+                msg = error.message;
+            }
+
+            expect(Retros.update, 'retros update').to.have.been.called
+            const args = Retros.update.args[0]
+            expect(args[0]._id).to.equal(retro._id)
+
+            expect(args[1].$set.status).to.equal(Constants.RetroStatuses.ARCHIVED)
+            expect(_.isDate(args[1].$set.archivedAt)).to.be.true
+
+            const archiveName = `${moment(retro.archivedAt).format('MM-DD-YYYY')}`
+
+            expect(args[1].$set.archiveName, 'archive name').to.contains(archiveName)
+            expect(args[1].$set.archiveName, 'archive name').to.not.contains('ARCHIVED')
+
+            expect(Settings.findOne, 'settings find one').to.have.been.called
+            expect(Settings.findOne, 'settings find one').to.have.been.calledWith({ createdBy: userId })
+            expect(args[1].$set.happyPlaceholder).to.equal(':)')
+            expect(args[1].$set.mehPlaceholder).to.equal(':|')
+            expect(args[1].$set.sadPlaceholder).to.equal(':(')
+
+            expect(msg, 'should have no message').to.be.equal('');
+        })
     })
 }

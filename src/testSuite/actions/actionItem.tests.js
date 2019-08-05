@@ -234,6 +234,48 @@ if (Meteor.isClient) {
             });
         })
 
+        it('pending selected item - wont save on return if item is blank', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: TestData.fakeRetroAction({ title: 'fake action', status: Constants.RetroItemStatuses.PENDING }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('actionItem', item, (el) => {
+                selectedVar.set(item.data._id)
+                Tracker.flush()
+
+                expect($(el).find('a.editButton'), 'should have edit button').to.have.length(1)
+
+                $(el).find('a.editButton')[0].click()
+                Tracker.flush()
+
+                expect($(el).find('a.okButton'), 'should not have ok button').to.have.length(0)
+                expect($(el).find('a.editButton'), 'should not have edit button').to.have.length(0)
+                expect($(el).find('a.deleteButton'), 'should not have delete button').to.have.length(0)
+                expect($(el).find('textarea#actionItemTextarea'), 'should have edit text box').to.have.length(1)
+                expect($(el).find('textarea#actionItemTextarea')[0].value, 'textarea should have correct value').to.equal('fake action')
+                expect($(el).find('a#btnCancel'), 'should have cancel button').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'should have save button').to.have.length(1)
+
+                $(el).find('textarea#actionItemTextarea').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#actionItemTextarea')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                expect(Meteor.call, 'method should not have been called').to.not.have.been.called
+                done()
+            });
+        })
+
         it('handles method call error correctly', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Toast, 'showError')

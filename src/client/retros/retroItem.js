@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { $ } from 'meteor/jquery'
+import { _ } from 'meteor/underscore'
 import { ConfirmDialog } from '../common/confirmDialog'
 import { Toast } from '../common/toast'
 import { Retros } from '../../lib/sequent'
@@ -129,6 +130,9 @@ Template.retroItem.helpers({
     },
     currentTimer() {
         return Template.instance().timerText.get()
+    },
+    decodedTitle() {
+        return _.unescape(this.data.title)
     }
 })
 
@@ -189,14 +193,23 @@ Template.retroItem.events({
 
     'click a#btnSave'(event, instance) {
         event.stopPropagation()
-        const newTitle = $('textarea#titleTextBox')[0].value
-        instance.saveAction(event.currentTarget.dataset.id, newTitle)
+        // const val = event.currentTarget.value.replace('\n', '').trim()
+        const newTitle = $('textarea#titleTextBox')[0].value.replace('\n', '').trim()
+        if (newTitle !== '') {
+            instance.saveAction(event.currentTarget.dataset.id, newTitle)
+        } else {
+            $('textarea#titleTextBox')[0].value = ''
+        }
     },
 
     'keypress textarea#titleTextBox': function (event, instance) {
         if (event.which === 13) {
-            const newTitle = event.currentTarget.value
-            instance.saveAction(event.currentTarget.dataset.id, newTitle)
+            const newTitle = event.currentTarget.value.replace('\n', '').trim()
+            if (newTitle !== '') {
+                instance.saveAction(event.currentTarget.dataset.id, newTitle)
+            } else {
+                event.currentTarget.value = ''
+            }
         }
     },
 

@@ -5,10 +5,10 @@
             <div class="row" style="padding: 12px;">
                 <div class="col-sm-12">
                     {{#if editMode}}
-                        <textarea id="titleTextBox" data-id={{data.itemId}} class="retro-edit" rows=1>{{data.title}}</textarea>
+                        <textarea id="titleTextBox" data-id={{data.itemId}} class="retro-edit" rows=1>{{decodedTitle}}</textarea>
                         <!-- <input type='text' id="titleTextbox" class="retro-edit" style="opacity: 1;" data-id={{data.itemId}} value="{{data.title}}" /> -->
                     {{else}}
-                        <div class="tappable-text text-left" style="width: 100%; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{data.title}}</div>
+                        <div class="tappable-text text-left" style="width: 100%; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{decodedTitle}}</div>
                     {{/if}}
                 </div>
                 <div class="col-sm-12">
@@ -42,7 +42,7 @@
                     {{/if}}
                     <p id="voteCount" style="width: 20px; font-size: 12pt !important; color: #666; margin: 0 auto;">{{data.votes}}</p>
                 </div>
-                <div class="tappable-text" style="width: 90%; display: table-cell; text-align: left; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{data.title}}</div>
+                <div class="tappable-text" style="width: 90%; display: table-cell; text-align: left; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{decodedTitle}}</div>
             </div>
         </div>
     {{/if}}

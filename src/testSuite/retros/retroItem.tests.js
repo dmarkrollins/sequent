@@ -75,6 +75,32 @@ if (Meteor.isClient) {
             });
         })
 
+        it('displays encoded text default correctly ', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            Retros.insert(await TestData.fakeRetro())
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: await TestData.fakeRetroItem({ title: '3 &gt;= 2' }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            withRenderedTemplate('retroItem', item, (el) => {
+                expect($(el).find('div.viewable-item'), 'read view should appear').to.have.length(1)
+                expect($(el).find('div.selected-item'), 'edit view should disappear').to.have.length(0)
+                expect($(el).find('div.tappable-text')[0].innerText).to.equal('3 >= 2')
+                expect($(el).find('a#voteButton')).to.have.length(1)
+                expect($(el).find('p#voteCount')[0].innerText).to.equal('0')
+                expect($(el).find('a.completeButton.hidden')).to.have.length(0)
+                expect($(el).find('a.editButton.hidden')).to.have.length(0)
+                expect($(el).find('a.deleteButton.hidden')).to.have.length(0)
+                expect($(el).find('#timer')).to.have.length(0)
+            });
+        })
+
         it('displays votes correctly ', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
@@ -129,15 +155,15 @@ if (Meteor.isClient) {
             });
         })
 
-        it('completed items display correctly', async function () {
+        it('completed items display correctly', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.COMPLETE }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.COMPLETE }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -149,18 +175,19 @@ if (Meteor.isClient) {
                 expect($(el).find('a#voteButton'), 'vote button should not be visible').to.have.length(0)
                 expect($(el).find('p#voteCount')[0].innerText).to.equal('3')
                 expect($(el).find('a.completeButton'), 'complete button should not be visible').to.have.length(0)
+                done()
             });
         })
 
-        it('goes into highlight mode correctly', async function () {
+        it('goes into highlight mode correctly', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -177,18 +204,19 @@ if (Meteor.isClient) {
                 expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
                 expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
                 expect($(el).find('a.deleteButton'), 'has delete button').to.have.length(1)
+                done()
             });
         })
 
-        it('once in edit mode with new text - cancel edit', async function () {
+        it('once in edit mode with new text - cancel edit', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -227,18 +255,19 @@ if (Meteor.isClient) {
                 expect($(el).find('a.deleteButton'), 'has delete button').to.have.length(1)
                 expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
                 expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
+                done()
             });
         })
 
-        it('once in edit mode with new text - save new title', async function (done) {
+        it('once in edit mode with new text - save new title', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -277,15 +306,52 @@ if (Meteor.isClient) {
             });
         })
 
-        it('once in edit mode with new text - save new title with return', async function (done) {
+        it('once in edit mode with new text - wont save new title if blank', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroItem', item, (el, template) => {
+                selectedVar.set(item.data.itemId)
+                Tracker.flush()
+
+                $(el).find('a.editButton')[0].click()
+                Tracker.flush()
+
+                expect($(el).find('textarea#titleTextBox'), 'should title textarea').to.have.length(1)
+                expect($(el).find('a#btnCancel'), 'cancel button visible').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
+
+                $(el).find('textarea#titleTextBox').val('\n')
+
+                $(el).find('a#btnSave')[0].click()
+                Tracker.flush()
+
+                expect(Meteor.call).to.not.have.been.called
+                done()
+            });
+        })
+
+
+        it('once in edit mode with new text - save new title with return', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            Retros.insert(TestData.fakeRetro())
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -326,16 +392,66 @@ if (Meteor.isClient) {
             });
         })
 
-
-        it('completes the item', async function (done) {
+        it('once in edit mode with new text - wont save new title if blank with return', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroItem', item, (el, template) => {
+                selectedVar.set(item.data.itemId)
+                Tracker.flush()
+
+                $(el).find('a.editButton')[0].click()
+                Tracker.flush()
+
+                expect($(el).find('textarea#titleTextBox'), 'should title textarea').to.have.length(1)
+                expect($(el).find('a#btnCancel'), 'cancel button visible').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
+
+                $(el).find('textarea#titleTextBox').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#titleTextBox')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                expect(Meteor.call).to.not.have.been.called
+                done()
+                // expect(Meteor.call).to.have.been.calledWith('updateRetroItemTitle', item.data.itemId, 'new fake title')
+
+                // setTimeout(function () {
+                //     expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
+                //     expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
+                //     expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
+                //     expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
+                //     expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
+                //     expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
+                //     expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
+                //     done()
+                // }, 500)
+            });
+        })
+
+
+        it('completes the item', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            Retros.insert(TestData.fakeRetro())
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -368,15 +484,15 @@ if (Meteor.isClient) {
             });
         })
 
-        it('deletes the item', async function (done) {
+        it('deletes the item', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }
@@ -412,15 +528,15 @@ if (Meteor.isClient) {
             });
         })
 
-        it('timer starts on select', async function (done) {
+        it('timer starts on select', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
-            Retros.insert(await TestData.fakeRetro())
+            Retros.insert(TestData.fakeRetro())
 
             const selectedVar = new ReactiveVar(null)
 
             const item = {
-                data: await TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
+                data: TestData.fakeRetroItem({ votes: 3, status: Constants.RetroItemStatuses.PENDING, title: 'fake title' }),
                 unHighlight: sandbox.stub(),
                 selectedItemId: selectedVar
             }

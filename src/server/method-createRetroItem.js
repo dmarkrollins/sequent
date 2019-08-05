@@ -16,7 +16,12 @@ Meteor.methods({
             throw new Meteor.Error('not-logged-in', 'You must be logged into a retro board!')
         }
 
-        // validate item type
+
+        const theTitle = title ? title.trim() : ''
+
+        if (title === '') {
+            throw new Meteor.Error('title-required', 'You must provide title text!')
+        }
 
         let retro = Retros.findOne({
             createdBy: this.userId,

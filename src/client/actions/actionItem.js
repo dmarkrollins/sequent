@@ -89,9 +89,13 @@ Template.actionItem.events({
 
     'keypress #actionItemTextarea': function (event, instance) {
         if (event.which === 13) {
-            const newTitle = event.currentTarget.value
-            instance.saveAction(event.currentTarget.dataset.id, newTitle)
+            const val = event.currentTarget.value.replace('\n', '').trim()
+            if (val !== '') {
+                instance.saveAction(event.currentTarget.dataset.id, val)
+                event.currentTarget.value = ''
+                return false
+            }
+            event.currentTarget.value = ''
         }
     }
-
 })

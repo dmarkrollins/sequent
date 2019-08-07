@@ -157,8 +157,7 @@ Template.retroBoard.helpers({
 Template.retroBoard.events({
     'keypress div.greenItem textarea': function (event, instance) {
         if (event.which === 13) {
-            const val = event.currentTarget.value
-            // const val = event.currentTarget.value.replace('\n', '').trim()
+            const val = event.currentTarget.value.replace('\n', '').trim()
             if (val !== '') {
                 instance.insertItem(Constants.RetroItemTypes.HAPPY, val)
                 event.currentTarget.value = ''
@@ -169,7 +168,7 @@ Template.retroBoard.events({
     },
     'keypress div.yellowItem textarea': function (event, instance) {
         if (event.which === 13) {
-            const val = event.currentTarget.value
+            const val = event.currentTarget.value.replace('\n', '').trim()
             if (val !== '') {
                 instance.insertItem(Constants.RetroItemTypes.MEH, val)
                 event.currentTarget.value = ''
@@ -180,7 +179,7 @@ Template.retroBoard.events({
     },
     'keypress div.redItem textarea': function (event, instance) {
         if (event.which === 13) {
-            const val = event.currentTarget.value
+            const val = event.currentTarget.value.replace('\n', '').trim()
             if (val !== '') {
                 instance.insertItem(Constants.RetroItemTypes.SAD, val)
                 event.currentTarget.value = ''

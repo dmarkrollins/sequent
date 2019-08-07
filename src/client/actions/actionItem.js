@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { $ } from 'meteor/jquery'
+import { _ } from 'meteor/underscore'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Toast } from '../common/toast'
 import { Constants } from '../../lib/constants'
@@ -38,6 +39,9 @@ Template.actionItem.helpers({
     },
     editing() {
         return Template.instance().editing.get()
+    },
+    decodedTitle() {
+        return _.unescape(this.data.title)
     }
 })
 

@@ -65,6 +65,28 @@ if (Meteor.isClient) {
             });
         })
 
+        it('displays correctly - unselected pending encoded', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            const selectedVar = new ReactiveVar(null)
+
+            const data = await TestData.fakeRetroAction({ title: '4 &gt; 3', status: Constants.RetroItemStatuses.PENDING })
+
+            const item = {
+                data,
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            withRenderedTemplate('actionItem', item, (el) => {
+                expect($(el).find('div.tappable-text')[0].innerText).to.equal('4 > 3')
+                const source = $(el).find('a.okButton img')[0].attributes.src.value
+                expect(source).to.equal('/ok-gray.png')
+                expect($(el).find('a.deleteButton'), 'no delete button').to.have.length(0)
+                expect($(el).find('a.editButton'), 'no edit button').to.have.length(0)
+            });
+        })
+
         it('displays correctly - unselected complete', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 

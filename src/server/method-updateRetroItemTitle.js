@@ -42,7 +42,7 @@ Meteor.methods({
 
         const newTitle = cleanInput(title)
 
-        if (newTitle !== title) {
+        if (newTitle === '') {
             throw new Meteor.Error('invalid-title', 'Invalid Retro Item. HTML tags not allowed.')
         }
 

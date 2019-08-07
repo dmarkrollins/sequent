@@ -1,6 +1,7 @@
 /* eslint-env mocha */
 /* eslint-disable func-names, prefer-arrow-callback */
 import { Meteor } from 'meteor/meteor';
+import { Tracker } from 'meteor/tracker'
 import { Template } from 'meteor/templating';
 import { Random } from 'meteor/random'
 import { $ } from 'meteor/jquery';
@@ -75,6 +76,71 @@ if (Meteor.isClient) {
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.retroItem'), 'green items').to.have.length(1)
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.retroItem'), 'yellow items').to.have.length(1)
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.retroItem'), 'red items').to.have.length(1)
+            });
+        })
+
+        it('should not allow blank input - happy', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroBoard', {}, (el) => {
+                expect($(el).find('textarea#happy-textarea'), 'should have happy textarea').to.have.length(1)
+                $(el).find('textarea#happy-textarea').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#happy-textarea')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                setTimeout(() => {
+                    expect(Meteor.call).to.not.have.been.called
+                    expect($(el).find('textarea#happy-textarea').val(), 'should be blank').to.equal('')
+                    done()
+                }, 200)
+            });
+        })
+        it('should not allow blank input - meh', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroBoard', {}, (el) => {
+                expect($(el).find('textarea#meh-textarea'), 'should have meh textarea').to.have.length(1)
+                $(el).find('textarea#meh-textarea').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#meh-textarea')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                setTimeout(() => {
+                    expect(Meteor.call).to.not.have.been.called
+                    expect($(el).find('textarea#meh-textarea').val(), 'should be blank').to.equal('')
+                    done()
+                }, 200)
+            });
+        })
+
+        it('should not allow blank input - sad', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroBoard', {}, (el) => {
+                expect($(el).find('textarea#sad-textarea'), 'should have sad textarea').to.have.length(1)
+                $(el).find('textarea#sad-textarea').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#sad-textarea')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                setTimeout(() => {
+                    expect(Meteor.call).to.not.have.been.called
+                    expect($(el).find('textarea#sad-textarea').val(), 'should be blank').to.equal('')
+                    done()
+                }, 200)
             });
         })
 

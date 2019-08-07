@@ -16,19 +16,18 @@ Meteor.methods({
             throw new Meteor.Error('not-logged-in', 'You must be logged into a retro board!')
         }
 
+        const newTitle = cleanInput(title)
 
-        const theTitle = title ? title.trim() : ''
-
-        if (title === '') {
-            throw new Meteor.Error('title-required', 'You must provide title text!')
+        if (newTitle === '') {
+            throw new Meteor.Error('title-required', 'Invalid retro item! HTML Tags not allowed.')
         }
 
+        // if there are no active retros for this user create one
         let retro = Retros.findOne({
             createdBy: this.userId,
             status: Constants.RetroStatuses.ACTIVE
         })
 
-        // need to see if there is
         if (!retro) {
             const retroDoc = {}
             retroDoc.status = Constants.RetroStatuses.ACTIVE
@@ -41,15 +40,9 @@ Meteor.methods({
             retroId = retro._id
         }
 
-        const newTitle = cleanInput(title)
-
-        if (newTitle === '') {
-            throw new Meteor.Error('title-required', 'Invalid retro item! HTML Tags not allowed.')
-        }
-
         const doc = {}
         doc.itemId = Random.id()
-        doc.title = cleanInput(title)
+        doc.title = newTitle
         doc.itemType = itemType
         doc.status = Constants.RetroItemStatuses.PENDING
         doc.votes = 0

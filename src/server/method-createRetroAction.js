@@ -16,6 +16,7 @@ Meteor.methods({
 
         const action = {}
         action.title = cleanInput(title)
+
         action.status = Constants.RetroItemStatuses.PENDING
 
         if (action.title === '') {

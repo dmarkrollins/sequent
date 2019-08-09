@@ -157,29 +157,35 @@ Template.retroBoard.helpers({
 Template.retroBoard.events({
     'keypress div.greenItem textarea': function (event, instance) {
         if (event.which === 13) {
-            if (event.currentTarget.value !== '') {
-                instance.insertItem(Constants.RetroItemTypes.HAPPY, event.currentTarget.value)
+            const val = event.currentTarget.value.replace('\n', '').trim()
+            if (val !== '') {
+                instance.insertItem(Constants.RetroItemTypes.HAPPY, val)
                 event.currentTarget.value = ''
                 return false
             }
+            event.currentTarget.value = ''
         }
     },
     'keypress div.yellowItem textarea': function (event, instance) {
         if (event.which === 13) {
-            if (event.currentTarget.value !== '') {
-                instance.insertItem(Constants.RetroItemTypes.MEH, event.currentTarget.value)
+            const val = event.currentTarget.value.replace('\n', '').trim()
+            if (val !== '') {
+                instance.insertItem(Constants.RetroItemTypes.MEH, val)
                 event.currentTarget.value = ''
                 return false
             }
+            event.currentTarget.value = ''
         }
     },
     'keypress div.redItem textarea': function (event, instance) {
         if (event.which === 13) {
-            if (event.currentTarget.value !== '') {
-                instance.insertItem(Constants.RetroItemTypes.SAD, event.currentTarget.value)
+            const val = event.currentTarget.value.replace('\n', '').trim()
+            if (val !== '') {
+                instance.insertItem(Constants.RetroItemTypes.SAD, val)
                 event.currentTarget.value = ''
                 return false
             }
+            event.currentTarget.value = ''
         }
     },
     'click div.listItem': function (event, instance) {

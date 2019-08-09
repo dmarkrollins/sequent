@@ -2,8 +2,7 @@ module.exports = {
     "plugins": [
         "import",
         "meteor",
-        "mocha",
-        "underscore"
+        "mocha"
     ],
     "parser": "babel-eslint",
     "parserOptions": {

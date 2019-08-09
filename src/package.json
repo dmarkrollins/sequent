@@ -2,7 +2,7 @@
   "name": "sequent",
   "private": true,
   "description": "Sequent Retrospectives",
-  "version": "0.1.12",
+  "version": "0.1.14",
   "author": "6thcents (http://6thcents.com/)",
   "scripts": {
     "start": "bash local.sh",
@@ -13,7 +13,7 @@
     "chimp-test": "chimp --mocha --path=tests-acceptance"
   },
   "dependencies": {
-    "@babel/runtime": "7.0.0-beta.55",
+    "@babel/runtime": "^7.5.5",
     "bcrypt": "^3.0.6",
     "js-yaml": ">=3.13.1",
     "meteor-node-stubs": "^0.4.1",
@@ -30,11 +30,10 @@
     "eslint-import-resolver-meteor": "^0.4.0",
     "eslint-plugin-import": "^2.17.3",
     "eslint-plugin-jsx-a11y": "^6.2.1",
-    "eslint-plugin-meteor": "^4.2.2",
+    "eslint-plugin-meteor": "^6.0.0",
     "eslint-plugin-mocha": "^4.12.1",
     "eslint-plugin-promise": "^3.8.0",
     "eslint-plugin-react": "^7.13.0",
-    "eslint-plugin-underscore": "0.0.10",
     "faker": "^4.1.0",
     "sinon": "^4.5.0",
     "sinon-chai": "^2.14.0"

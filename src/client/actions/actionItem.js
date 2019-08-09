@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor'
 import { Template } from 'meteor/templating'
 import { $ } from 'meteor/jquery'
+import { _ } from 'meteor/underscore'
 import { ReactiveVar } from 'meteor/reactive-var'
 import { Toast } from '../common/toast'
 import { Constants } from '../../lib/constants'
@@ -38,6 +39,9 @@ Template.actionItem.helpers({
     },
     editing() {
         return Template.instance().editing.get()
+    },
+    decodedTitle() {
+        return _.unescape(this.data.title)
     }
 })
 
@@ -89,9 +93,13 @@ Template.actionItem.events({
 
     'keypress #actionItemTextarea': function (event, instance) {
         if (event.which === 13) {
-            const newTitle = event.currentTarget.value
-            instance.saveAction(event.currentTarget.dataset.id, newTitle)
+            const val = event.currentTarget.value.replace('\n', '').trim()
+            if (val !== '') {
+                instance.saveAction(event.currentTarget.dataset.id, val)
+                event.currentTarget.value = ''
+                return false
+            }
+            event.currentTarget.value = ''
         }
     }
-
 })

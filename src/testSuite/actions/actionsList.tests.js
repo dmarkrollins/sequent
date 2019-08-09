@@ -125,5 +125,56 @@ if (Meteor.isClient) {
                 expect(Meteor.call, 'calls send method').to.have.been.calledWith('sendActionsByEmail', retro._id, 'fake-email')
             });
         })
+
+        it('should save new action with return', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Meteor, 'call').yields(null)
+            sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
+            const retro = TestData.fakeRetro()
+            Retros.insert(retro)
+            RetroActions.insert(TestData.fakeRetroAction())
+            RetroActions.insert(TestData.fakeRetroAction())
+
+            withRenderedTemplate('actionsList', {}, (el, template) => {
+                expect($(el).find('input#actionInput')).to.have.length(1)
+
+                $(el).find('input#actionInput').val('new fake action')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('input#actionInput')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+                setTimeout(() => {
+                    expect(Meteor.call).to.have.been.called
+                    expect(Meteor.call).to.have.been.calledWith('createRetroAction', 'new fake action')
+                    done()
+                }, 200)
+            });
+        })
+
+        it('should not save new action if action is empty', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Meteor, 'call').yields(null)
+            sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
+            const retro = TestData.fakeRetro()
+            Retros.insert(retro)
+            RetroActions.insert(TestData.fakeRetroAction())
+            RetroActions.insert(TestData.fakeRetroAction())
+
+            withRenderedTemplate('actionsList', {}, (el, template) => {
+                expect($(el).find('input#actionInput')).to.have.length(1)
+
+                $(el).find('input#actionInput').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('input#actionInput')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+                setTimeout(() => {
+                    expect(Meteor.call).to.not.have.been.called
+                    done()
+                }, 200)
+            });
+        })
     })
 }

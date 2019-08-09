@@ -65,6 +65,28 @@ if (Meteor.isClient) {
             });
         })
 
+        it('displays correctly - unselected pending encoded', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            const selectedVar = new ReactiveVar(null)
+
+            const data = await TestData.fakeRetroAction({ title: '4 &gt; 3', status: Constants.RetroItemStatuses.PENDING })
+
+            const item = {
+                data,
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            withRenderedTemplate('actionItem', item, (el) => {
+                expect($(el).find('div.tappable-text')[0].innerText).to.equal('4 > 3')
+                const source = $(el).find('a.okButton img')[0].attributes.src.value
+                expect(source).to.equal('/ok-gray.png')
+                expect($(el).find('a.deleteButton'), 'no delete button').to.have.length(0)
+                expect($(el).find('a.editButton'), 'no edit button').to.have.length(0)
+            });
+        })
+
         it('displays correctly - unselected complete', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
 
@@ -231,6 +253,48 @@ if (Meteor.isClient) {
                 expect(Meteor.call, 'method should have been called').to.have.been.called
                 expect(Meteor.call).to.have.been.calledWith('updateActionTitle', item.data._id, 'new fake action')
                 expect(item.unHighlight, 'unhighlight should have been called').to.have.been.called
+            });
+        })
+
+        it('pending selected item - wont save on return if item is blank', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+
+            const selectedVar = new ReactiveVar(null)
+
+            const item = {
+                data: TestData.fakeRetroAction({ title: 'fake action', status: Constants.RetroItemStatuses.PENDING }),
+                unHighlight: sandbox.stub(),
+                selectedItemId: selectedVar
+            }
+
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('actionItem', item, (el) => {
+                selectedVar.set(item.data._id)
+                Tracker.flush()
+
+                expect($(el).find('a.editButton'), 'should have edit button').to.have.length(1)
+
+                $(el).find('a.editButton')[0].click()
+                Tracker.flush()
+
+                expect($(el).find('a.okButton'), 'should not have ok button').to.have.length(0)
+                expect($(el).find('a.editButton'), 'should not have edit button').to.have.length(0)
+                expect($(el).find('a.deleteButton'), 'should not have delete button').to.have.length(0)
+                expect($(el).find('textarea#actionItemTextarea'), 'should have edit text box').to.have.length(1)
+                expect($(el).find('textarea#actionItemTextarea')[0].value, 'textarea should have correct value').to.equal('fake action')
+                expect($(el).find('a#btnCancel'), 'should have cancel button').to.have.length(1)
+                expect($(el).find('a#btnSave'), 'should have save button').to.have.length(1)
+
+                $(el).find('textarea#actionItemTextarea').val('\n')
+
+                const evt = new Event('keypress') //eslint-disable-line
+                evt.which = 13
+                $(el).find('textarea#actionItemTextarea')[0].dispatchEvent(evt) //eslint-disable-line
+                Tracker.flush()
+
+                expect(Meteor.call, 'method should not have been called').to.not.have.been.called
+                done()
             });
         })
 

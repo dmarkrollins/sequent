@@ -18,7 +18,7 @@ You need to install Meteor - currently this project is on v1.7x
 - Clone this repo
 - cd sequent/src
 - From the root folder run the project with the command `meteor`
-- Sequent is currently on Meteor v1.7x
+- Sequent is currently on Meteor v1.8.1
 
 ## Core Features
 

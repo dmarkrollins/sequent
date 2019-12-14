@@ -65,7 +65,7 @@ if (Meteor.isServer) {
                 msg = error.reason;
             }
 
-            expect(msg, 'should throw no actions').to.be.equal('There are no actions to send!');
+            expect(msg, 'should throw no actions').to.be.equal('There are no active or recently completed actions to send!');
         })
 
         it('must have a target email', function () {

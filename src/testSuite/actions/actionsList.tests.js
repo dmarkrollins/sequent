@@ -77,8 +77,8 @@ if (Meteor.isClient) {
 
             withRenderedTemplate('actionsList', {}, (el) => {
                 expect($(el).find('input#actionInput'), 'action input').to.have.length(1)
-                expect($(el).find('button#btnSend'), 'send button').to.have.length(0)
-                expect($(el).find('button#btnShowCompleted'), 'show completed').to.have.length(0)
+                expect($(el).find('button#btnSend'), 'send button').to.have.length(1)
+                expect($(el).find('button#btnShowCompleted'), 'show completed').to.have.length(1)
                 expect($(el).find('div.retroItem'), 'items').to.have.length(0)
                 expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
             });

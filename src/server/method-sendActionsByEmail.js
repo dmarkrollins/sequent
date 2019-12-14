@@ -48,7 +48,7 @@ Meteor.methods({
         }).fetch()
 
         if (actions.length === 0) {
-            throw new Meteor.Error('no-actions', 'There are no actions to send!')
+            throw new Meteor.Error('no-actions', 'There are no active or recently completed actions to send!')
         }
 
         const data = {}

@@ -111,7 +111,7 @@ Template.actionsList.events({
                         // console.log('Action item send error', err)
                         Toast.showError('Could not send action items - try again later')
                     } else {
-                        Toast.showSuccess('Action items have been sent!')
+                        Toast.showSuccess('Action items have been sent - check spam folder too!')
                     }
                 })
             }

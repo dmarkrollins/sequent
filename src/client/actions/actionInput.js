@@ -4,12 +4,8 @@ import { Retros, RetroActions } from '../../lib/sequent'
 import './actionInput.html'
 
 Template.actionInput.helpers({
-    shouldShowSend() {
-        const items = RetroActions.find().fetch().length
-        if (items > 0 && this.showSend) {
-            return true
-        }
-        return false
+    shouldShowButtons() {
+        return this.showSend
     },
     retroId() {
         const retro = Retros.findOne()

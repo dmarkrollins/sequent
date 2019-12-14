@@ -1,8 +1,8 @@
 <template name="actionsList">
-    
+
     <div id="listWrapper" class="fullscreen" style="background-image: url({{backGround}})">
-        
-        {{> actionInput showSend=true}}
+
+        {{> actionInput showSend=true showCompleted=showCompletedItems}}
 
         {{#if Template.subscriptionsReady}}
             {{#each item}}
@@ -10,10 +10,17 @@
                     {{> actionItem currentItem}}
                 </div>
             {{/each}}
+            <div class="retroItemNoBorder">
+                {{#if hasMoreActions}}
+                    <button id="btnGetMore" class="btn btn-primary" style="margin-top: 12px;">More Actions</button>
+                {{else}}
+                    <span style="color: #aaa;">There are no more action items to display.</span>
+                {{/if}}
+            </div>
         {{else}}
             {{> spinner}}
         {{/if}}
-        
-    </div>            
-    
+
+    </div>
+
 </template>

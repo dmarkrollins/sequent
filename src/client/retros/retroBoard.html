@@ -25,11 +25,9 @@
                     <div class="tab-content">
                         <div role="tabpanel" class="tab-pane active" id="happy">
                             <div class="fullheight-green text-center" style="padding-top: 5px;">
-                                {{#if notFrozen}}
                                     <div class="greenItem">
-                                        <textarea rows="1" placeholder="{{happyPlaceholder}}"></textarea>
+                                        <textarea rows="1" placeholder="{{happyPlaceholder}}" {{frozenEntry}}></textarea>
                                     </div>
-                                {{/if}}
                                 {{#each greenItem}}
                                     <div class="retroItem {{itemClass}}">
                                         {{> retroItem currentItem }}
@@ -39,11 +37,9 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="meh">
                             <div class="fullheight-yellow text-center" style="padding-top: 5px;">
-                                {{#if notFrozen}}
                                     <div class="yellowItem" >
-                                        <textarea rows="1" placeholder="{{mehPlaceholder}}"></textarea>
+                                        <textarea rows="1" placeholder="{{mehPlaceholder}}" {{frozenEntry}}></textarea>
                                     </div>
-                                {{/if}}
                                 {{#each yellowItem}}
                                     <div class="retroItem {{itemClass}}">
                                         {{> retroItem currentItem }}
@@ -53,11 +49,9 @@
                         </div>
                         <div role="tabpanel" class="tab-pane" id="sad">
                             <div class="fullheight-red text-center" style="padding-top: 5px;">
-                                {{#if notFrozen}}
                                     <div class="redItem" >
-                                        <textarea rows="1" placeholder="{{sadPlaceholder}}"></textarea>
+                                        <textarea rows="1" placeholder="{{sadPlaceholder}}" {{frozenEntry}}></textarea>
                                     </div>
-                                {{/if}}
                                 {{#each redItem}}
                                     <div class="retroItem {{itemClass}}">
                                         {{> retroItem currentItem }}
@@ -72,11 +66,9 @@
                 <div id="fullSizeCol" class="hidden-sm hidden-xs col-md-12">
                     <div class="row row-eq-height">
                         <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
-                            {{#if notFrozen}}
                                 <div class="greenItem">
-                                    <textarea id="happy-textarea" rows="1" placeholder="{{happyPlaceholder}}"></textarea>
+                                    <textarea id="happy-textarea" rows="1" placeholder="{{happyPlaceholder}}" {{frozenEntry}}></textarea>
                                 </div>
-                            {{/if}}
                             {{#each greenItem}}
                                 <div class="retroItem {{itemClass}}">
                                     {{> retroItem currentItem }}
@@ -84,11 +76,9 @@
                             {{/each}}
                         </div>
                         <div class="col-md-4 fullheight-yellow text-center" style="display: table-cell;">
-                            {{#if notFrozen}}
                                 <div class="yellowItem">
-                                    <textarea id="meh-textarea" rows="1" placeholder="{{mehPlaceholder}}"></textarea>
+                                    <textarea id="meh-textarea" rows="1" placeholder="{{mehPlaceholder}}" {{frozenEntry}}></textarea>
                                 </div>
-                            {{/if}}
                             {{#each yellowItem}}
                                 <div class="retroItem {{itemClass}}">
                                     {{> retroItem currentItem}}
@@ -96,11 +86,9 @@
                             {{/each}}
                         </div>
                         <div class="col-md-4 fullheight-red text-center" style="display: table-cell;">
-                            {{#if notFrozen}}
                                 <div class="redItem">
-                                    <textarea id="sad-textarea" rows="1" placeholder="{{sadPlaceholder}}"></textarea>
+                                    <textarea id="sad-textarea" rows="1" placeholder="{{sadPlaceholder}}" {{frozenEntry}}></textarea>
                                 </div>
-                            {{/if}}
                             {{#each redItem}}
                                 <div class="retroItem {{itemClass}}">
                                     {{> retroItem currentItem}}

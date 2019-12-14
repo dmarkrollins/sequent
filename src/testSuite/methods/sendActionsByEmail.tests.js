@@ -2,6 +2,7 @@
 /* eslint-disable func-names, prefer-arrow-callback */
 import { Meteor } from 'meteor/meteor';
 import { Random } from 'meteor/random'
+import { _ } from 'meteor/underscore'
 import chai, { expect } from 'chai';
 import sinon from 'sinon';
 import sinonChai from 'sinon-chai'
@@ -48,34 +49,6 @@ if (Meteor.isServer) {
 
             expect(msg, 'should throw not logged in').to.be.equal('You must be logged in to perform this action!');
         })
-
-        // it('must be valid retro', function () {
-        //     const context = { userId };
-        //     let msg = '';
-        //     sandbox.stub(Retros, 'findOne').returns(undefined)
-
-        //     try {
-        //         subject.apply(context, ['fake-id', 'fake-email']);
-        //     } catch (error) {
-        //         msg = error.reason;
-        //     }
-
-        //     expect(msg, 'should throw retro not found').to.be.equal('Retro not found!');
-        // })
-
-        // it('must be the retro owner', function () {
-        //     const context = { userId };
-        //     let msg = '';
-        //     sandbox.stub(Retros, 'findOne').returns(TestData.fakeRetro())
-
-        //     try {
-        //         subject.apply(context, ['fake-id', 'fake-email']);
-        //     } catch (error) {
-        //         msg = error.reason;
-        //     }
-
-        //     expect(msg, 'should throw not retro owner').to.be.equal('You are not the owner of this retro!');
-        // })
 
         it('there must be actions', function () {
             const context = { userId };
@@ -170,10 +143,8 @@ if (Meteor.isServer) {
             expect(args[2], 'user name').to.equal('Fakeusername Action Items')
             const data = {}
             data.retroName = 'Fakeusername'
-            data.actions = []
-            actionItems.forEach((action) => {
-                data.actions.push({ status: action.status, title: action.title.toProperCase() })
-            })
+            data.actions = _.sortBy(actionItems, 'status')
+
             expect(args[4], 'email data').to.deep.equal(data)
         })
     })

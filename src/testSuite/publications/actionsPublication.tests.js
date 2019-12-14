@@ -17,9 +17,11 @@ if (Meteor.isServer) {
 
     describe('Action Publication', function () {
         let sandbox;
+        let userId
 
         beforeEach(function () {
-            sandbox = sinon.sandbox.create();
+            sandbox = sinon.createSandbox()
+            userId = Random.id()
         });
 
         afterEach(function () {
@@ -27,21 +29,95 @@ if (Meteor.isServer) {
             RetroActions.remove({})
         });
 
-        it('actions published correctly', async function (done) {
-            sandbox.stub(Meteor, 'userId').returns(Random.id());
-
-            RetroActions.insert(await TestData.fakeRetroAction())
+        it('open actions published correctly', function (done) {
+            const collector = new PublicationCollector({ userId: userId });
+            sandbox.stub(Meteor, 'userId').returns(userId);
             const expired = moment().subtract(2, 'days');
-            RetroActions.insert(await TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE, completedAt: new Date() }))
-            RetroActions.insert(await TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE, completedAt: expired.toDate() }))
-
-            const collector = new PublicationCollector();
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE, completedAt: expired.toDate(), createdBy: userId }))
 
             collector.collect('open-actions', null, (collections) => {
-                // console.log('The collections', JSON.stringify(collections, null, 4));
+                // console.log('The open items', JSON.stringify(collections, null, 4));
                 const actions = collections['retro-actions'];
-                expect(actions).to.have.length(2);
-                done();
+                try {
+                    expect(actions).to.have.length(2);
+                    done();
+                } catch (error) {
+                    done(error)
+                }
+            });
+        })
+
+        it('all actions published correctly', function (done) {
+            const collector = new PublicationCollector({ userId: userId });
+            sandbox.stub(Meteor, 'userId').returns(userId);
+            const expired = moment().subtract(2, 'days');
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE, completedAt: expired.toDate(), createdBy: userId }))
+            const search = {
+                limit: 25,
+                showAll: true
+            }
+
+            collector.collect('all-actions', search, (collections) => {
+                // console.log('All Items', JSON.stringify(collections, null, 4));
+                const actions = collections['retro-actions'];
+                try {
+                    expect(actions).to.have.length(3);
+                    done();
+                } catch (error) {
+                    done(error)
+                }
+            });
+        })
+
+        it('all actions published just pending', function (done) {
+            const collector = new PublicationCollector({ userId: userId });
+            sandbox.stub(Meteor, 'userId').returns(userId);
+            const expired = moment().subtract(2, 'days');
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.COMPLETE, completedAt: expired.toDate(), createdBy: userId }))
+            const search = {
+                limit: 25,
+                showAll: false
+            }
+
+            collector.collect('all-actions', search, (collections) => {
+                // console.log('All Items', JSON.stringify(collections, null, 4));
+                const actions = collections['retro-actions'];
+                try {
+                    expect(actions).to.have.length(2);
+                    done();
+                } catch (error) {
+                    done(error)
+                }
+            });
+        })
+
+        it('all actions published over limit', function (done) {
+            const collector = new PublicationCollector({ userId: userId });
+            sandbox.stub(Meteor, 'userId').returns(userId);
+            const expired = moment().subtract(2, 'days');
+            for (let i = 0; i < 30; i += 1) {
+                RetroActions.insert(TestData.fakeRetroAction({ status: Constants.RetroItemStatuses.PENDING, createdBy: userId }))
+            }
+            const search = {
+                limit: 25,
+                showAll: true
+            }
+
+            collector.collect('all-actions', search, (collections) => {
+                // console.log('All Items', JSON.stringify(collections, null, 4));
+                const actions = collections['retro-actions'];
+                try {
+                    expect(actions).to.have.length(25);
+                    done();
+                } catch (error) {
+                    done(error)
+                }
             });
         })
     })

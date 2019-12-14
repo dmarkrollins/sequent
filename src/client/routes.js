@@ -59,7 +59,6 @@ RetroRouter.route('/board', {
 RetroRouter.route('/actions', {
     subscriptions: function (params) {
         this.register('retros', Meteor.subscribe('active-retros'))
-        this.register('actions', Meteor.subscribe('open-actions'))
         this.register('settings', Meteor.subscribe('settings'))
     },
     action: function () {

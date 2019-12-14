@@ -9,8 +9,6 @@ html, body {
     display: table;
 }
 
-
-
 .backgroundBlue {
     background-image: url(graypattern.png);
     /* background: rgb(206,206,206); 
@@ -100,6 +98,14 @@ html, body {
     border: 1px solid #000000;
 }
 
+.retroItemNoBorder {
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 12px;
+    max-width: 95%;
+    margin-bottom: 21px;
+}
+
 .greenItem {
     background-color: transparent;
     padding: 7px;
@@ -154,6 +160,24 @@ html, body {
     padding-left: 7px;
 }
 
+.greenItem textarea:disabled {
+    margin-top: 3px;
+    font-size: 1.5em;
+    width: 100%;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #123652; /*5e9671; */
+    background-color: #718EA4;/*ace0bf;*/
+    box-shadow: none;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    padding-left: 7px;
+    text-align: center;
+    color: #000;
+}
+
 .yellowItem textarea {
     margin-top: 3px;
     font-size: 1.5em;
@@ -168,6 +192,25 @@ html, body {
     outline: none;
     resize: none;
     padding-left: 7px;
+    color: #000;
+}
+
+.yellowItem textarea:disabled {
+    margin-top: 3px;
+    font-size: 1.5em;
+    width: 100%;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #806515;/*944a4a;*/
+    background-color: #ffeaaa;/*f3b5b5;*/
+    box-shadow: none;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    padding-left: 7px;
+    text-align: center;
+    color: #000;
 }
 
 .redItem textarea {
@@ -184,6 +227,25 @@ html, body {
     outline: none;
     resize: none;
     padding-left: 7px;
+    color: #000;
+}
+
+.redItem textarea:disabled {
+    margin-top: 3px;
+    font-size: 1.5em;
+    width: 100%;
+    border-radius: 4px 4px 4px 4px;
+    -moz-border-radius: 4px 4px 4px 4px;
+    -webkit-border-radius: 4px 4px 4px 4px;
+    border: 0px solid #803315;/*b3a703;*/
+    background-color: #ffc2aa;/*ebebad;*/
+    box-shadow: none;
+    overflow: hidden;
+    outline: none;
+    resize: none;
+    padding-left: 7px;
+    text-align: center;
+    color: #000;
 }
 
 .listItem {
@@ -453,4 +515,23 @@ textarea.retro-edit {
     display: block;
     z-index: 999;
 }
-  
+
+.btn-primary {
+    
+}
+
+/* .btn-primary {
+    background-color: rgb(207,186,120);
+    color: #fff;
+    border-color:rgb(175, 150, 65);
+    border-radius:4px;
+    margin-right: 7px;
+}
+.btn-primary:hover,
+.btn-primary:focus,
+.btn-primary:active    {
+    background-color: rgb(189, 167, 96) !important;
+    color: #FFF;
+    border-color: rgb(155, 132, 58);
+}
+   */

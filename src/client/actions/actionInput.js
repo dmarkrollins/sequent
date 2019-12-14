@@ -17,5 +17,8 @@ Template.actionInput.helpers({
             return retro._id
         }
         return null
+    },
+    completedIcon() {
+        return this.showCompleted ? 'fa-toggle-on' : 'fa-toggle-off'
     }
 })

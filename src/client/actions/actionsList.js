@@ -14,13 +14,32 @@ import './actionInput.html'
 import './actionItem.html'
 
 Template.actionsList.onCreated(function () {
-    this.currentlyHighlighted = null
-    this.selectedItemId = new ReactiveVar(null)
+    const self = this
+    self.currentlyHighlighted = null
+    self.selectedItemId = new ReactiveVar(null)
+    self.limit = new ReactiveVar(Sequent.pageSize())
+    self.loaded = new ReactiveVar()
+
+    self.autorun(function () {
+        const showAll = Session.get('showAllCompleted')
+        const search = { showAll, limit: self.limit.get() }
+        const subscription = self.subscribe('all-actions', search)
+
+        if (subscription.ready()) {
+            const count = RetroActions.find().count()
+            self.loaded.set(count)
+        }
+    })
 })
 
 Template.actionsList.helpers({
     item() {
-        return RetroActions.find()
+        if (Session.get('showAllCompleted')) {
+            return RetroActions.find({}, { sort: { completedAt: 1 } })
+        }
+        return RetroActions.find({
+            status: Constants.RetroItemStatuses.PENDING
+        })
     },
     backGround() {
         const settings = Sequent.getSettings()
@@ -34,7 +53,20 @@ Template.actionsList.helpers({
             },
             selectedItemId: Template.instance().selectedItemId
         }
-    }
+    },
+    showCompletedItems() {
+        return Session.get('showAllCompleted')
+    },
+    hasMoreActions() {
+        const loaded = Template.instance().loaded.get()
+        const limit = Template.instance().limit.get()
+
+        if (loaded === limit) {
+            return true
+        }
+
+        return false
+    },
 })
 
 Template.actionsList.events({
@@ -84,5 +116,12 @@ Template.actionsList.events({
                 })
             }
         })
+    },
+    'click #btnShowCompleted': function (event, instance) {
+        Session.set('showAllCompleted', !Session.get('showAllCompleted'))
+    },
+    'click #btnGetMore': function (event, instance) {
+        let newLimit = instance.limit.get()
+        instance.limit.set(newLimit += Sequent.pageSize())
     }
 })

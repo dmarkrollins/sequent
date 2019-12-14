@@ -158,9 +158,9 @@ if (Meteor.isClient) {
 
             withRenderedTemplate('retroBoard', {}, (el) => {
                 expect($(el).find('div#fullSizeCol div.row div.col-md-4'), 'column count').to.have.length(3)
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.greenItem'), 'green input').to.have.length(0)
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.yellowItem'), 'yellow input').to.have.length(0)
-                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.redItem'), 'red input').to.have.length(0)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.greenItem textarea'), 'green input').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.yellowItem textarea'), 'yellow input').to.have.length(1)
+                expect($(el).find('div#fullSizeCol div.row div.fullheight-red div.redItem textarea'), 'red input').to.have.length(1)
 
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-green div.retroItem'), 'green items').to.have.length(1)
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow div.retroItem'), 'yellow items').to.have.length(1)

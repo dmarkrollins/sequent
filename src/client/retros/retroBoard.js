@@ -102,18 +102,18 @@ Template.retroBoard.helpers({
             return list
         }
     },
-    notFrozen() {
+    frozenEntry(){
         const retro = Retros.findOne()
 
         if (!retro) {
-            return true
+            return ''
         }
 
         if (retro.status === Constants.RetroStatuses.FROZEN) {
-            return false
+            return 'disabled'
         }
 
-        return true
+        return ''
     },
     itemClass() {
         const retro = Retros.findOne()

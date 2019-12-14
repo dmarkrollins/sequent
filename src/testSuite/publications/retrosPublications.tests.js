@@ -30,12 +30,12 @@ if (Meteor.isServer) {
             Retros.remove({})
         });
 
-        it('active retros published correctly', async function (done) {
+        it('active retros published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
-            Retros.insert(await TestData.fakeRetro({ createdBy: userId }))
-            Retros.insert(await TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
-            archivedId = Retros.insert(await TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId }))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
+            archivedId = Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
 
             collector.collect('active-retros', null, (collections) => {
                 // console.log('The collections', JSON.stringify(collections, null, 4));
@@ -49,12 +49,12 @@ if (Meteor.isServer) {
             });
         })
 
-        it('archived retros published correctly', async function (done) {
+        it('archived retros published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
-            Retros.insert(await TestData.fakeRetro({ createdBy: userId }))
-            Retros.insert(await TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
-            archivedId = Retros.insert(await TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId }))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
+            archivedId = Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
 
             collector.collect('archived-retros', null, (collections) => {
                 // console.log('The collections', JSON.stringify(collections, null, 4));
@@ -68,12 +68,12 @@ if (Meteor.isServer) {
             });
         })
 
-        it('single archived retro published correctly', async function (done) {
+        it('single archived retro published correctly', function (done) {
             const collector = new PublicationCollector({ userId: userId });
 
-            Retros.insert(await TestData.fakeRetro({ createdBy: userId }))
-            Retros.insert(await TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
-            archivedId = Retros.insert(await TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId }))
+            Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.FROZEN }))
+            archivedId = Retros.insert(TestData.fakeRetro({ createdBy: userId, status: Constants.RetroStatuses.ARCHIVED }))
 
             collector.collect('single-archived-retro', archivedId, (collections) => {
                 // console.log('The collections', JSON.stringify(collections, null, 4));

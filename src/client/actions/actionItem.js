@@ -42,6 +42,9 @@ Template.actionItem.helpers({
     },
     decodedTitle() {
         return _.unescape(this.data.title)
+    },
+    titleColor() {
+        return this.data.completedAt ? '#aaa' : '#444'
     }
 })
 

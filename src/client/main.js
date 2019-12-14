@@ -25,6 +25,7 @@ const preLoadImages = () => {
 Meteor.startup(() => {
     BlazeLayout.setRoot('body')
     Session.set('sortDescending', false)
+    Session.set('showAllCompleted', false)
     preLoadImages()
 })
 

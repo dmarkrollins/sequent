@@ -22,6 +22,9 @@ const Sequent = {
     defaultConfirmMsg: 'Are you sure?',
     ToastTimeOut: 3000,
     EMAIL_TARGET: 'emailTarget',
+    pageSize() {
+        return 25
+    },
     getSettings() {
         let settings = Settings.findOne()
 

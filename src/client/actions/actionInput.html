@@ -1,16 +1,19 @@
-<template name="actionInput">    
+<template name="actionInput">
     <div class="row">
-        <div class="col-sm-12" style="color: #fff; padding: 12px 12px 7px 12px;">
-            <div class="row" style="padding-left: 12px; padding-right:12px; margin-bottom: 7px;">
-                <div class="col-sm-6 col-sm-offset-3 col-xs-12">
-                    {{#if shouldShowSend}}
-                        <input class="form-control" id="actionInput" style="font-size: 1.5em; border: 1px solid #999; width: 75%; display:inline-block;" placeholder="Enter an action item">
-                        <button id="btnSend" class="btn btn-default" data-id={{retroId}} style="display: inline-block; margin-top: -7px;"><i class="fa fa-share-alt" aria-hidden="true" title="Email action items list to someone."></i> Share</button>
-                    {{else}}
-                        <input class="form-control" id="actionInput" style="font-size: 1.5em; border: 1px solid #999;" placeholder="Enter an action item">
-                    {{/if}}
+        <div class="col-sm-12" style="color: #fff; padding: 12px;">
+            <div class="row" style="margin-bottom: 7px;">
+                <div class="col-sm-8 col-sm-offset-2 col-xs-12 text-center">
+                    <div style="width: 85%; margin: 0 auto;">
+                        {{#if shouldShowSend}}
+                            <input class="form-control" id="actionInput" style="font-size: 1.5em; border: 1px solid #999; width: 50%; display:inline-block; height:35px; margin-right: 7px;" placeholder="Enter action item">
+                            <button id="btnSend" class="btn btn-default" data-id={{retroId}} style="padding: 1px 17px 1px 17px; display: inline-block; margin-top: -7px; margin-right: 7px;" title="Email action items list to someone"><i class="fa fa-share-alt" aria-hidden="true" style="position: relative; top: 4px;" ><br /><span style="font-size: 6pt; position: relative; top: -3px;">Send</span></i></button>
+                            <button id="btnShowCompleted" class="btn btn-default" data-id={{retroId}} style="padding: 1px 7px 1px 7px; display: inline-block; margin-top: -7px;" title="Show all completed action items"><i class="fa {{completedIcon}}" aria-hidden="true" style="position: relative; top: 4px;"><br /><span style="font-size: 6pt; position: relative; top: -3px;">Completed</span></i></button>
+                        {{else}}
+                            <input class="form-control" id="actionInput" style="font-size: 1.5em; border: 1px solid #999; width: 85%; display:inline-block;" placeholder="Enter an action item">
+                        {{/if}}
+                    </div>
                 </div>
             </div>
         </div>
-    </div>        
+    </div>
 </template>

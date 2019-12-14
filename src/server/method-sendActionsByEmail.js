@@ -1,4 +1,5 @@
 import { Meteor } from 'meteor/meteor'
+import { _ } from 'meteor/underscore'
 import { Retros, RetroActions } from '../lib/sequent'
 import { Constants } from '../lib/constants'
 import { ServerUtils } from './serverUtils'
@@ -56,9 +57,8 @@ Meteor.methods({
 
         data.retroName = user.username.toProperCase()
         data.actions = []
-        actions.forEach((action) => {
-            data.actions.push({ status: action.status, title: action.title.toProperCase() })
-        })
+
+        data.actions = _.sortBy(actions, 'status')
 
         const from = process.env.FROM_EMAIL_ADDRESS || 'noreply@6thcents.com'
 

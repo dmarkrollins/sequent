@@ -20,7 +20,9 @@ Template.retroNav.helpers({
         return Meteor.user().username.toProperCase()
     },
     actionCount() {
-        return RetroActions.find().count()
+        return RetroActions.find({
+            status: Constants.RetroItemStatuses.PENDING
+        }).count()
     },
     badgeClass() {
         if (RetroActions.find().count() > 0) {

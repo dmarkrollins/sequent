@@ -56,7 +56,7 @@ if (Meteor.isClient) {
             sandbox.restore()
         })
 
-        it('displays list correctly with team email', function () {
+        it('displays list correctly with items', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
             RetroActions.insert(TestData.fakeRetroAction())
@@ -64,19 +64,21 @@ if (Meteor.isClient) {
 
             withRenderedTemplate('actionsList', {}, (el) => {
                 expect($(el).find('input#actionInput'), 'action input').to.have.length(1)
+                expect($(el).find('button#btnShowCompleted'), 'show completed').to.have.length(1)
                 expect($(el).find('button#btnSend'), 'send button').to.have.length(1)
                 expect($(el).find('div.retroItem'), 'items').to.have.length(2)
                 expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
             });
         })
 
-        it('displays list correctly with no team email', function () {
+        it('displays list correctly with no items', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
             withRenderedTemplate('actionsList', {}, (el) => {
                 expect($(el).find('input#actionInput'), 'action input').to.have.length(1)
                 expect($(el).find('button#btnSend'), 'send button').to.have.length(0)
+                expect($(el).find('button#btnShowCompleted'), 'show completed').to.have.length(0)
                 expect($(el).find('div.retroItem'), 'items').to.have.length(0)
                 expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
             });

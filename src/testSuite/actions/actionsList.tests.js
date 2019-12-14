@@ -67,7 +67,7 @@ if (Meteor.isClient) {
                 expect($(el).find('button#btnShowCompleted'), 'show completed').to.have.length(1)
                 expect($(el).find('button#btnSend'), 'send button').to.have.length(1)
                 expect($(el).find('div.retroItem'), 'items').to.have.length(2)
-                expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
+                expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.contain('fakebackground.png')
             });
         })
 
@@ -80,7 +80,7 @@ if (Meteor.isClient) {
                 expect($(el).find('button#btnSend'), 'send button').to.have.length(1)
                 expect($(el).find('button#btnShowCompleted'), 'show completed').to.have.length(1)
                 expect($(el).find('div.retroItem'), 'items').to.have.length(0)
-                expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
+                expect($(el).find('div#listWrapper')[0].style.backgroundImage).to.contain('fakebackground.png')
             });
         })
 

@@ -50,7 +50,7 @@ if (Meteor.isClient) {
                 expect($(el).find('#btnCancel')).to.have.length(1)
                 expect($(el).find('#btnCreateNewTeam')).to.have.length(1)
                 expect($(el).find('span.error-message')).to.have.length(1)
-                expect($(el).find('div.fullscreen')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
+                expect($(el).find('div.fullscreen')[0].style.backgroundImage).to.contains('fakebackground.png')
             });
         })
     })

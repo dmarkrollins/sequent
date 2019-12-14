@@ -14,12 +14,10 @@ import { TestData } from '../testData'
 
 const should = chai.should();
 
-if (Meteor.isClient){
-
+if (Meteor.isClient) {
     import '../../client/common/settings.js'
 
-    describe('Settings Dialog', function (){
-
+    describe('Settings Dialog', function () {
         let userId
         let sandbox
 
@@ -30,7 +28,7 @@ if (Meteor.isClient){
             sadPlaceholder: 'sad'
         }
 
-        beforeEach(function (){
+        beforeEach(function () {
             sandbox = sinon.createSandbox()
             userId = Random.id()
             Template.registerHelper('_', key => key);
@@ -41,17 +39,16 @@ if (Meteor.isClient){
             }));
         });
 
-        afterEach(function (){
+        afterEach(function () {
             Template.deregisterHelper('_')
             StubCollections.restore()
             sandbox.restore()
         });
 
         it('items show up on dialog', function () {
-
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
-            withRenderedTemplate('settings', null, el => {
+            withRenderedTemplate('settings', null, (el) => {
                 expect($(el).find('#happyPlaceholder')).to.have.length(1)
                 expect($(el).find('#mehPlaceholder')).to.have.length(1)
                 expect($(el).find('#sadPlaceholder')).to.have.length(1)
@@ -59,27 +56,24 @@ if (Meteor.isClient){
                 expect($(el).find('#selectedBackground')).to.have.length(1)
                 expect($(el).find('span.error-message')).to.have.length(1)
                 expect($(el).find('#btnCancel')).to.have.length(1)
-                expect($(el).find('div.fullscreen')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
-            });          
-
+                expect($(el).find('div.fullscreen')[0].style.backgroundImage).to.contains('fakebackground.png')
+            });
         })
 
         it('items display with correct data', function () {
-
             Settings.insert(TestData.fakeSettings())
 
-            TestData.fakeBackgroundsArray().forEach(function(item) {
+            TestData.fakeBackgroundsArray().forEach(function (item) {
                 Backgrounds.insert(item)
-            }) 
+            })
 
-            withRenderedTemplate('settings', {}, el => {
+            withRenderedTemplate('settings', {}, (el) => {
                 expect($(el).find('#happyPlaceholder')[0].value).to.equal('Fake happy placeholder')
                 expect($(el).find('#mehPlaceholder')[0].value).to.equal('Fake meh placeholder')
                 expect($(el).find('#sadPlaceholder')[0].value).to.equal('Fake sad placeholder')
                 expect($(el).find('#selectedBackground')[0]).to.have.length(6)
                 expect($(el).find('#selectedBackground')[0][1].selected).to.equal(true)
-            });          
-
+            });
         })
     })
 }

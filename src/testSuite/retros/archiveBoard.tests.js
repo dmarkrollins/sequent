@@ -69,7 +69,7 @@ if (Meteor.isClient) {
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-green-archive div.retroItem')).to.have.length(1)
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-yellow-archive div.retroItem')).to.have.length(1)
                 expect($(el).find('div#fullSizeCol div.row div.fullheight-red-archive div.retroItem')).to.have.length(1)
-                expect($(el).find('div#boardWrapper')[0].style.backgroundImage).to.equal('url("fakebackground.png")')
+                expect($(el).find('div#boardWrapper')[0].style.backgroundImage).to.contains('fakebackground.png')
                 expect($(el).find('div.grayItem textarea'), 'header items').to.have.length(6)
                 expect($(el).find('div.grayItem textarea#happy-placeholder[placeholder="Fake happy placeholder"]'), 'happy placeholder').to.have.length(2)
                 expect($(el).find('div.grayItem textarea#meh-placeholder[placeholder="Fake meh placeholder"]'), 'meh placeholder').to.have.length(2)

@@ -109,7 +109,11 @@ Template.actionsList.events({
                 Meteor.call('sendActionsByEmail', event.currentTarget.dataset.id, email, function (err) {
                     if (err) {
                         // console.log('Action item send error', err)
-                        Toast.showError('Could not send action items - try again later')
+                        if (err.error === 'no-actions') {
+                            Toast.showError(err.reason)
+                        } else {
+                            Toast.showError('Could not send action items - try again later')
+                        }
                     } else {
                         Toast.showSuccess('Action items have been sent - check spam folder too!')
                     }

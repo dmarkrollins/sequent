@@ -56,9 +56,16 @@ Meteor.methods({
         const user = Meteor.users.findOne(this.userId)
 
         data.retroName = user.username.toProperCase()
-        data.actions = []
+        data.currentYear = new Date().getFullYear()
+        // turn into html list
+        let items = '<tr><th>Action Item</th><th class="text-center" style="width: 25%;">Status</th></tr>'
+        data.retroItems = _.sortBy(actions, 'status').forEach((item) => {
+            const isComplete = (item.status === Constants.RetroItemStatuses.COMPLETE) ? 'Complete' : 'Active'
+            const itemStyle = (item.status === Constants.RetroItemStatuses.COMPLETE) ? 'color: #999; padding: 4px 4px 4px 0px; vertical-align: top;' : 'padding: 4px 4px 4px 0px; vertical-align: top;'
+            items += `<tr></tr><td style="${itemStyle}">${item.title}</td><td style="${itemStyle}">${isComplete}</td></tr>`
+        })
 
-        data.actions = _.sortBy(actions, 'status')
+        data.retroItems = items
 
         const from = process.env.FROM_EMAIL_ADDRESS || 'noreply@6thcents.com'
 

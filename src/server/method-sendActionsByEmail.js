@@ -67,7 +67,7 @@ Meteor.methods({
 
         data.retroItems = items
 
-        const from = process.env.FROM_EMAIL_ADDRESS || 'noreply@6thcents.com'
+        const from = process.env.FROM_EMAIL_ADDRESS || 'sequent@6thcents.com'
 
         ServerUtils.sendHtmlEmail(newEmail, from, `${user.username.toProperCase()} Action Items`, 'actionItems', data)
     }

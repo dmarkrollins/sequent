@@ -40,7 +40,7 @@ ServerUtils.sendHtmlEmail = (to, from, subject, templateName, data) => {
     Meteor.defer(function () {
         Email.send({
             to: to,
-            from: from || 'noreply@6thcents.com',
+            from: from || 'sequent@6thcents.com',
             subject: subject,
             html: body
         })

@@ -60,6 +60,20 @@ Add, change delete actions. Tap on the red action item badge to manage action it
 
 <img src="/src/private/actions.jpg" width="400">
 
+#### Toggle the Showing of Completed Actions
+
+On the Action Items List page you can toggle showing __all__ action items.
+
+By default completed items are not shown. To see them tap the show completed button:
+
+<img src="/src/private/show-completed-actions.jpg" width="400">
+
+The slider icon on the show completed button will indicate you have toggled complete items ON.
+
+<img src="/src/private/showing-completed-actions.jpg" width="400">
+
+Action Item are listed as a continuous scrolling list of actions in blocks of 25 items. 
+
 #### Sending Action items Via Email
 
 Post-retro you can share action items with your team by tapping the share button from the Action Items List page.
@@ -83,6 +97,7 @@ By default action items are sent from _noreply@6thcents.com_ but you can customi
 The action item report looks something like this:
 
 <img src="/src/private/actionReport.jpg" width="400">
+
 
 ### Tools
 

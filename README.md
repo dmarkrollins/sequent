@@ -80,6 +80,10 @@ The email iaddress values you enter will get "remembered" in local storage on _t
 
 By default action items are sent from _noreply@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
 
+The action item report looks something like this:
+
+<img src="/src/private/actionReport.jpg" width="400">
+
 ### Tools
 
 Sequent has a few tools to make sure your retros are the best they can be.

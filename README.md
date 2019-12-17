@@ -60,19 +60,25 @@ Add, change delete actions. Tap on the red action item badge to manage action it
 
 <img src="/src/private/actions.jpg" width="400">
 
+Action Items are listed as a continuous scrolling list of actions in blocks of 25 items. 
+
+When there are no more action items to show you'll see that _"There are no more action items to display."_ is shown at the bottom of the list.
+
 #### Toggle the Showing of Completed Actions
 
-On the Action Items List page you can toggle showing __all__ action items.
+On the Action Items List page you can toggle showing __all__ action items (ie. both active and completed items). You might want to do this because an action item you recently completed needs to be re-activated or you just want to see the completed actions for some other reason.
 
-By default completed items are not shown. To see them tap the show completed button:
+By default completed items are not shown. 
+
+To see them tap the _Completed_ button:
 
 <img src="/src/private/show-completed-actions.jpg" width="400">
 
-The slider icon on the show completed button will indicate you have toggled complete items ON.
+You will then see both active and completed action items in the list
 
 <img src="/src/private/showing-completed-actions.jpg" width="400">
 
-Action Item are listed as a continuous scrolling list of actions in blocks of 25 items. 
+> Note that the slider icon on the Completed button indicates when you're viewing completed items.
 
 #### Sending Action items Via Email
 

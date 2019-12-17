@@ -27,7 +27,7 @@ export MAIL_URL=your smtp server url
 meteor run 
 ```
 
-You can also for the local.sh file and simply run the project with the command `meteor run` from the _src_ folder. If you go this route any action item report you send will simply be printed to console.
+You can also skip the local.sh file and simply run the project with the command `meteor run` from the _src_ folder. If you go this route any action item report you send will simply be printed to console.
 
 ## Core Features
 

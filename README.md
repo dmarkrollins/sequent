@@ -10,15 +10,24 @@ https://sequent.herokuapp.com/
 
 ## Development Info
 
-You need to install Meteor - currently this project is on v1.8.1
+You need to install Meteor - currently this product is on v1.8.1
 
 ## Installation
 
 - Install [Meteor](https://www.meteor.com)
 - Clone this repo
 - cd sequent/src
-- From the root folder run the project with the command `meteor`
-- Sequent is currently on Meteor v1.8.1
+- create an local.sh file and add it to the src folder
+- From the root folder run the project with the command `npm run start`
+
+The local.sh file (or local.cmd file on Windows) should contain something like this:
+
+```
+export MAIL_URL=your smtp server url
+meteor run 
+```
+
+You can also for the local.sh file and simply run the project with the command `meteor run` from the _src_ folder. If you go this route any action item report you send will simply be printed to console.
 
 ## Core Features
 
@@ -100,11 +109,9 @@ The email iaddress values you enter will get "remembered" in local storage on _t
 
 By default action items are sent from _noreply@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
 
-If you are running the public version of Sequent Retrospectives and your team has an internal distribution list that is __not__ addressable from outside your firewall, Sequent will __not__ be be able to send anything to it. Make sure that the team email you're using is publically addressable. 
+>If you are running the public version of Sequent Retrospectives and your team has an internal distribution list that is __not__ addressable from outside your firewall, Sequent will __not__ be be able to send anything to it. Make sure that the team email you're using is publically addressable. Alternatively just send the report to yourself then resend it to your team-mates.
 
-Alternatively just send the report to yourself then resend it to your team-mates.
-
-However you get the report it looks something like this:
+The action items report will look something like this:
 
 <img src="/src/private/actionReport.jpg" width="400">
 
@@ -164,11 +171,11 @@ Tap the eye icon next to the archive you're interested in to view that archive.
 
 #### Change Prompts
 
-Change the default retro board prompts manually or try the randomizer! 
+You can change the default retro board prompts.
 
-By default they are ```:), :| and :(```
+By default the happy, meh and sad prompts are ```:), :| and :(```
 
-You can change these to any text string that helps your team achieve retro greatness.
+Change these to whatever helps your team achieve retro greatness.
 
 For example you might want to ask specific questions to illicit a particular discussion.
 
@@ -176,6 +183,8 @@ If you want discussion prompt inspiration tap the __random__ button and see what
 
 #### Choose Background Pattern
 
-Set your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing one of 15 or so unique background patterns.
+you can also your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing one of 15 or so unique background patterns.
 
-Check it out let us know what you think.
+Check it out and let us know what you think.
+
+Enjoy!

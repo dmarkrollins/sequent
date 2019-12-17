@@ -199,7 +199,7 @@ If you want discussion prompt inspiration tap the __random__ button and see what
 
 #### Choose Background Pattern
 
-you can also your team's preferred background pattern. This feature was created "just for fun" but lets your team make Sequent your own by choosing one of 15 or so unique background patterns.
+Make Sequent your own by setting your team's preferred background pattern. This feature was created "just for fun" with 20 or so unique background patterns.
 
 Check it out and let us know what you think.
 

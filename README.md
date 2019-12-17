@@ -65,19 +65,35 @@ The idea is that in a case you run out of meeting time you'll at least end up di
 
 ### Actions View
 
-Add, change delete actions. Tap on the red action item badge to manage action items.
+When discussing retro items entered by team members you'll more than likely end up wanting to take action on something.
+
+This is where action items come in. They stick around from retro to retro until you _complete_ them. In this way action items are like a team to do list.
+
+You'll notice you can enter them from both the top of the retro board and the action items view.
+
+When you create an action item the best practice is to assign it to a specific team members by simply adding their name to the action item title.
+
+So for example - assigning a networking task to _Jim_ might look something like this:
+
+```
+Contact networking to research intermittent packet drops (Jim) 
+```
+
+To get started managing action items tap the red action item badge to navigate to the action items view.
+
+On the action item view page you can manage action items by adding, changing, deleting and completing them. 
 
 <img src="/src/private/actions.jpg" width="400">
 
 Action Items are listed as a continuous scrolling list of actions in blocks of 25 items. 
 
-When there are no more action items to show you'll see that _"There are no more action items to display."_ is shown at the bottom of the list.
+When there are no more action items to show you'll see _"There are no more action items to display."_ at the bottom of the list.
 
 #### Toggle the Showing of Completed Actions
 
 On the Action Items List page you can toggle showing __all__ action items (ie. both active and completed items). You might want to do this because an action item you recently completed needs to be re-activated or you just want to see the completed actions for some other reason.
 
-By default completed items are not shown. 
+By default completed items are __not__ shown. 
 
 To see them tap the _Completed_ button:
 
@@ -87,11 +103,11 @@ You will then be able to see both active and completed items in the Action Items
 
 <img src="/src/private/showing-completed-actions.jpg" width="400">
 
-Note the slider icon on the Completed button indicates when you're viewing completed items.
+>Note: the slider icon on the Completed button indicates when you're viewing completed items.
 
 #### Sending Action items Via Email
 
-Post-retro you can share action items with your team by tapping the share button from the Action Items List page.
+Post-retro you can share active and recently completed action items with your team by tapping the share button from the Action Items List page.
 
 <img src="/src/private/share-button.jpg" width="400">
 
@@ -103,15 +119,15 @@ You can send to multiple emails by seperating the addresses with a semi-colon.
 
 For example: myaddress@email1.com;myaddress@email2.com;myaddress@email3.com
 
-Or simply use a team group email. Note the group email needs to be public. Some companies do not make team group distribution lists public.
+Or simply use a team group email. 
 
-The email iaddress values you enter will get "remembered" in local storage on _the local device_ and will pre-populate next time you decide to share action items.
+>Note: The group email needs to be public! Some companies do not make team group distribution lists public.
 
-By default action items are sent from _noreply@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
+The email address values you enter will get "remembered" in local storage on _the local device_ and will pre-populate next time you decide to share action items. 
 
->If you are running the public version of Sequent Retrospectives and your team has an internal distribution list that is __not__ addressable from outside your firewall, Sequent will __not__ be be able to send anything to it. Make sure that the team email you're using is publically addressable. Alternatively just send the report to yourself then resend it to your team-mates.
+By default action items are sent from _sequent@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
 
-The action items report will look something like this:
+The action items report looks something like this:
 
 <img src="/src/private/actionReport.jpg" width="400">
 

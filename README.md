@@ -139,13 +139,13 @@ You access these from the Sequent system menu (gear icon in upper right hand cor
 
 <img src="/src/private/tools.jpg" width="125">
 
-- Sort - sort the retro board by votes descending
-- Freeze - toggle allowing new retro items to be created
-- Show Completed - toggle showing completed items
-- Archive Retro - archive an open retro so next time you start with a clean slate
-- View Archives - view previously archived retros
-- Preferences - Sequent customization options - see customizing sequent
-- Share Sequent - send a link to your installation to someone via email
+- Sort - sort the retro board by votes descending - so the most important ones (highest votes) are on top
+- Freeze - toggle allowing new retro items to be created - you might want to stop new entries after some arbitrary number of minutes to have the team switch focus to voting and discussion.
+- Show Completed - toggle whether completed retro items show on the retro board.
+- Archive Retro - archive an open retro so next time you start with a clean slate.
+- View Archives - view previously archived retros.
+- Preferences - Sequent customization options - see _Customizing Sequent_ below.
+- Share Sequent - share Sequent goodness with someone you know via email.
 
 ### Archiving Retros
 
@@ -195,7 +195,7 @@ Change these to whatever helps your team achieve retro greatness.
 
 For example you might want to ask specific questions to illicit a particular discussion.
 
-If you want discussion prompt inspiration tap the __random__ button and see what happens :)
+If you're needing discussion prompt inspiration tap the __random__ button and see what happens :) Then tap it again.
 
 #### Choose Background Pattern
 

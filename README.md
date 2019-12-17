@@ -59,7 +59,7 @@ There are no rules around how you vote. You can up vote stuff 1000 times. There 
 
 Once you're done voting you can use the _sort feature_ (see __Tools__ below) to change how the items in each category are displayed. Sort will display items in # votes decending order with items with the most votes on top. 
 
-The idea is that in a case you run out of meeting time you'll at least end up discussing the most important (items with highest votes) items.
+The idea behind sorting items by vote count is if you run out of meeting time you'll at least end up discussing the most important (items with highest votes) items.
 
 <img src="/src/private/main_board.jpg" width="400">
 
@@ -71,7 +71,7 @@ This is where action items come in. They stick around from retro to retro until 
 
 You'll notice you can enter them from both the top of the retro board and the action items view.
 
-When you create an action item the best practice is to assign it to a specific team members by simply adding their name to the action item title.
+When you create an action item the best practice is to assign the thing to a specific team member by adding their name to the action item title.
 
 So for example - assigning a networking task to _Jim_ might look something like this:
 
@@ -81,9 +81,9 @@ Contact networking to research intermittent packet drops (Jim)
 
 To get started managing action items tap the red action item badge to navigate to the action items view.
 
-On the action item view page you can manage action items by adding, changing, deleting and completing them. 
-
 <img src="/src/private/actions.jpg" width="400">
+
+On the action item view page you manage action items by adding, changing, deleting and completing them. 
 
 Action Items are listed as a continuous scrolling list of actions in blocks of 25 items. 
 

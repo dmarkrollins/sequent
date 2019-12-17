@@ -74,11 +74,11 @@ To see them tap the _Completed_ button:
 
 <img src="/src/private/show-completed-actions.jpg" width="400">
 
-You will then see both active and completed action items in the list
+You will then be able to see both active and completed items in the Action Items list view.
 
 <img src="/src/private/showing-completed-actions.jpg" width="400">
 
-> Note that the slider icon on the Completed button indicates when you're viewing completed items.
+Note the slider icon on the Completed button indicates when you're viewing completed items.
 
 #### Sending Action items Via Email
 
@@ -100,10 +100,13 @@ The email iaddress values you enter will get "remembered" in local storage on _t
 
 By default action items are sent from _noreply@6thcents.com_ but you can customize this by setting the FROM_EMAIL_ADDRESS environment variable to whatever email address you'd like to send action items from.
 
-The action item report looks something like this:
+If you are running the public version of Sequent Retrospectives and your team has an internal distribution list that is __not__ addressable from outside your firewall, Sequent will __not__ be be able to send anything to it. Make sure that the team email you're using is publically addressable. 
+
+Alternatively just send the report to yourself then resend it to your team-mates.
+
+However you get the report it looks something like this:
 
 <img src="/src/private/actionReport.jpg" width="400">
-
 
 ### Tools
 

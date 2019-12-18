@@ -1,11 +1,10 @@
 <template name="settings">
 
     <div class="fullscreen" style="background-image: url({{backGround}})">
-        <div class="vertical-center"  style="padding: 7px;">
+        <div class="vertical-center" style="padding: 7px;">
             <div class="panel panel-default" style="max-width: 500px; margin: 0 auto; padding: 20px;">
-                <img src="/Sequent.png" width="64"/>
-                <h3 style="margin-top: 7px; margin-bottom: 21px;">Sequent</h3>
-                <p><strong>Sequent Preferences</strong></p>                
+                {{> startHeading}}
+                <p><strong>Preferences</strong></p>
                 <div style="width: 80%; margin: 0 auto;">
                     <form id="settingsForm">
                         {{#if Template.subscriptionsReady}}
@@ -34,17 +33,17 @@
                                         <select id="selectedBackground" class="form-control">
                                             <option value="">None Chosen</option>
                                             {{#each background}}
-                                                <option value="{{value}}" selected="{{selected}}" >{{name}}</option>
+                                                <option value="{{value}}" selected="{{selected}}">{{name}}</option>
                                             {{/each}}
                                         </select>
                                     </div>
-                                </div>  
-                            </div>              
+                                </div>
+                            </div>
                             <p>
                                 <span class="error-message">{{errMessage}}</span>
                             </p>
                             <p>
-                                <button type="button" id="btnCancel" class="btn btn-default">Done</button>
+                                <button type="button" id="btnCancel" class="btn btn-primary">Done</button>
                             </p>
                         {{else}}
                             {{> spinner}}
@@ -53,7 +52,7 @@
                 </div>
             </div>
         </div>
-        
+
     </div>
 
 </template>

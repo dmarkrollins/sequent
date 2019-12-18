@@ -40,12 +40,14 @@ if (Meteor.isClient) {
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
             withRenderedTemplate('start', null, (el) => {
-                expect($(el).find('#teamName')).to.have.length(1)
-                expect($(el).find('#password')).to.have.length(1)
-                expect($(el).find('#btnNext')).to.have.length(1)
-                expect($(el).find('#btnNewTeam')).to.have.length(1)
-                expect($(el).find('span.error-message')).to.have.length(1)
-                expect($(el).find('div.fullscreen')[0].style.backgroundImage).to.contains('fakebackground.png')
+                expect($(el).find('#logoimage'), 'logo image').to.have.length(1)
+                expect($(el).find('div#product-name')[0].innerText, 'title').to.equal('Sequent Retrospectives')
+                expect($(el).find('#teamName'), 'team name').to.have.length(1)
+                expect($(el).find('#password'), 'password').to.have.length(1)
+                expect($(el).find('#btnNext'), 'btn next').to.have.length(1)
+                expect($(el).find('#btnNewTeam'), 'btn new team').to.have.length(1)
+                expect($(el).find('div.error-message'), 'error msg').to.have.length(1)
+                expect($(el).find('div.fullscreen')[0].style.backgroundImage, 'background').to.contains('fakebackground.png')
             });
         })
     })

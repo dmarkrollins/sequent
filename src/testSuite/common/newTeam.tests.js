@@ -14,6 +14,7 @@ const should = chai.should();
 
 if (Meteor.isClient) {
     import '../../client/common/newTeam.js'
+    import '../../client/common/startHeading.html'
 
     describe('New Team Dialog', function () {
         let userId;
@@ -40,17 +41,17 @@ if (Meteor.isClient) {
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
             withRenderedTemplate('newTeam', null, (el) => {
-                expect($(el).find('#logoimage')).to.have.length(1)
-                expect($(el).find('h3')[0].innerText).to.equal('Sequent')
-                expect($(el).find('p strong')[0].innerText).to.equal('Create Your Team')
-                expect($(el).find('#teamName')).to.have.length(1)
-                expect($(el).find('#description')).to.have.length(1)
-                expect($(el).find('#password')).to.have.length(1)
-                expect($(el).find('#confirmPassword')).to.have.length(1)
-                expect($(el).find('#btnCancel')).to.have.length(1)
-                expect($(el).find('#btnCreateNewTeam')).to.have.length(1)
-                expect($(el).find('span.error-message')).to.have.length(1)
-                expect($(el).find('div.fullscreen')[0].style.backgroundImage).to.contains('fakebackground.png')
+                expect($(el).find('#logoimage'), 'logo image').to.have.length(1)
+                expect($(el).find('div#product-name')[0].innerText, 'title').to.equal('Sequent Retrospectives')
+                expect($(el).find('p strong')[0].innerText, 'prompt').to.equal('Create Your Team')
+                expect($(el).find('#teamName'), 'team name').to.have.length(1)
+                expect($(el).find('#description'), 'description').to.have.length(1)
+                expect($(el).find('#password'), 'password').to.have.length(1)
+                expect($(el).find('#confirmPassword'), 'confirm pw').to.have.length(1)
+                expect($(el).find('#btnCancel'), 'btn cancel').to.have.length(1)
+                expect($(el).find('#btnCreateNewTeam'), 'btn create team').to.have.length(1)
+                expect($(el).find('span.error-message'), 'error message').to.have.length(1)
+                expect($(el).find('div.fullscreen')[0].style.backgroundImage, 'background').to.contains('fakebackground.png')
             });
         })
     })

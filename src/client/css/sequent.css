@@ -27,9 +27,10 @@ html, body {
 
 .error-message {
     width: 100%; 
-    min-height: 24px; 
+    min-height: 0px; 
     display: block; 
     color: #b85555;
+    margin-bottom: 7px;
 }
 
 .fullheight-green {
@@ -446,7 +447,7 @@ li.sadTabArchive.active{
     color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
-    background-color: #f0ad4e;
+    background-color: rgb(196, 172, 95);
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
@@ -458,7 +459,7 @@ li.sadTabArchive.active{
     color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
-    background-color: #d9534f;
+    background-color: rgb(213, 147, 125);
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
@@ -482,7 +483,7 @@ li.sadTabArchive.active{
     color:#fff;
     padding:9px 15px;
     border-bottom:1px solid #eee;
-    background-color: #428bca;
+    background-color: rgb(90, 127,160);
     -webkit-border-top-left-radius: 5px;
     -webkit-border-top-right-radius: 5px;
     -moz-border-radius-topleft: 5px;
@@ -516,22 +517,37 @@ textarea.retro-edit {
     z-index: 999;
 }
 
-.btn-primary {
-    
-}
+/* blue 100, 127,150 */
+/* yellow 207, 186, 120 */
+/* red 213, 147, 125 */
 
-/* .btn-primary {
-    background-color: rgb(207,186,120);
+.btn-primary {
+    background-color: rgb(90, 127,160);
     color: #fff;
-    border-color:rgb(175, 150, 65);
+    border-color:rgb(79, 112, 141);
     border-radius:4px;
     margin-right: 7px;
 }
 .btn-primary:hover,
 .btn-primary:focus,
 .btn-primary:active    {
-    background-color: rgb(189, 167, 96) !important;
+    background-color: rgb(67, 100, 129) !important;
     color: #FFF;
-    border-color: rgb(155, 132, 58);
+    border-color: rgb(79, 112, 141);
 }
-   */
+
+.btn-warning {
+    background-color: rgb(196, 172, 95);
+    color: #fff;
+    border-color:rgb(163, 150, 105);
+    border-radius:4px;
+    margin-right: 7px;
+}
+.btn-warning:hover,
+.btn-warning:focus,
+.btn-warning:active    {
+    background-color: rgb(163, 147, 92) !important;
+    color: #FFF;
+    border-color: rgb(163, 150, 105);
+}
+  

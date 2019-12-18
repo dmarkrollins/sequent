@@ -1,13 +1,9 @@
 <template name="start">
-    
+
     <div class="fullscreen" style="background-image: url({{backGround}})">
         <div class="vertical-center" style="padding: 7px;">
             <div class="panel panel-default" style="max-width: 500px; margin: 0 auto; padding: 20px; border: 1px solid #999;">
-                <img src="/Sequent.png" width="64"/>
-                <h3 style="margin-top: 7px; margin-bottom: 21px;">Sequent</h3>
-                <p>
-                    Because your team is only as good as its last retro...
-                </p>
+                {{> startHeading }}
                 <div style="max-width: 80%; margin: 0 auto;">
                     <form id="start-form">
                         <fieldset id="start-fs">
@@ -17,19 +13,17 @@
                             <div class="form-group">
                                 <input type="password" class="form-control" id="password" placeholder="Password">
                             </div>
-                            <p>
-                                <span id="errorMessage" class="error-message">{{errMessage}}</span>
-                            </p>
-                            <p>
-                                <button type="button" class="btn btn-primary" id="btnNewTeam"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Team</button>
-                                <button type="submit" class="btn btn-success" id="btnNext">Next <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
-                            </p>
+                            <div id="errorMessage" class="error-message">{{errMessage}}</div>
+                            <div>
+                                <button type="button" class="btn btn-primary" id="btnNewTeam" style="margin-bottom: 12px;"><i class="fa fa-plus-circle" aria-hidden="true"></i> Create New Team</button>
+                                <button type="submit" class="btn btn-warning" id="btnNext" style="margin-bottom: 12px;">Login <i class="fa fa-angle-double-right" aria-hidden="true"></i></button>
+                            </div>
                         </fieldset>
                     </form>
                 </div>
             </div>
         </div>
-        
+
     </div>
-    
+
 </template>

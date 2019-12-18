@@ -143,7 +143,19 @@ if (Meteor.isServer) {
             expect(args[2], 'user name').to.equal('Fakeusername Action Items')
             const data = {}
             data.retroName = 'Fakeusername'
-            data.actions = _.sortBy(actionItems, 'status')
+            data.currentYear = new Date().getFullYear()
+            // data.actions = _.sortBy(actionItems, 'status')
+            let items = '<tr><th>Action Item</th><th class="text-center" style="width: 25%;">Status</th></tr>'
+            data.retroItems = _.sortBy(actionItems, 'status').forEach((item) => {
+                const isComplete = (item.status === Constants.RetroItemStatuses.COMPLETE) ? 'Complete' : 'Active'
+                const itemStyle = (item.status === Constants.RetroItemStatuses.COMPLETE) ? 'color: #999; padding: 4px 4px 4px 0px; vertical-align: top;' : 'padding: 4px 4px 4px 0px; vertical-align: top;'
+                items += `<tr></tr><td style="${itemStyle}">${item.title}</td><td style="${itemStyle}">${isComplete}</td></tr>`
+            })
+
+            data.retroItems = items
+
+            // console.log(JSON.stringify(args[4], null, 4))
+            // console.log(JSON.stringify(data, null, 4))
 
             expect(args[4], 'email data').to.deep.equal(data)
         })

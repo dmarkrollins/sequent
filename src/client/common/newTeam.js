@@ -62,7 +62,7 @@ Template.newTeam.events({
 
         Accounts.createUser(options, function (err) {
             if (err) {
-                template.setMessage(err)
+                template.setMessage(err.reason)
                 return
             }
             FlowRouter.go('/retro/board')

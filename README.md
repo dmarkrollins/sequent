@@ -10,7 +10,7 @@ https://sequent.herokuapp.com/
 
 ## Development Info
 
-You need to install Meteor - currently this product is on v1.8.1
+You need to install Meteor - currently this product is on v1.9
 
 ## Installation
 

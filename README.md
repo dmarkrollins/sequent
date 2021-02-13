@@ -1,4 +1,4 @@
-## Sequent Retrospectives V1.1
+## Sequent Retrospectives V1.19
 
 Taking your teamperature every week is a great way to measure how well things are going with the group of people you spend most of your time with.
 
@@ -10,7 +10,7 @@ https://sequent.herokuapp.com/
 
 ## Development Info
 
-You need to install Meteor - currently this product is on v1.9
+You need to install Meteor - currently this product is on v2.0
 
 ## Installation
 

@@ -3,6 +3,7 @@ import moment from 'moment'
 // const React = await import('react')
 import { Meteor } from 'meteor/meteor'
 import { Session } from 'meteor/session'
+import { ReactiveVar } from 'meteor/reactive-var'
 import { Template } from 'meteor/templating'
 import { FlowRouter } from 'meteor/kadira:flow-router'
 import { Toast } from '../../client/common/toast'
@@ -12,6 +13,19 @@ import { Constants } from '../../lib/constants'
 
 import '../version'
 import './retroNav.html'
+
+Template.retroNav.onCreated(function () {
+    const self = this
+
+    self.showUsage = new ReactiveVar(false)
+
+    Meteor.call('showUsage', (err, val) => {
+        if (err) {
+            self.showUsage.set(false)
+        }
+        self.showUsage.set(val)
+    })
+})
 
 Template.retroNav.helpers({
     projectName() {
@@ -104,6 +118,9 @@ Template.retroNav.helpers({
     },
     currentVersion() {
         return `Version ${PackageInfo.version}`
+    },
+    showUsage() {
+        return Template.instance().showUsage.get()
     }
 
 })

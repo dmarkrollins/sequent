@@ -25,6 +25,7 @@ if (Meteor.isClient) {
     describe('RetroNav Menu', function () {
         let userId
         let sandbox
+        let callStub
 
         const fakeUser = {
             username: 'faketeamname'
@@ -46,6 +47,7 @@ if (Meteor.isClient) {
                 ready: () => true,
             }));
             sandbox.stub(FlowRouter, 'current').returns(fakeRoute)
+            callStub = sandbox.stub(Meteor, 'call')
         });
 
         afterEach(function () {
@@ -56,6 +58,7 @@ if (Meteor.isClient) {
 
         it('Displays correctly - no retro - no actions', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
+            callStub.withArgs('showUsage').yields(null, false)
 
             withRenderedTemplate('retroNav', null, (el) => {
                 expect($(el).find('a.navbar-brand')[0].href).to.contain('/retro/board')
@@ -74,11 +77,13 @@ if (Meteor.isClient) {
                 expect($(el).find('a#preferences'), 'preferences').to.have.length(1)
                 expect($(el).find('a#shareSequent'), 'share sequent').to.have.length(1)
                 expect($(el).find('a#versionInfo'), 'version info').to.have.length(1)
+                expect($(el).find('a#usageHistory'), 'show usage item').to.have.length(0)
             });
         })
 
         it('Displays correctly - no retro - 2 actions', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
+            callStub.withArgs('showUsage').yields(null, false)
 
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
@@ -97,6 +102,7 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
 
+            callStub.withArgs('showUsage').yields(null, false)
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname')
@@ -120,10 +126,27 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
 
+            callStub.withArgs('showUsage').yields(null, false)
+
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname - FROZEN')
                 expect($(el).find('a#freezeRetro'), 'freeze menu item').to.have.length(1)
                 expect($(el).find('a#freezeRetro')[0].innerText, 'freeze menu item text').to.equal(' Un-Freeze')
+            });
+        })
+
+        it('Displays correctly - usage history activated', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            Retros.insert(await TestData.fakeRetro())
+
+            RetroActions.insert(await TestData.fakeRetroAction())
+            RetroActions.insert(await TestData.fakeRetroAction())
+
+            callStub.withArgs('showUsage').yields(null, true)
+
+            withRenderedTemplate('retroNav', {}, (el) => {
+                expect($(el).find('a#usageHistory'), 'show usage item').to.have.length(1)
+                expect($(el).find('a#usageHistory')[0].innerText, 'show usage item text').to.equal(' Usage History')
             });
         })
 
@@ -133,6 +156,8 @@ if (Meteor.isClient) {
 
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
+
+            callStub.withArgs('showUsage').yields(null, false)
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#showCompleted'), 'show completed menu item').to.have.length(1)
@@ -149,6 +174,8 @@ if (Meteor.isClient) {
 
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
+
+            callStub.withArgs('showUsage').yields(null, false)
 
             const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
 
@@ -167,6 +194,8 @@ if (Meteor.isClient) {
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
 
+            callStub.withArgs('showUsage').yields(null, false)
+
             const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
 
             withRenderedTemplate('retroNav', {}, (el) => {
@@ -180,6 +209,8 @@ if (Meteor.isClient) {
             const archivedDate = new Date()
             const retro = await TestData.fakeRetro()
             Retros.insert(retro)
+
+            callStub.withArgs('showUsage').yields(null, false)
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#sortByVotes'), 'sort menu option').to.have.length(1)
@@ -198,11 +229,12 @@ if (Meteor.isClient) {
 
         it('When archiving retro user is prompted for optional retro name', async function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
-            sandbox.stub(Meteor, 'call')
             sandbox.stub(ConfirmDialog, 'showConfirmation').yields('fake archive name')
 
             const retro = await TestData.fakeRetro()
             Retros.insert(retro)
+
+            callStub.withArgs('showUsage').yields(null, false)
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#archiveRetro'), 'archive retro option').to.have.length(1)

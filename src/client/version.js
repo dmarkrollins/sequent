@@ -1,1 +1,1 @@
-PackageInfo = require('../package.json');
+PackageInfo = require('../package.json'); // eslint-disable-line

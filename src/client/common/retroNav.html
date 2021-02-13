@@ -24,18 +24,22 @@
                             <li role="separator" class="divider"></li>
                             <li><a href="#" id="archiveRetro"><i class="fa fa-archive" aria-hidden="true" style="color: #2b71cc;"></i> Archive Retro</a></li>
                         {{/if}}
-                        <li><a id="viewArchives" href="/retro/archives" ><i class="fa fa-list" aria-hidden="true" style="color: #2b71cc;"></i> View Archives</a></li>
+                        <li><a id="viewArchives" href="/retro/archives"><i class="fa fa-list" aria-hidden="true" style="color: #2b71cc;"></i> View Archives</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a id="preferences" href="/retro/settings" ><i class="fa fa-sliders" aria-hidden="true" style="color: #2b71cc;"></i> Preferences</a></li>
+                        <li><a id="preferences" href="/retro/settings"><i class="fa fa-sliders" aria-hidden="true" style="color: #2b71cc;"></i> Preferences</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a id="shareSequent" href="mailto:?subject=Check%20Out%20Sequent&body=Have%20better%20team%20retros%20-%20https://sequent.herokuapp.com" ><i class="fa fa-share-alt" aria-hidden="true" style="color: #2b71cc"></i> Share Sequent</a></li>
+                        <li><a id="shareSequent" href="mailto:?subject=Check%20Out%20Sequent&body=Have%20better%20team%20retros%20-%20https://sequent.herokuapp.com"><i class="fa fa-share-alt" aria-hidden="true" style="color: #2b71cc"></i> Share Sequent</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="#" id="signOut"><i class="fa fa-sign-out" style="color: #990000;" aria-hidden="true"></i> Logout</a></li>
                         <li role="separator" class="divider"></li>
                         <li><a href="/versions" id="versionInfo" style="padding-left: 18px;"><i class="fa fa-thumb-tack" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{currentVersion}}</a></li>
+                        {{#if showUsage}}
+                            <li role="separator" class="divider"></li>
+                            <li><a href="/history" id="usageHistory" style="padding-left: 18px;"><i class="fa fa-line-chart" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> Usage History</a></li>
+                        {{/if}}
                     </ul>
                 </div>
             </div>
-        </div>  
+        </div>
     </nav>
 </template>

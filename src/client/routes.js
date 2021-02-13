@@ -34,6 +34,19 @@ FlowRouter.route('/versions', {
 
 })
 
+FlowRouter.route('/history', {
+    subscriptions: function (params) {
+        this.register('retros', Meteor.subscribe('active-retros'))
+        this.register('actions', Meteor.subscribe('open-actions'))
+        this.register('settings', Meteor.subscribe('settings'))
+    },
+    action: function () {
+        BlazeLayout.render('retroLayout', { content: 'historyChart' });
+    },
+    name: 'chart'
+
+})
+
 var RetroRouter = FlowRouter.group({ // eslint-disable-line
     prefix: '/retro',
     name: 'admin',

@@ -2,19 +2,18 @@
     "name": "sequent",
     "private": true,
     "description": "Sequent Retrospectives",
-    "version": "0.1.17",
+    "version": "0.1.19",
     "author": "6thcents (http://6thcents.com/)",
     "scripts": {
         "start": "bash local.sh",
+        "prod": "bash production.sh",
         "start:visualize": "meteor --extra-packages bundle-visualizer --production",
-        "test": "meteor test --driver-package cultofcoders:mocha --port 3100",
-        "acceptance": "node ./.testing/chimp.js",
-        "chimp-watch": "chimp --ddp=http://localhost:3000 --watch --mocha --path=tests-acceptance",
-        "chimp-test": "chimp --mocha --path=tests-acceptance"
+        "test": "meteor test --driver-package cultofcoders:mocha --port 3100"
     },
     "dependencies": {
         "@babel/runtime": "^7.8.3",
-        "bcrypt": "^3.0.7",
+        "@mongodb-js/charts-embed-dom": "^2.0.1",
+        "bcrypt": "^5.0.0",
         "js-yaml": ">=3.13.1",
         "meteor-node-stubs": "^1.0.0",
         "moment": "^2.24.0",

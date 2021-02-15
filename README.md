@@ -181,6 +181,18 @@ If you had specified a name when you created the retro that name will show up in
 
 Tap the eye icon next to the archive you're interested in to view that archive.
 
+#### Viewing Sequent Usage
+
+You can add a view of how many retros folks are running.
+
+You can check this out by tapping the Usage History menu item.
+
+<img src="/src/private/usageHistory.jpg" width="400">
+
+You can activate this feature by exporting the environment variable USAGE_URL which should point to whatever usage history chart you'd like Sequent to point to within an IFrame.
+
+The public Sequent install points this variable to a Mongo DB Charts chart URL.
+
 ### Customizing Sequent
 
 <img src="/src/private/custom.jpg" width="250">

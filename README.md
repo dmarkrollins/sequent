@@ -187,7 +187,7 @@ You can add a view of how many retros folks are running.
 
 You can check this out by tapping the Usage History menu item.
 
-<img src="/src/private/usageHistory.jpg" width="400">
+<img src="/src/private/usageHistory.jpg" width="250">
 
 You can activate this feature by exporting the environment variable USAGE_URL which should point to whatever usage history chart you'd like Sequent to point to within an IFrame.
 

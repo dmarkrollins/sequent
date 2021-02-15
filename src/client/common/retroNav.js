@@ -19,11 +19,10 @@ Template.retroNav.onCreated(function () {
 
     self.showUsage = new ReactiveVar(false)
 
-    Meteor.call('showUsage', (err, val) => {
-        if (err) {
-            self.showUsage.set(false)
+    Meteor.call('getChartUrl', (err, val) => {
+        if (!err && val > '') {
+            self.showUsage.set(true)
         }
-        self.showUsage.set(val)
     })
 })
 

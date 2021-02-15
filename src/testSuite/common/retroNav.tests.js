@@ -58,7 +58,7 @@ if (Meteor.isClient) {
 
         it('Displays correctly - no retro - no actions', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             withRenderedTemplate('retroNav', null, (el) => {
                 expect($(el).find('a.navbar-brand')[0].href).to.contain('/retro/board')
@@ -83,7 +83,7 @@ if (Meteor.isClient) {
 
         it('Displays correctly - no retro - 2 actions', function () {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
@@ -102,7 +102,7 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname')
@@ -126,7 +126,7 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a.navbar-brand div')[0].innerText).to.equal('Faketeamname - FROZEN')
@@ -142,7 +142,7 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
 
-            callStub.withArgs('showUsage').yields(null, true)
+            callStub.withArgs('getChartUrl').yields(null, 'fake-url')
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#usageHistory'), 'show usage item').to.have.length(1)
@@ -157,7 +157,7 @@ if (Meteor.isClient) {
             RetroActions.insert(await TestData.fakeRetroAction())
             RetroActions.insert(await TestData.fakeRetroAction())
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#showCompleted'), 'show completed menu item').to.have.length(1)
@@ -175,7 +175,7 @@ if (Meteor.isClient) {
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
 
@@ -194,7 +194,7 @@ if (Meteor.isClient) {
             RetroActions.insert(TestData.fakeRetroAction())
             RetroActions.insert(TestData.fakeRetroAction())
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             const dateVal = moment(archivedDate).format('MM-DD-YYYY - LT')
 
@@ -210,7 +210,7 @@ if (Meteor.isClient) {
             const retro = await TestData.fakeRetro()
             Retros.insert(retro)
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#sortByVotes'), 'sort menu option').to.have.length(1)
@@ -234,7 +234,7 @@ if (Meteor.isClient) {
             const retro = await TestData.fakeRetro()
             Retros.insert(retro)
 
-            callStub.withArgs('showUsage').yields(null, false)
+            callStub.withArgs('getChartUrl').yields(null, '')
 
             withRenderedTemplate('retroNav', {}, (el) => {
                 expect($(el).find('a#archiveRetro'), 'archive retro option').to.have.length(1)

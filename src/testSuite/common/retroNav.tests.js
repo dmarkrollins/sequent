@@ -77,6 +77,7 @@ if (Meteor.isClient) {
                 expect($(el).find('a#preferences'), 'preferences').to.have.length(1)
                 expect($(el).find('a#shareSequent'), 'share sequent').to.have.length(1)
                 expect($(el).find('a#sequentHelp'), 'show help link').to.have.length(1)
+                expect($(el).find('a#clearBoard'), 'no clear board').to.have.length(0)
                 expect($(el).find('a#versionInfo'), 'version info').to.have.length(1)
             });
         })
@@ -113,6 +114,7 @@ if (Meteor.isClient) {
                 expect($(el).find('a#showCompleted'), 'show-completed menu option').to.have.length(1)
                 expect($(el).find('a#showCompleted')[0].innerText, 'show-completed text').to.equal(' Show Completed')
                 expect($(el).find('a#archiveRetro'), 'archive retro option').to.have.length(1)
+                expect($(el).find('a#clearBoard'), 'show clear board').to.have.length(1)
 
                 expect($(el).find('a#actionCount span.badge-error')).to.have.length(1)
                 expect($(el).find('a#actionCount')[0].innerText).to.equal('2')
@@ -251,6 +253,32 @@ if (Meteor.isClient) {
                 expect(args[0], 'the message input').to.contain('id="archiveName"')
                 expect(Meteor.call).to.have.been.called
                 expect(Meteor.call).to.have.been.calledWith('archiveRetro', retro._id, 'fake archive name')
+            });
+        })
+
+        it('When clearing retro user is prompted to confirm', async function () {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(ConfirmDialog, 'showConfirmation').yields('')
+
+            const retro = await TestData.fakeRetro()
+            Retros.insert(retro)
+
+            callStub.withArgs('getChartUrl').yields(null, '')
+
+            withRenderedTemplate('retroNav', {}, (el) => {
+                expect($(el).find('a#clearBoard'), 'clear board option').to.have.length(1)
+
+                $(el).find('a#clearBoard')[0].click()
+                Tracker.flush()
+
+                expect(ConfirmDialog.showConfirmation).to.have.been.called
+                const args = ConfirmDialog.showConfirmation.args[0]
+                expect(args[0]).to.equal('<p>Are you sure you want clear this retro board?</p><p>All retro items entered, both completed and not completed, will be DELETED!</p><p style="color: #aaa; padding-left: 12px; padding-right: 12px;">If you want to clear the board but save the items for review later <b>Archive</b> this retro instead.</p>')
+                expect(args[1]).to.equal('Clear Retro Board?')
+                expect(args[2]).to.equal('warning')
+                expect(args[3]).to.be.null
+                expect(Meteor.call).to.have.been.called
+                expect(Meteor.call).to.have.been.calledWith('clearRetroBoard', retro._id)
             });
         })
     })

@@ -10,7 +10,7 @@ const ConvertRetro = (settings, retro) => {
     const happy = _.filter(retro.items, item => item.itemType.toLowerCase() === 'happy')
     happy.forEach((item) => {
         items.push({
-            happy: item.title.replace('"', ''),
+            happy: item.title,
             meh: '',
             sad: ''
         })
@@ -24,7 +24,7 @@ const ConvertRetro = (settings, retro) => {
         } else {
             items.push({
                 happy: '',
-                meh: item.title.replace('"', ''),
+                meh: item.title,
                 sad: ''
             })
         }
@@ -39,7 +39,7 @@ const ConvertRetro = (settings, retro) => {
             items.push({
                 happy: '',
                 meh: '',
-                sad: item.title.replace('"', '')
+                sad: item.title
             })
         }
     })

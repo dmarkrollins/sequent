@@ -102,7 +102,7 @@ Template.retroBoard.helpers({
             return list
         }
     },
-    frozenEntry(){
+    frozenEntry() {
         const retro = Retros.findOne()
 
         if (!retro) {

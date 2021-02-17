@@ -16,15 +16,13 @@
                         <img src="/gear.png" width="32" alt="">
                     </a>
                     <ul class="dropdown-menu pull-right">
-                        <li><a href="https://github.com/dmarkrollins/sequent" id="sequentHelp" target="_blank" style="padding-left: 18px;"><i class="fa fa-question-circle" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> Sequent Help</a></li>
-                        <li role="separator" class="divider"></li>
                         {{#if showActiveRetroMenuItems}}
                             <li><a href="#" id="sortByVotes"><i class="fa {{sortIcon}}" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{sortText}}</a></li>
-                            <li role="separator" class="divider"></li>
                             <li><a href="#" id="freezeRetro"><i class="fa fa-bolt" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{freezeText}}</a></li>
                             <li><a href="#" id="showCompleted"><i class="fa {{completeViewClass}}" aria-hidden="true"></i> {{showCompletedText}}</a></li>
                             <li role="separator" class="divider"></li>
-                            <li><a href="#" id="clearBoard"><i class="fa fa-eraser" aria-hidden="true" style="color: #2b71cc;"></i> Clear Board</a></li>
+                            <li><a id="exportBoard" download href="/export/retro?id={{retroId}}"><i class="fa fa-download" aria-hidden="true" style="color: #2b71cc"></i> Export Retro</a></li>
+                            <li><a href="#" id="clearBoard"><i class="fa fa-eraser" aria-hidden="true" style="color: #2b71cc;"></i> Clear Retro</a></li>
                             <li role="separator" class="divider"></li>
                             <li><a href="#" id="archiveRetro"><i class="fa fa-archive" aria-hidden="true" style="color: #2b71cc;"></i> Archive Retro</a></li>
                         {{/if}}
@@ -34,13 +32,13 @@
                         <li role="separator" class="divider"></li>
                         <li><a id="shareSequent" href="mailto:?subject=Check%20Out%20Sequent&body=Have%20better%20team%20retros%20-%20https://sequent.herokuapp.com"><i class="fa fa-share-alt" aria-hidden="true" style="color: #2b71cc"></i> Share Sequent</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="#" id="signOut"><i class="fa fa-sign-out" style="color: #990000;" aria-hidden="true"></i> Logout</a></li>
-                        <li role="separator" class="divider"></li>
+                        <li><a href="https://github.com/dmarkrollins/sequent" id="sequentHelp" target="_blank" style="padding-left: 18px;"><i class="fa fa-question-circle" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> Sequent Help</a></li>
                         <li><a href="/versions" id="versionInfo" style="padding-left: 18px;"><i class="fa fa-thumb-tack" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> {{currentVersion}}</a></li>
                         {{#if showUsage}}
-                            <li role="separator" class="divider"></li>
                             <li><a href="/history" id="usageHistory" style="padding-left: 18px;"><i class="fa fa-line-chart" aria-hidden="true" style="color: #2b71cc; width: 14px; text-align: center;"></i> Usage History</a></li>
                         {{/if}}
+                        <li role="separator" class="divider"></li>
+                        <li><a href="#" id="signOut"><i class="fa fa-sign-out" style="color: #990000;" aria-hidden="true"></i> Logout</a></li>
                     </ul>
                 </div>
             </div>

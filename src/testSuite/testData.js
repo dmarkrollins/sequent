@@ -113,6 +113,33 @@ const TestData = {
         }
 
         return Retro
+    },
+
+    fakeRetro2(parameters) {
+        let parms = {}
+
+        if (!_.isUndefined(parameters)) {
+            parms = parameters;
+        }
+
+        const Retro = {}
+
+        Retro._id = parms._id || Random.id()
+        Retro.createdAt = new Date()
+        Retro.createdBy = parms.createdBy || Random.id()
+        Retro.title = parms.title || 'fake title'
+        Retro.status = parms.status || Constants.RetroStatuses.ACTIVE
+        Retro.items = parms.items || this.fakeRetroItems(parameters, parms.count || 3)
+        Retro.showCompleted = _.isUndefined(parms.showCompleted) ? false : parms.showCompleted
+        Retro.archivedAt = parms.archivedAt || new Date()
+        Retro.happyPlaceholder = 'Fake happy placeholder'
+        Retro.mehPlaceholder = 'Fake meh placeholder'
+        Retro.sadPlaceholder = 'Fake sad placeholder'
+        if (parms.archiveName) {
+            Retro.archiveName = parms.archiveName
+        }
+
+        return Retro
     }
 }
 

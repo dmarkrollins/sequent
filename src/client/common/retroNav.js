@@ -120,6 +120,13 @@ Template.retroNav.helpers({
     },
     showUsage() {
         return Template.instance().showUsage.get()
+    },
+    retroId() {
+        const retro = Retros.findOne()
+
+        if (!retro) return ''
+
+        return retro._id
     }
 
 })

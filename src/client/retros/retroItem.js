@@ -119,9 +119,11 @@ Template.retroItem.helpers({
             instance.editing.set(false)
             return false
         }
-        if (instance.data.selectedItemId.get() === this.data.itemId) {
-            instance.startTimer()
-            return true
+        if (instance.data.selectedItemId) {
+            if (instance.data.selectedItemId.get() === this.data.itemId) {
+                instance.startTimer()
+                return true
+            }
         }
         instance.stopTimer()
         instance.timerText.set('00:00:00')

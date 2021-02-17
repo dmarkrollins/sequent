@@ -126,6 +126,22 @@ Template.retroNav.helpers({
 
 Template.retroNav.events({
 
+    'click #clearBoard'() {
+        const title = 'Clear Retro Board?'
+        const msg = '<p>Are you sure you want clear this retro board?</p><p>All retro items entered, both completed and not completed, will be DELETED!</p><p style="color: #aaa; padding-left: 12px; padding-right: 12px;">If you want to clear the board but save the items for review later <b>Archive</b> this retro instead.</p>'
+
+        ConfirmDialog.showConfirmation(msg, title, 'warning', null, function (value) {
+            const retro = Retros.findOne()
+
+            if (!retro) return
+
+            Meteor.call('clearRetroBoard', retro._id, function (err, result) {
+                if (err) {
+                    Toast.showError(err.reason)
+                }
+            })
+        })
+    },
     'click #archiveRetro'() {
         const title = 'Archive Retro?'
         const msg = '<p>Are you sure you want to archive this retro?</p> <div class="form-group"><input type="text" class="form-control" id="archiveName" placeholder="Optional archive name" style="width: 90%; margin: auto;"></div>'

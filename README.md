@@ -161,7 +161,7 @@ Best practice is to archive your retro as soon as you're session is done. The ac
 
 To archive a retro you tap the archive tool from the Sequent system menu.
 
-<img src="/src/private/archiveRetroMenuItem.jpg" width="200">
+<img src="/src/private/archiveRetroMenuItem.jpg" width="300">
 
 When you choose to archive a retro you can assign it a name. This is sorta handy if you've captured something special during the retro and want to make it easy to find later.
 

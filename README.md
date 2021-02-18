@@ -137,7 +137,7 @@ Sequent has a few tools to make sure your retros are the best they can be.
 
 You access these from the Sequent system menu (gear icon in upper right hand corner)
 
-<img src="/src/private/tools.jpg" width="125">
+<img src="/src/private/tools.jpg" width="200">
 
 - Sort - sort the retro board by votes descending - so the most important ones (highest votes) are on top
 - Freeze - toggle allowing new retro items to be created - you might want to stop new entries after some arbitrary number of minutes to have the team switch focus to voting and discussion.
@@ -161,7 +161,7 @@ Best practice is to archive your retro as soon as you're session is done. The ac
 
 To archive a retro you tap the archive tool from the Sequent system menu.
 
-<img src="/src/private/archiveRetroMenuItem.jpg" width="300">
+<img src="/src/private/archiveRetroMenuItem.jpg" width="200">
 
 When you choose to archive a retro you can assign it a name. This is sorta handy if you've captured something special during the retro and want to make it easy to find later.
 

@@ -550,4 +550,10 @@ textarea.retro-edit {
     color: #FFF;
     border-color: rgb(163, 150, 105);
 }
+
+.char-count {
+    font-size: 8pt;
+    border: 0px solid red;
+    text-align: left;
+}
   

@@ -6,6 +6,7 @@
                 <div class="col-sm-12">
                     {{#if editMode}}
                         <textarea id="titleTextBox" data-id={{data.itemId}} class="retro-edit" rows=1 maxlength="255">{{decodedTitle}}</textarea>
+                        <div class="char-count">{{charCount}}</div>
                         <!-- <input type='text' id="titleTextbox" class="retro-edit" style="opacity: 1;" data-id={{data.itemId}} value="{{data.title}}" /> -->
                     {{else}}
                         <div class="tappable-text text-left" style="width: 100%; padding: 7px; overflow-y: hidden; overflow-x: scroll; -ms-overflow-style: none;">{{decodedTitle}}</div>

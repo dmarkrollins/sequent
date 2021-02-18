@@ -142,10 +142,16 @@ You access these from the Sequent system menu (gear icon in upper right hand cor
 - Sort - sort the retro board by votes descending - so the most important ones (highest votes) are on top
 - Freeze - toggle allowing new retro items to be created - you might want to stop new entries after some arbitrary number of minutes to have the team switch focus to voting and discussion.
 - Show Completed - toggle whether completed retro items show on the retro board.
+- Export Retro - exports the current retro board as a CSV and downloads this file to your computer.
+- Clear Retro - permanently removes both completed and non completed items from the retro board. 
 - Archive Retro - archive an open retro so next time you start with a clean slate.
 - View Archives - view previously archived retros.
 - Preferences - Sequent customization options - see _Customizing Sequent_ below.
 - Share Sequent - share Sequent goodness with someone you know via email.
+- Sequent Help - navigate to this read me file on GitHub.
+- Version X.X.X - displays the Sequent version history.
+- Usage History - if this option is turned on it will display a Sequent Usage History chart.
+- Logout - logs you out of the current retro board.
 
 ### Archiving Retros
 
@@ -181,7 +187,15 @@ If you had specified a name when you created the retro that name will show up in
 
 Tap the eye icon next to the archive you're interested in to view that archive.
 
-#### Viewing Sequent Usage
+### Clearing the Retro Board
+
+When you tap the "Clear Retro" drop down menu option you will be prompted if you would like to clear the retro board with the following prompt:
+
+<img src="/src/private/clearBoard.jpg" width="400">
+
+If you tap OK ALL current retro items entered, both completed and not completed, will be removed from the retro board PERMANENTLY.
+
+### Viewing Sequent Usage
 
 You can add a view of how many retros folks are running.
 
@@ -192,6 +206,7 @@ You can check this out by tapping the Usage History menu item.
 You can activate this feature by exporting the environment variable USAGE_URL which should point to whatever usage history chart you'd like Sequent to point to within an IFrame.
 
 The public Sequent install points this variable to a Mongo DB Charts chart URL.
+
 
 ### Customizing Sequent
 

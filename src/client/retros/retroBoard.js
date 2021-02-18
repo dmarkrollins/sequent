@@ -7,6 +7,7 @@ import { ReactiveVar } from 'meteor/reactive-var'
 import { Toast } from '../common/toast'
 import { Retros, RetroActions, Settings, Sequent } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
+import { UXUtils } from '../common/uxUtils'
 
 import autosize from '../autosize'
 import './retroBoard.html'
@@ -17,6 +18,9 @@ Template.retroBoard.onCreated(function () {
     self.retro = {}
     self.currentlyHighlighted = null
     self.selectedItemId = new ReactiveVar(null)
+    self.happyCount = new ReactiveVar('')
+    self.mehCount = new ReactiveVar('')
+    self.sadCount = new ReactiveVar('')
 
     self.insertItem = (itemType, title) => {
         Meteor.call(
@@ -151,41 +155,65 @@ Template.retroBoard.helpers({
         const settings = Sequent.getSettings()
         return settings.sadPlaceholder
     },
+    happyCount() {
+        return Template.instance().happyCount.get()
+    },
+    mehCount() {
+        return Template.instance().mehCount.get()
+    },
+    sadCount() {
+        return Template.instance().sadCount.get()
+    }
 
 })
 
 Template.retroBoard.events({
+    'input textarea#happy-textarea': function (event, instance) {
+        const tval = event.target.value
+        const cval = UXUtils.remainingChars(tval)
+        instance.happyCount.set(cval)
+    },
+    'input textarea#meh-textarea': function (event, instance) {
+        const tval = event.target.value
+        const cval = UXUtils.remainingChars(tval)
+        instance.mehCount.set(cval)
+    },
+    'input textarea#sad-textarea': function (event, instance) {
+        const tval = event.target.value
+        const cval = UXUtils.remainingChars(tval)
+        instance.sadCount.set(cval)
+    },
     'keypress div.greenItem textarea': function (event, instance) {
         if (event.which === 13) {
             const val = event.currentTarget.value.replace('\n', '').trim()
+            event.currentTarget.value = ''
+            instance.happyCount.set('')
             if (val !== '') {
                 instance.insertItem(Constants.RetroItemTypes.HAPPY, val)
-                event.currentTarget.value = ''
                 return false
             }
-            event.currentTarget.value = ''
         }
     },
     'keypress div.yellowItem textarea': function (event, instance) {
         if (event.which === 13) {
             const val = event.currentTarget.value.replace('\n', '').trim()
+            event.currentTarget.value = ''
+            instance.mehCount.set('')
             if (val !== '') {
                 instance.insertItem(Constants.RetroItemTypes.MEH, val)
-                event.currentTarget.value = ''
                 return false
             }
-            event.currentTarget.value = ''
         }
     },
     'keypress div.redItem textarea': function (event, instance) {
         if (event.which === 13) {
             const val = event.currentTarget.value.replace('\n', '').trim()
+            event.currentTarget.value = ''
+            instance.sadCount.set('')
             if (val !== '') {
                 instance.insertItem(Constants.RetroItemTypes.SAD, val)
-                event.currentTarget.value = ''
                 return false
             }
-            event.currentTarget.value = ''
         }
     },
     'click div.listItem': function (event, instance) {

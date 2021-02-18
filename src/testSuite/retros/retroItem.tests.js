@@ -243,11 +243,17 @@ if (Meteor.isClient) {
 
 
                 $(el).find('textarea#titleTextBox').val('new fake title')
+                $(el).find('textarea#titleTextBox').trigger('input')
+
+                Tracker.flush()
+
+                expect($(el).find('div.char-count')[0].innerText, 'should have char count').to.equal('241/255')
 
                 $(el).find('a#btnCancel')[0].click()
                 Tracker.flush()
 
                 expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
+                expect($(el).find('div.char-count'), 'no char count').to.have.length(0)
                 expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
                 expect($(el).find('div.tappable-text')[0].innerText).to.equal(item.data.title)
                 expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
@@ -255,6 +261,8 @@ if (Meteor.isClient) {
                 expect($(el).find('a.deleteButton'), 'has delete button').to.have.length(1)
                 expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
                 expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
+
+
                 done()
             });
         })
@@ -286,6 +294,10 @@ if (Meteor.isClient) {
                 expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
 
                 $(el).find('textarea#titleTextBox').val('new fake title')
+                $(el).find('textarea#titleTextBox').trigger('input')
+                Tracker.flush()
+
+                expect($(el).find('div.char-count')[0].innerText, 'should have char count').to.equal('241/255')
 
                 $(el).find('a#btnSave')[0].click()
                 Tracker.flush()
@@ -294,14 +306,19 @@ if (Meteor.isClient) {
                 expect(Meteor.call).to.have.been.calledWith('updateRetroItemTitle', item.data.itemId, 'new fake title')
 
                 setTimeout(function () {
-                    expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
-                    expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
-                    expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
-                    expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
-                    expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
-                    expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
-                    expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
-                    done()
+                    try {
+                        expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
+                        expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
+                        expect($(el).find('div.char-count'), 'no char count').to.have.length(0)
+                        expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
+                        expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
+                        expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
+                        expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
+                        expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
+                        done()
+                    } catch (err) {
+                        done(err)
+                    }
                 }, 500)
             });
         })
@@ -370,6 +387,11 @@ if (Meteor.isClient) {
                 expect($(el).find('a#btnSave'), 'save button visible').to.have.length(1)
 
                 $(el).find('textarea#titleTextBox').val('new fake title')
+                $(el).find('textarea#titleTextBox').trigger('input')
+
+                Tracker.flush()
+
+                expect($(el).find('div.char-count')[0].innerText, 'should have char count').to.equal('241/255')
 
                 const evt = new Event('keypress') //eslint-disable-line
                 evt.which = 13
@@ -380,14 +402,19 @@ if (Meteor.isClient) {
                 expect(Meteor.call).to.have.been.calledWith('updateRetroItemTitle', item.data.itemId, 'new fake title')
 
                 setTimeout(function () {
-                    expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
-                    expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
-                    expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
-                    expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
-                    expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
-                    expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
-                    expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
-                    done()
+                    try {
+                        expect($(el).find('div.tappable-text'), 'should have title text').to.have.length(1)
+                        expect($(el).find('textarea#titleTextBox'), 'should have no title edit input').to.have.length(0)
+                        expect($(el).find('div.char-count'), 'no char count').to.have.length(0)
+                        expect($(el).find('a.completeButton'), 'has complete button').to.have.length(1)
+                        expect($(el).find('a.editButton'), 'has edit button').to.have.length(1)
+                        expect($(el).find('a.deleteButton'), 'has edit button').to.have.length(1)
+                        expect($(el).find('a#btnCancel'), 'cancel button not visible').to.have.length(0)
+                        expect($(el).find('a#btnSave'), 'save button not visible').to.have.length(0)
+                        done()
+                    } catch (err) {
+                        done(err)
+                    }
                 }, 500)
             });
         })

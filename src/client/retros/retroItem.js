@@ -8,6 +8,7 @@ import { Toast } from '../common/toast'
 import { Retros } from '../../lib/sequent'
 import { Constants } from '../../lib/constants'
 import autosize from '../autosize'
+import { UXUtils } from '../common/uxUtils'
 
 import './retroItem.html'
 
@@ -17,6 +18,8 @@ Template.retroItem.onCreated(function () {
     self.currentlyHighlighted = null
     self.itemOkd = new ReactiveVar('ok-gray.png')
     self.editBtn = new ReactiveVar('edit-blue.png')
+
+    self.charCount = new ReactiveVar('')
 
     self.editing = new ReactiveVar(false)
     self.title = ''
@@ -135,10 +138,18 @@ Template.retroItem.helpers({
     },
     decodedTitle() {
         return _.unescape(this.data.title)
+    },
+    charCount() {
+        return Template.instance().charCount.get()
     }
 })
 
 Template.retroItem.events({
+    'input textarea#titleTextBox': function (event, instance) {
+        const tval = event.target.value
+        const cval = UXUtils.remainingChars(tval)
+        instance.charCount.set(cval)
+    },
     'click div.selected-item'(event, instance) {
         if (instance.editing.get()) {
             event.stopPropagation()
@@ -150,6 +161,7 @@ Template.retroItem.events({
         const msg = `Are you sure you want to <i>permanently</i> remove item: '${this.data.title}' ?`
         const title = 'Remove Item?'
         ConfirmDialog.showConfirmation(msg, title, 'danger', event.currentTarget.dataset.id, (id) => {
+            instance.charCount.set('')
             Meteor.call('removeRetroItem', id, function (err) {
                 if (err) {
                     Toast.showError('Could not remove item - try again later')
@@ -164,6 +176,7 @@ Template.retroItem.events({
         event.stopPropagation()
         instance.itemOkd.set('ok-green.png')
         setTimeout(function () {
+            instance.charCount.set('')
             Meteor.call('completeRetroItem', event.currentTarget.dataset.id, function (err) {
                 if (err) {
                     Toast.showError(err.message);
@@ -190,13 +203,15 @@ Template.retroItem.events({
         setTimeout(function () {
             autosize($('textarea#titleTextBox'))
             $('textarea#titleTextBox').focus().select()
+            const cval = UXUtils.remainingChars(instance.title)
+            instance.charCount.set(cval)
         }, 100)
     },
 
     'click a#btnSave'(event, instance) {
         event.stopPropagation()
-        // const val = event.currentTarget.value.replace('\n', '').trim()
         const newTitle = $('textarea#titleTextBox')[0].value.replace('\n', '').trim()
+        instance.charCount.set('')
         if (newTitle !== '') {
             instance.saveAction(event.currentTarget.dataset.id, newTitle)
         } else {
@@ -220,6 +235,7 @@ Template.retroItem.events({
         $('textarea#titleTextbox').val(instance.title)
         instance.title = ''
         instance.editing.set(false)
+        instance.charCount.set('')
     }
 
 

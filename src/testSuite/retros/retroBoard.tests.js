@@ -85,7 +85,7 @@ if (Meteor.isClient) {
             sandbox.stub(Meteor, 'call').yields(null)
 
             withRenderedTemplate('retroBoard', {}, (el) => {
-                expect($(el).find('textarea#happy-textarea'), 'should have happy textarea').to.have.length(1)
+                expect($(el).find('textarea#happy-textarea'), 'should have happy textarea').to.have.length(2)
                 $(el).find('textarea#happy-textarea').val('\n')
 
                 const evt = new Event('keypress') //eslint-disable-line
@@ -100,13 +100,14 @@ if (Meteor.isClient) {
                 }, 200)
             });
         })
+
         it('should not allow blank input - meh', function (done) {
             sandbox.stub(Meteor, 'user').returns(fakeUser)
             sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
             sandbox.stub(Meteor, 'call').yields(null)
 
             withRenderedTemplate('retroBoard', {}, (el) => {
-                expect($(el).find('textarea#meh-textarea'), 'should have meh textarea').to.have.length(1)
+                expect($(el).find('textarea#meh-textarea'), 'should have meh textarea').to.have.length(2)
                 $(el).find('textarea#meh-textarea').val('\n')
 
                 const evt = new Event('keypress') //eslint-disable-line
@@ -128,7 +129,7 @@ if (Meteor.isClient) {
             sandbox.stub(Meteor, 'call').yields(null)
 
             withRenderedTemplate('retroBoard', {}, (el) => {
-                expect($(el).find('textarea#sad-textarea'), 'should have sad textarea').to.have.length(1)
+                expect($(el).find('textarea#sad-textarea'), 'should have sad textarea').to.have.length(2)
                 $(el).find('textarea#sad-textarea').val('\n')
 
                 const evt = new Event('keypress') //eslint-disable-line
@@ -141,6 +142,54 @@ if (Meteor.isClient) {
                     expect($(el).find('textarea#sad-textarea').val(), 'should be blank').to.equal('')
                     done()
                 }, 200)
+            });
+        })
+
+        it('should display char count - happy', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroBoard', {}, (el) => {
+                expect($(el).find('textarea#happy-textarea'), 'should have happy textarea').to.have.length(2)
+                expect($(el).find('div.greenItem div.char-count').last()[0].innerText, 'should not have char count').to.equal('')
+                $(el).find('textarea#happy-textarea').last().val('new fake title')
+                $(el).find('textarea#happy-textarea').last().trigger('input')
+                Tracker.flush()
+                expect($(el).find('div.greenItem div.char-count').last()[0].innerText, 'should have char count').to.equal('241/255')
+                done()
+            });
+        })
+
+        it('should display char count - meh', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroBoard', {}, (el) => {
+                expect($(el).find('textarea#meh-textarea'), 'should have meh textarea').to.have.length(2)
+                expect($(el).find('div.yellowItem div.char-count').last()[0].innerText, 'should not have char count').to.equal('')
+                $(el).find('textarea#meh-textarea').last().val('new fake title')
+                $(el).find('textarea#meh-textarea').last().trigger('input')
+                Tracker.flush()
+                expect($(el).find('div.yellowItem div.char-count').last()[0].innerText, 'should have char count').to.equal('241/255')
+                done()
+            });
+        })
+
+        it('should display char count - sad', function (done) {
+            sandbox.stub(Meteor, 'user').returns(fakeUser)
+            sandbox.stub(Sequent, 'getSettings').returns({ backgroundImage: 'fakeBackground.png' })
+            sandbox.stub(Meteor, 'call').yields(null)
+
+            withRenderedTemplate('retroBoard', {}, (el) => {
+                expect($(el).find('textarea#sad-textarea'), 'should have sad textarea').to.have.length(2)
+                expect($(el).find('div.redItem div.char-count').last()[0].innerText, 'should not have char count').to.equal('')
+                $(el).find('textarea#sad-textarea').last().val('new fake title')
+                $(el).find('textarea#sad-textarea').last().trigger('input')
+                Tracker.flush()
+                expect($(el).find('div.redItem div.char-count').last()[0].innerText, 'should have char count').to.equal('241/255')
+                done()
             });
         })
 

@@ -26,7 +26,8 @@
                         <div role="tabpanel" class="tab-pane active" id="happy">
                             <div class="fullheight-green text-center" style="padding-top: 5px;">
                                 <div class="greenItem">
-                                    <textarea rows="1" placeholder="{{happyPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                    <textarea rows="1" id="happy-textarea" placeholder="{{happyPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                    <div class="char-count">{{happyCount}}</div>
                                 </div>
                                 {{#each greenItem}}
                                     <div class="retroItem {{itemClass}}">
@@ -38,7 +39,8 @@
                         <div role="tabpanel" class="tab-pane" id="meh">
                             <div class="fullheight-yellow text-center" style="padding-top: 5px;">
                                 <div class="yellowItem">
-                                    <textarea rows="1" placeholder="{{mehPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                    <textarea rows="1" id="meh-textarea" placeholder="{{mehPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                    <div class="char-count">{{mehCount}}</div>
                                 </div>
                                 {{#each yellowItem}}
                                     <div class="retroItem {{itemClass}}">
@@ -50,7 +52,8 @@
                         <div role="tabpanel" class="tab-pane" id="sad">
                             <div class="fullheight-red text-center" style="padding-top: 5px;">
                                 <div class="redItem">
-                                    <textarea rows="1" placeholder="{{sadPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                    <textarea rows="1" id="sad-textarea" placeholder="{{sadPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                    <div class="char-count">{{sadCount}}</div>
                                 </div>
                                 {{#each redItem}}
                                     <div class="retroItem {{itemClass}}">
@@ -68,6 +71,7 @@
                         <div class="col-md-4 fullheight-green text-center" style="display: table-cell;">
                             <div class="greenItem">
                                 <textarea id="happy-textarea" rows="1" placeholder="{{happyPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                <div class="char-count">{{happyCount}}</div>
                             </div>
                             {{#each greenItem}}
                                 <div class="retroItem {{itemClass}}">
@@ -78,6 +82,7 @@
                         <div class="col-md-4 fullheight-yellow text-center" style="display: table-cell;">
                             <div class="yellowItem">
                                 <textarea id="meh-textarea" rows="1" placeholder="{{mehPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                <div class="char-count">{{mehCount}}</div>
                             </div>
                             {{#each yellowItem}}
                                 <div class="retroItem {{itemClass}}">
@@ -88,6 +93,7 @@
                         <div class="col-md-4 fullheight-red text-center" style="display: table-cell;">
                             <div class="redItem">
                                 <textarea id="sad-textarea" rows="1" placeholder="{{sadPlaceholder}}" {{frozenEntry}} maxlength="255"></textarea>
+                                <div class="char-count">{{sadCount}}</div>
                             </div>
                             {{#each redItem}}
                                 <div class="retroItem {{itemClass}}">

@@ -2,7 +2,7 @@
     "name": "sequent",
     "private": true,
     "description": "Sequent Retrospectives",
-    "version": "0.1.19",
+    "version": "0.1.20",
     "author": "6thcents (http://6thcents.com/)",
     "scripts": {
         "start": "bash local.sh",

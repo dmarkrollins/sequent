@@ -107,6 +107,18 @@ html, body {
     margin-bottom: 21px;
 }
 
+div.tappable-text {
+    display: block;
+    /* position: absolute; */
+    /* right: 0; */
+    width: auto;
+    box-sizing: border-box;
+    overflow-wrap: break-word; 
+    padding: 7px; 
+    -ms-overflow-style: none;
+    text-align: left;
+}
+
 .greenItem {
     background-color: transparent;
     padding: 7px;

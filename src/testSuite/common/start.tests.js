@@ -36,7 +36,7 @@ if (Meteor.isClient) {
             sandbox.restore()
         });
 
-        it('displays correctly', function () {
+        it('displays start correctly', function () {
             sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
 
             withRenderedTemplate('start', null, (el) => {
@@ -45,9 +45,18 @@ if (Meteor.isClient) {
                 expect($(el).find('#teamName'), 'team name').to.have.length(1)
                 expect($(el).find('#password'), 'password').to.have.length(1)
                 expect($(el).find('#btnNext'), 'btn next').to.have.length(1)
-                expect($(el).find('#btnNewTeam'), 'btn new team').to.have.length(1)
+                expect($(el).find('#btnNewTeam'), 'btn new team').to.have.length(0)
                 expect($(el).find('div.error-message'), 'error msg').to.have.length(1)
                 expect($(el).find('div.fullscreen')[0].style.backgroundImage, 'background').to.contains('fakebackground.png')
+            });
+        })
+
+        it('displays start nav correctly', function () {
+            sandbox.stub(Sequent, 'getSettings').returns(fakeSettings)
+
+            withRenderedTemplate('startNav', null, (el) => {
+                expect($(el).find('div.navbar-header img'), 'logo image').to.have.length(1)
+                expect($(el).find('#btnNewTeam'), 'btn new team').to.have.length(1)
             });
         })
     })

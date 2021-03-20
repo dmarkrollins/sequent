@@ -6,6 +6,7 @@ import { $ } from 'meteor/jquery'
 import { Sequent, Settings } from '../../lib/sequent'
 
 import './start.html'
+import './startNav.html'
 
 Template.start.onCreated(function () {
     this.message = new ReactiveVar('')

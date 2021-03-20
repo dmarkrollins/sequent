@@ -8,7 +8,7 @@ FlowRouter.route('/', {
         if (Meteor.userId()) {
             FlowRouter.go('/retro/board')
         } else {
-            BlazeLayout.render('layout', { content: 'start' });
+            BlazeLayout.render('startLayout', { content: 'start' });
         }
     },
     name: 'start'
@@ -16,7 +16,7 @@ FlowRouter.route('/', {
 
 FlowRouter.route('/new', {
     action: function () {
-        BlazeLayout.render('layout', { content: 'newTeam' });
+        BlazeLayout.render('newLayout', { content: 'newTeam' });
     },
     name: 'new-team'
 });

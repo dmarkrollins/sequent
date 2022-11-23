@@ -17,7 +17,7 @@
         "js-yaml": ">=3.13.1",
         "meteor-node-stubs": "^1.0.0",
         "moment": "^2.24.0",
-        "sanitize-html": "^1.20.1"
+        "sanitize-html": "^2.3.2"
     },
     "devDependencies": {
         "@meteorjs/eslint-config-meteor": "^1.0.5",

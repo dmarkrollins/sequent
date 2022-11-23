@@ -6,7 +6,7 @@ PRs are welcome.
 
 ## Check it Out
 
-https://sequent.herokuapp.com/
+https://sequent.meteorapp.com/
 
 ## Development Info
 

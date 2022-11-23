@@ -2,7 +2,7 @@
     "name": "sequent",
     "private": true,
     "description": "Sequent Retrospectives",
-    "version": "0.1.22",
+    "version": "0.1.23",
     "author": "6thcents (http://6thcents.com/)",
     "scripts": {
         "start": "bash local.sh",
@@ -11,7 +11,7 @@
         "test": "meteor test --driver-package cultofcoders:mocha --port 3100"
     },
     "dependencies": {
-        "@babel/runtime": "^7.8.3",
+        "@babel/runtime": "^7.20.1",
         "@mongodb-js/charts-embed-dom": "^2.0.1",
         "bcrypt": "^5.0.0",
         "js-yaml": ">=3.13.1",
